@@ -22,18 +22,21 @@ jobs:
       VITE_FEEDBACK_API_BASE: ${{ vars.FEEDBACK_API_BASE }}
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
+          cache: pnpm
       - uses: actions/configure-pages@v5
-      - run: npm ci
-      - run: npm run validate:edition
-      - run: npm run check:duplicates
-      - run: npm run validate:archives
-      - run: npm run build
-      - run: npm test
-      - run: npm run test:feedback
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run validate:edition
+      - run: pnpm run check:duplicates
+      - run: pnpm run validate:archives
+      - run: pnpm run build
+      - run: pnpm test
+      - run: pnpm run test:feedback
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/client
