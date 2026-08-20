@@ -24,3 +24,12 @@ test("the Pages build forwards the configured feedback Worker origin to Vite", a
 
   assert.match(workflow, /VITE_FEEDBACK_API_BASE:\s*\$\{\{\s*vars\.FEEDBACK_API_BASE\s*\}\}/);
 });
+
+test("the Pages build installs the checked-in pnpm lockfile reproducibly", async () => {
+  const workflow = await readFile(path.join(root, ".github/workflows/deploy-pages.yml"), "utf8");
+
+  assert.match(workflow, /pnpm\/action-setup@v4/);
+  assert.match(workflow, /cache:\s*pnpm/);
+  assert.match(workflow, /pnpm install --frozen-lockfile/);
+  assert.doesNotMatch(workflow, /npm ci/);
+});
