@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import manifest from "../data/manifest.json" with { type: "json" };
+import currentEdition from "../data/editions/2026-08-20.json" with { type: "json" };
 import edition from "./fixtures/edition.json" with { type: "json" };
 import policy from "../config/curation-policy.json" with { type: "json" };
 import {
@@ -247,6 +248,12 @@ test("the manifest points to the researched current edition and the test fixture
   assert.deepEqual(manifest.editions, ["2026-08-20"]);
   assert.equal(edition.items.length, 12);
   assert.deepEqual(validateEdition(edition), []);
+});
+
+test("the current edition omits generated action material while retaining concrete access limits", () => {
+  assert.ok(currentEdition.items.every((item) => !Object.hasOwn(item, "experiment") && !Object.hasOwn(item, "caveat")));
+  assert.match(currentEdition.items.find((item) => item.id === "vercel-fish-audio-ai-gateway").summary, /September 18/i);
+  assert.match(currentEdition.items.find((item) => item.id === "vercel-agent-slack-public-beta").summary, /Pro and Enterprise/i);
 });
 
 test("the schema version 2 edition fixture is monotonically ordered by editorial tier", () => {

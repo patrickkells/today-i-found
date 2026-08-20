@@ -6,7 +6,6 @@ import {
   CaretLeft,
   CaretRight,
   CheckCircle,
-  Copy,
   Funnel,
   MagnifyingGlass,
   Question,
@@ -18,7 +17,6 @@ import {
 } from "@phosphor-icons/react";
 
 import { applyVote, createInitialState, filterSignals, getNextSelection } from "./app-state.js";
-import { copyText } from "./clipboard.js";
 import {
   createFeedbackService,
   reconcileFeedbackSource,
@@ -58,6 +56,14 @@ function formatCuratedTime(curatedAt, timeZone) {
     hour12: false,
     timeZone,
   }).format(new Date(curatedAt));
+}
+
+function formatVerifiedDate(date) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${date}T12:00:00Z`)).toUpperCase();
 }
 
 function shiftDate(date, amount) {
@@ -200,83 +206,38 @@ function VoteControls({ itemId, record, onVote }) {
   );
 }
 
-function SignalRow({ item, selected, record, onSelect, onVote }) {
+function SignalRow({ item, selected, record, onVote }) {
   const accent = CATEGORY_ACCENTS[item.category] ?? "lime";
   return (
     <article className={`signal-row ${selected ? "is-selected" : ""}`} role="listitem">
-      <button
-        className="signal-row-main"
-        type="button"
-        onClick={() => onSelect(item.id)}
-        aria-label={`Open signal: ${item.title}`}
-        aria-current={selected ? "true" : undefined}
-        data-signal-id={item.id}
-      >
-        <span className="signal-rank">{String(item.rank).padStart(2, "0")}</span>
-        <span className="signal-copy"><span className="signal-title">{item.title}</span><span>{item.summary}</span></span>
-        <span className={`signal-category accent-${accent}`}>{shortCategory(item.category)}</span>
-        <span className="signal-source"><span>{item.source.publisher}</span><CheckCircle size={15} weight="bold" aria-label="Verified source" /></span>
-      </button>
+      <span className="signal-rank">{String(item.rank).padStart(2, "0")}</span>
+      <div className="signal-copy">
+        <a
+          className="signal-title"
+          href={item.source.url}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Read source: ${item.title}`}
+          aria-current={selected ? "true" : undefined}
+          data-signal-id={item.id}
+        >{item.title}</a>
+        <span className="signal-summary">{item.summary}</span>
+        <a
+          className="signal-source-inline"
+          href={item.source.url}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Verified source: ${item.source.publisher}, checked ${item.source.verification.verifiedAt}`}
+        >
+          <CheckCircle size={13} weight="bold" />
+          <span>{item.source.publisher}</span>
+          <span>· VERIFIED {formatVerifiedDate(item.source.verification.verifiedAt)}</span>
+          <ArrowSquareOut size={13} />
+        </a>
+      </div>
+      <span className={`signal-category accent-${accent}`}>{shortCategory(item.category)}</span>
       <VoteControls itemId={item.id} record={record} onVote={onVote} />
     </article>
-  );
-}
-
-function Inspector({ item, onClose, copyState, copyAnnouncement, onCopy, modal = false, dialogRef }) {
-  const accent = CATEGORY_ACCENTS[item.category] ?? "lime";
-  const Element = modal ? "section" : "aside";
-  return (
-    <Element
-      className={`inspector ${modal ? "inspector--modal" : ""}`}
-      aria-label={`${item.title} details`}
-      role={modal ? "dialog" : undefined}
-      aria-modal={modal ? "true" : undefined}
-      ref={dialogRef}
-    >
-      <div className="inspector-topline">
-        <span>{item.experiment ? "TRY THIS" : "SIGNAL DETAILS"}</span>
-        <button className="icon-button" type="button" onClick={onClose} aria-label="Close inspector" data-autofocus={modal ? "true" : undefined}><X size={18} /></button>
-      </div>
-      <section className="inspector-intro">
-        <h2>{item.title}</h2>
-        <p>{item.summary}</p>
-        <dl className="signal-meta">
-          <div><dt>CATEGORY</dt><dd className={`accent-${accent}`}>{shortCategory(item.category)}</dd></div>
-          <div><dt>SOURCE</dt><dd>{item.source.publisher} <CheckCircle size={14} weight="bold" /></dd></div>
-        </dl>
-        <div className="inspector-block"><h3>WHY IT MATTERS</h3><p>{item.signal.whyNow}{item.experiment ? ` ${item.experiment.goal}` : ""}</p></div>
-      </section>
-      {item.experiment ? (
-        <section className="experiment-section">
-          <h3>TRY THIS</h3>
-          <ol className="experiment-list">
-            {item.experiment.steps.map((step, index) => {
-              const label = copyState.itemId === item.id && copyState.index === index
-                ? copyState.status === "success" ? "COPIED" : copyState.status === "failure" ? "COPY FAILED" : "COPY"
-                : "COPY";
-              return (
-                <li key={step}>
-                  <span className="step-number">{String(index + 1).padStart(2, "0")}</span>
-                  <div className="step-content">
-                    <span>{step}</span>
-                    <button className="copy-button" type="button" onClick={() => onCopy(item.id, step, index)} aria-label={`Copy step ${index + 1}`}>
-                      <Copy size={16} /><span>{label}</span>
-                    </button>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
-          <p className="sr-only" role="status" aria-live="polite">{copyState.itemId === item.id ? copyAnnouncement : ""}</p>
-        </section>
-      ) : null}
-      {item.caveat?.trim() ? <section className="inspector-footer-section"><h3>CAVEAT</h3><p>{item.caveat}</p></section> : null}
-      <section className="inspector-footer-section inspector-source-link">
-        <h3>VERIFIED SOURCE</h3>
-        <a href={item.source.url} target="_blank" rel="noreferrer"><span>{item.source.title}</span><ArrowSquareOut size={16} /></a>
-        <p><CheckCircle size={14} weight="bold" /> Verified · {item.source.verification.verifiedAt}</p>
-      </section>
-    </Element>
   );
 }
 
@@ -325,7 +286,6 @@ function SignalExperience({ edition, manifest, loadEdition, feedbackService: pro
   const items = useMemo(() => rankItems(activeEdition?.items ?? []), [activeEdition]);
   const initial = useMemo(() => createInitialState(items), [items]);
   const [selectedId, setSelectedId] = useState(initial.selectedId);
-  const [inspectorOpen, setInspectorOpen] = useState(initial.inspectorOpen);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -333,12 +293,9 @@ function SignalExperience({ edition, manifest, loadEdition, feedbackService: pro
   const [filters, setFilters] = useState(initial.filters);
   const [records, setRecords] = useState(() => seedVoteRecords(items));
   const [feedbackSource, setFeedbackSource] = useState("loading");
-  const [copyState, setCopyState] = useState({ itemId: null, index: null, status: "idle" });
-  const [copyAnnouncement, setCopyAnnouncement] = useState("");
   const searchRef = useRef(null);
   const filterDialogRef = useRef(null);
   const helpDialogRef = useRef(null);
-  const mobileInspectorRef = useRef(null);
   const mutationVersions = useRef({});
   const feedbackStatusVersion = useRef(0);
   const isPhone = useMediaQuery("(max-width: 720px)");
@@ -348,20 +305,12 @@ function SignalExperience({ edition, manifest, loadEdition, feedbackService: pro
     () => isPublishedDate ? filterSignals(items, { ...filters, query }) : [],
     [filters, isPublishedDate, items, query],
   );
-  const selectedItem = visibleItems.find((item) => item.id === selectedId) ?? visibleItems[0] ?? null;
   const closeFilters = useCallback(() => setFiltersOpen(false), []);
   const closeHelp = useCallback(() => setHelpOpen(false), []);
-  const closeInspector = useCallback(() => setInspectorOpen(false), []);
-  const modalOpen = filtersOpen || helpOpen || (isPhone && inspectorOpen && Boolean(selectedItem));
+  const modalOpen = filtersOpen || helpOpen;
 
   useDialogFocus(filtersOpen, filterDialogRef, closeFilters);
   useDialogFocus(helpOpen, helpDialogRef, closeHelp);
-  useDialogFocus(
-    isPhone && inspectorOpen && Boolean(selectedItem),
-    mobileInspectorRef,
-    closeInspector,
-    selectedItem ? `[data-signal-id="${selectedItem.id}"]` : undefined,
-  );
 
   useEffect(() => {
     if (loadedEditions[currentDate] || !publishedDates.has(currentDate) || !loadEdition) {
@@ -405,7 +354,6 @@ function SignalExperience({ edition, manifest, loadEdition, feedbackService: pro
 
   const selectItem = useCallback((id) => {
     setSelectedId(id);
-    setInspectorOpen(true);
   }, []);
 
   useEffect(() => {
@@ -414,7 +362,6 @@ function SignalExperience({ edition, manifest, loadEdition, feedbackService: pro
       const typing = ["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement?.tagName);
       if (event.key === "Escape") {
         if (searchOpen) setSearchOpen(false);
-        else setInspectorOpen(false);
         return;
       }
       if (typing) return;
@@ -458,24 +405,8 @@ function SignalExperience({ edition, manifest, loadEdition, feedbackService: pro
     });
   };
 
-  const copyStep = async (itemId, step, index) => {
-    const copied = await copyText(step);
-    setCopyState({ itemId, index, status: copied ? "success" : "failure" });
-    setCopyAnnouncement(copied ? `Step ${index + 1} copied.` : `Step ${index + 1} copy failed.`);
-  };
-
-  const inspector = selectedItem ? (
-    <Inspector
-      item={selectedItem}
-      onClose={closeInspector}
-      copyState={copyState}
-      copyAnnouncement={copyAnnouncement}
-      onCopy={copyStep}
-    />
-  ) : null;
-
   return (
-    <main className={`app-shell ${inspectorOpen && selectedItem && !isPhone ? "has-inspector" : ""}`}>
+    <main className="app-shell">
       <div className="app-underlay" inert={modalOpen}>
         <header className="app-header">
           <div className="brand-block"><h1>today i found</h1></div>
@@ -499,7 +430,7 @@ function SignalExperience({ edition, manifest, loadEdition, feedbackService: pro
             </div>
           </aside>
           <section className="signal-table" aria-label="Ranked signals">
-            <div className="table-header" aria-hidden="true"><span>#</span><span>SIGNAL</span><span>CATEGORY</span><span>SOURCE</span><span>VOTES</span></div>
+            <div className="table-header" aria-hidden="true"><span>#</span><span>SIGNAL</span><span>CATEGORY</span><span>VOTES</span></div>
             <div className="signal-list" role="list" aria-label="Signals">
               {visibleItems.map((item) => (
                 <SignalRow
@@ -507,17 +438,12 @@ function SignalExperience({ edition, manifest, loadEdition, feedbackService: pro
                   item={item}
                   selected={selectedId === item.id}
                   record={records[item.id] ?? { up: 0, down: 0, myVote: null }}
-                  onSelect={selectItem}
                   onVote={handleVote}
                 />
               ))}
               {!visibleItems.length ? <EmptyState date={currentDate} filtered={isPublishedDate} status={archiveStatus} onReset={resetFilters} onReturn={() => setCurrentDate(latestDate)} /> : null}
             </div>
           </section>
-          {!isPhone && inspectorOpen && selectedItem && isPublishedDate ? inspector : null}
-          {!isPhone && !inspectorOpen && selectedItem && isPublishedDate ? (
-            <button className="inspector-reopen" type="button" onClick={() => setInspectorOpen(true)}><CaretLeft size={16} weight="bold" /> OPEN INSPECTOR</button>
-          ) : null}
         </div>
 
         <AppFooter
@@ -561,18 +487,6 @@ function SignalExperience({ edition, manifest, loadEdition, feedbackService: pro
             </dl>
           </section>
         </div>
-      ) : null}
-
-      {isPhone && inspectorOpen && selectedItem && isPublishedDate ? (
-        <Inspector
-          item={selectedItem}
-          onClose={closeInspector}
-          copyState={copyState}
-          copyAnnouncement={copyAnnouncement}
-          onCopy={copyStep}
-          modal
-          dialogRef={mobileInspectorRef}
-        />
       ) : null}
     </main>
   );

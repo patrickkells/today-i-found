@@ -15,3 +15,5 @@ Use evidence-first curation. Read `config/curation-policy.json` first. Search ve
 Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts/prepare-sites-build.mjs`, and `tests/sites-worker.test.mjs` intact so the same local prototype can be handed to Sites. Before a Sites handoff, run `npm run build` and `npm run test:sites`; the build must leave `dist/client/index.html`, `dist/server/index.js`, and `dist/.openai/hosting.json`.
 
 For daily curation, prefer accuracy over item count. RSS, GitHub Trending, and community signals are discovery leads only. Publish an item only when a direct primary source provides dated evidence within the configured freshness window and the source passes the automated audit. Fail closed rather than publishing an unverifiable or stale item.
+
+Keep the briefing list self-contained and compact. Do not use a persistent story inspector, generated experiments, generic "why it matters" copy, or generic caveats. Put the publisher, verification date, and primary-source link directly in each story row. State only decision-relevant limitations as factual story copy.

@@ -48,12 +48,14 @@ test("phone header actions restore their labels after tablet icon compaction", a
 
 test("signal copy wraps without truncation so rows can grow with their content", async () => {
   const css = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
-  const dom = new JSDOM(`<!doctype html><style>${css}</style><article class="signal-row"><button class="signal-row-main"><span class="signal-copy"><span class="signal-title">A deliberately long signal title</span><span>A deliberately long summary</span></span></button></article>`);
+  const dom = new JSDOM(`<!doctype html><style>${css}</style><article class="signal-row"><span class="signal-rank">01</span><div class="signal-copy"><a class="signal-title">A deliberately long signal title</a><span class="signal-summary">A deliberately long summary</span><a class="signal-source-inline">Publisher · VERIFIED AUG 20 ↗</a></div><span class="signal-category">MODEL</span><div class="vote-controls"></div></article>`);
   const title = dom.window.getComputedStyle(dom.window.document.querySelector(".signal-title"));
-  const summary = dom.window.getComputedStyle(dom.window.document.querySelector(".signal-copy > span:last-child"));
+  const summary = dom.window.getComputedStyle(dom.window.document.querySelector(".signal-summary"));
+  const source = dom.window.getComputedStyle(dom.window.document.querySelector(".signal-source-inline"));
 
   assert.notEqual(title.whiteSpace, "nowrap");
   assert.notEqual(title.textOverflow, "ellipsis");
   assert.notEqual(summary.getPropertyValue("-webkit-line-clamp"), "2");
   assert.notEqual(summary.overflow, "hidden");
+  assert.equal(source.flexWrap, "wrap");
 });

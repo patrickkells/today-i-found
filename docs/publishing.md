@@ -22,7 +22,7 @@ node scripts/publish-edition.mjs --input /path/to/candidate.json --dry-run
 
 The command validates all hard selection gates, audits every source URL, and runs deterministic 30-day duplicate checks against archived editions. The curator must separately compare candidate meaning with the recent archive so paraphrased repeats do not pass merely because their URL, keys, or normalized title differ. A dry run neither writes files nor registers an edition.
 
-`caveat` and `experiment` are optional. When present, an experiment needs a nonempty goal and one to three nonempty steps. The interface renders Caveat and Try This only when those fields exist. New editions do not use `impact`, `confidence`, `novelty`, `baseScore`, `adjustedScore`, or `timeToTry`; legacy archives may retain those fields.
+New editions do not generate `caveat` or `experiment` fields. Put only concrete, decision-relevant access, pricing, migration, compatibility, or availability limits directly into the factual summary. The interface keeps each story self-contained and links its verified primary source inline. Legacy archives may retain `caveat`, `experiment`, `impact`, `confidence`, `novelty`, `baseScore`, `adjustedScore`, or `timeToTry`; the current interface does not render them.
 
 For a local candidate review with the Worker summary saved to disk:
 

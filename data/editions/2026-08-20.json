@@ -10,7 +10,6 @@
       "id": "google-gemini-3-7-flash-ga",
       "title": "Gemini 3.7 Flash is generally available for coding and agents",
       "summary": "Google released the stable gemini-3.7-flash endpoint with improvements aimed at software engineering, web development, and agentic workflows.",
-      "caveat": "A new model can change latency, output style, and tool-call behavior even when its aggregate quality improves; evaluate it on your own failures before changing a production alias.",
       "category": "Models",
       "editorialTier": "must-try",
       "rankingRationale": "Google's dated Gemini API changelog identifies a stable endpoint that builders can test immediately in existing coding and agent evaluations.",
@@ -34,21 +33,12 @@
           "method": "Opened the official dated changelog and checked the current model status and nearby deprecation notices.",
           "verifiedAt": "2026-08-20"
         }
-      },
-      "experiment": {
-        "goal": "Decide whether Gemini 3.7 Flash improves one real coding workflow.",
-        "steps": [
-          "Run ten previously failed coding or tool-use cases against your current model and gemini-3.7-flash.",
-          "Compare task completion, invalid tool calls, latency, and output verbosity.",
-          "Adopt it only for the slice where the results improve without new regressions."
-        ]
       }
     },
     {
       "id": "cloudflare-qwen-3-8-27b-workers-ai",
       "title": "Qwen 3.8 27B lands on Workers AI with vision and function calling",
       "summary": "Cloudflare added a hosted Qwen 3.8 27B endpoint with image and text input, reasoning, function calling, and a 262,144-token context window.",
-      "caveat": "Hosted availability does not establish model quality for your workload; compare instruction following, tool reliability, latency, and total cost against an existing endpoint.",
       "category": "Models",
       "editorialTier": "notable",
       "rankingRationale": "The dated Cloudflare release exposes a current multimodal, tool-capable model through APIs builders may already use for Workers applications.",
@@ -72,21 +62,12 @@
           "method": "Opened the dated Cloudflare changelog and cross-checked the active model page, endpoint ID, context window, and capabilities.",
           "verifiedAt": "2026-08-20"
         }
-      },
-      "experiment": {
-        "goal": "Test whether the hosted model can handle a small multimodal tool workflow.",
-        "steps": [
-          "Send one representative image-and-text task to @cf/qwen/qwen3.8-27b.",
-          "Add a read-only function and repeat the task with tool use enabled.",
-          "Inspect the tool arguments and final answer against a known-good result."
-        ]
       }
     },
     {
       "id": "vercel-fish-audio-ai-gateway",
       "title": "Vercel AI Gateway adds Fish Audio speech and transcription models",
-      "summary": "Four Fish Audio models are now accessible through AI Gateway, including streaming text-to-speech, voice cloning, multilingual speech, and word-timestamped transcription.",
-      "caveat": "The launch offer ends September 18. Standard model IDs begin billing afterward; the documented -free suffix stops serving instead of automatically charging.",
+      "summary": "Four Fish Audio models are now accessible through AI Gateway for speech and transcription. The free launch period ends September 18; -free model IDs stop serving afterward, while standard IDs begin billing.",
       "category": "Tools",
       "editorialTier": "notable",
       "rankingRationale": "The announcement includes active model identifiers and runnable AI SDK examples for speech generation and transcription, so builders can verify the utility directly.",
@@ -110,21 +91,12 @@
           "method": "Opened the dated Vercel changelog and checked model identifiers, supported operations, example code, and post-offer behavior.",
           "verifiedAt": "2026-08-20"
         }
-      },
-      "experiment": {
-        "goal": "Measure one speech feature with real input.",
-        "steps": [
-          "Use the documented -free model ID for either a short speech sample or a one-minute transcription.",
-          "Record latency, intelligibility or word accuracy, and timestamp quality.",
-          "Compare the result with your current provider before enabling a billable model ID."
-        ]
       }
     },
     {
       "id": "vercel-agent-slack-public-beta",
       "title": "Vercel Agent enters Slack with approval-gated production actions",
-      "summary": "The public beta brings deployment, build, log, metric, configuration, and repository context into Slack for incident investigation, code changes, and approved remediation.",
-      "caveat": "The beta is limited to Pro and Enterprise teams. Only a limited number of simple requests are free, and paid work is billed on demand.",
+      "summary": "The public beta brings deployment, build, log, metric, configuration, and repository context into Slack for investigation and approved remediation. It is available to Pro and Enterprise teams; only limited simple requests are free before usage-based billing.",
       "category": "Workflows",
       "editorialTier": "watch",
       "rankingRationale": "The workflow connects team discussion to production evidence while preserving read-only defaults, requester permissions, explicit approval, and action attribution.",
@@ -148,21 +120,12 @@
           "method": "Opened the official release and checked access tier, read-only defaults, approval boundaries, attribution, and billing language.",
           "verifiedAt": "2026-08-20"
         }
-      },
-      "experiment": {
-        "goal": "Evaluate the agent without granting mutation authority.",
-        "steps": [
-          "Install the beta in a non-production Slack channel and keep the agent read-only.",
-          "Ask it to explain one known failed preview deployment using logs and build context.",
-          "Compare its diagnosis with the incident record before testing any approval-gated action."
-        ]
       }
     },
     {
       "id": "vercel-chat-sdk-instagram-adapter",
       "title": "Chat SDK adds an Instagram adapter for DM bots",
       "summary": "The adapter supports Instagram direct messages, media, quick replies, link buttons, typing indicators, reactions, and story replies through the Chat SDK interface.",
-      "caveat": "A working prototype still depends on Meta application setup, webhook configuration, permissions, review requirements, and compliance with Instagram platform policies.",
       "category": "Utilities",
       "editorialTier": "watch",
       "rankingRationale": "The dated release provides a concrete adapter and code path for extending an existing Chat SDK bot to another user channel.",

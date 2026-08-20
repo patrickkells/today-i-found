@@ -31,11 +31,11 @@ function jsonResponse(payload, ok = true) {
   return { ok, status: ok ? 200 : 503, async json() { return payload; } };
 }
 
-test("createInitialState selects the first signal and starts with open inspector", () => {
+test("createInitialState selects the first signal without carrying inspector state", () => {
   const state = createInitialState(edition.items);
 
   assert.equal(state.selectedId, edition.items[0].id);
-  assert.equal(state.inspectorOpen, true);
+  assert.equal(Object.hasOwn(state, "inspectorOpen"), false);
   assert.deepEqual(state.filters, { categories: [] });
 });
 

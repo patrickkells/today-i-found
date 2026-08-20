@@ -74,7 +74,10 @@ test("renders valid interactive row semantics and actual edition update metadata
   const signalList = screen.getByRole("list", { name: "Signals" });
   assert.equal(within(signalList).getAllByRole("listitem").length, 12);
   const firstRow = within(signalList).getAllByRole("listitem")[0];
-  assert.ok(within(firstRow).getByRole("button", { name: /Open signal:/i }));
+  const headline = within(firstRow).getByRole("link", { name: /Read source:/i });
+  const source = within(firstRow).getByRole("link", { name: /Verified source: OpenAI, checked 2026-08-19/i });
+  assert.equal(headline.getAttribute("href"), edition.items[0].source.url);
+  assert.equal(source.getAttribute("href"), edition.items[0].source.url);
   assert.ok(within(firstRow).getByRole("button", { name: /^Useful,/i }));
   assert.ok(screen.getByText("UPDATED 09:17"));
   assert.ok(screen.getByRole("button", { name: "Demos 1" }));
@@ -103,15 +106,12 @@ test("omits unreliable usefulness and time-to-try metrics from the briefing inte
 
   assert.equal(screen.queryByText("USEFULNESS"), null);
   assert.equal(screen.queryByText("TIME TO TRY"), null);
-  assert.equal(document.querySelector(".table-header")?.textContent, "#SIGNALCATEGORYSOURCEVOTES");
+  assert.equal(document.querySelector(".table-header")?.textContent, "#SIGNALCATEGORYVOTES");
   assert.deepEqual(
     [...document.querySelectorAll(".filter-heading")].map((heading) => heading.textContent.trim()),
     ["FOCUS"],
   );
-  assert.deepEqual(
-    [...document.querySelectorAll(".signal-meta dt")].map((label) => label.textContent),
-    ["CATEGORY", "SOURCE"],
-  );
+  assert.equal(document.querySelector(".signal-meta"), null);
 });
 
 test("date navigation loads a published archive from the manifest", async () => {
@@ -132,7 +132,7 @@ test("date navigation loads a published archive from the manifest", async () => 
 
   await user.click(screen.getByRole("button", { name: "Previous date" }));
 
-  assert.equal((await screen.findAllByText("ARCHIVED BUILDER SIGNAL")).length, 2);
+  assert.equal((await screen.findAllByText("ARCHIVED BUILDER SIGNAL")).length, 1);
   assert.deepEqual(requested, ["2026-08-18"]);
 });
 
@@ -162,13 +162,12 @@ test("vote keyboard activation stays separate from row selection and survives a 
       feedbackService={canonicalService({ getVotes: () => initial.promise })}
     />,
   );
-
-  const targetRow = screen.getByRole("button", { name: /Open signal: Claude Code documents/i }).closest(".signal-row");
+  const targetRow = screen.getByRole("link", { name: /Read source: Claude Code documents/i }).closest(".signal-row");
   const targetVote = within(targetRow).getByRole("button", { name: /Useful, 11 votes/i });
   targetVote.focus();
   await user.keyboard("{Enter}");
   assert.equal(targetVote.getAttribute("aria-pressed"), "true");
-  assert.ok(screen.getByRole("complementary", { name: /GPT-5 adds stricter/i }));
+  assert.equal(document.querySelector(".inspector"), null);
 
   const staleRecords = seedVoteRecords(edition.items);
   initial.resolve({ records: staleRecords, source: "remote" });
@@ -198,65 +197,14 @@ test("filter dialog traps focus, makes the background inert, ignores global shor
   assert.equal(document.activeElement, trigger);
 });
 
-test("copy announces truthful success and failure with a visible label", async () => {
-  const user = userEvent.setup({ document });
-  Object.defineProperty(navigator, "clipboard", {
-    configurable: true,
-    value: { async writeText() { throw new Error("blocked"); } },
-  });
-  document.execCommand = () => false;
+test("stories stay self-contained and do not render generated analysis or experiments", () => {
   render(<App edition={edition} feedbackService={canonicalService()} />);
 
-  const copy = screen.getByRole("button", { name: "Copy step 1" });
-  await user.click(copy);
-  assert.ok(within(copy).getByText("COPY FAILED"));
-  assert.equal(screen.getByRole("status").textContent, "Step 1 copy failed.");
-
-  document.execCommand = () => true;
-  await user.click(copy);
-  assert.ok(within(copy).getByText("COPIED"));
-  assert.equal(screen.getByRole("status").textContent, "Step 1 copied.");
-});
-
-test("copy state never leaks across signals and the fallback restores the copy-button focus", async () => {
-  const user = userEvent.setup({ document });
-  Object.defineProperty(navigator, "clipboard", {
-    configurable: true,
-    value: { async writeText() { throw new Error("blocked"); } },
-  });
-  document.execCommand = () => true;
-  render(<App edition={edition} feedbackService={canonicalService()} />);
-
-  const firstCopy = screen.getByRole("button", { name: "Copy step 1" });
-  firstCopy.focus();
-  await user.keyboard("{Enter}");
-  await waitFor(() => assert.ok(within(firstCopy).getByText("COPIED")));
-  assert.equal(document.activeElement, firstCopy);
-
-  const secondRow = within(screen.getByRole("list", { name: "Signals" })).getAllByRole("listitem")[1];
-  await user.click(within(secondRow).getByRole("button", { name: /Open signal:/i }));
-  const secondCopy = screen.getByRole("button", { name: "Copy step 1" });
-  assert.ok(within(secondCopy).getByText("COPY"));
-  assert.equal(screen.getByRole("status").textContent, "");
-});
-
-test("the inspector omits optional action material instead of inventing filler", () => {
-  const fixture = structuredClone(edition);
-  delete fixture.items[0].experiment;
-  delete fixture.items[0].caveat;
-  render(<App edition={fixture} feedbackService={canonicalService()} />);
-
-  assert.equal(screen.queryByText("THREE-STEP EXPERIMENT"), null);
-  assert.equal(screen.queryByText("CAVEAT"), null);
-  assert.ok(screen.getByText("SIGNAL DETAILS"));
-});
-
-test("an experiment renders each of its one through three supplied steps", () => {
-  const fixture = structuredClone(edition);
-  fixture.items[0].experiment.steps = ["Run the maintainer example."];
-  render(<App edition={fixture} feedbackService={canonicalService()} />);
-
-  assert.equal(screen.getAllByRole("button", { name: /Copy step/i }).length, 1);
+  assert.equal(document.querySelector(".inspector"), null);
+  assert.equal(screen.queryByText(edition.items[0].signal.whyNow), null);
+  assert.equal(screen.queryByText(edition.items[0].caveat), null);
+  assert.equal(screen.queryByText(edition.items[0].experiment.goal), null);
+  assert.equal(screen.queryByText("TRY THIS"), null);
 });
 
 test("a stale initial feedback status cannot replace a newer mutation status", async () => {
@@ -298,18 +246,13 @@ test("an older vote response cannot replace the newest feedback status", async (
   assert.equal(screen.queryByText("FEEDBACK LOCAL"), null);
 });
 
-test("phone inspector is modal, traps focus, and Escape restores its row trigger", async () => {
+test("phone rows keep verified sources inline without opening a story modal", async () => {
   phoneViewport = true;
-  const user = userEvent.setup({ document });
   render(<App edition={edition} feedbackService={canonicalService()} />);
 
-  const inspector = screen.getByRole("dialog", { name: /GPT-5 adds stricter/i });
-  const close = within(inspector).getByRole("button", { name: "Close inspector" });
-  await waitFor(() => assert.equal(document.activeElement, close));
-  assert.ok(document.querySelector(".app-underlay").hasAttribute("inert"));
-  fireEvent.keyDown(document.activeElement, { key: "Escape" });
+  const firstRow = screen.getAllByRole("listitem")[0];
+  assert.ok(within(firstRow).getByRole("link", { name: /Verified source: OpenAI, checked 2026-08-19/i }));
   assert.equal(screen.queryByRole("dialog", { name: /GPT-5 adds stricter/i }), null);
-  await waitFor(() => assert.equal(document.activeElement?.getAttribute("aria-label"), "Open signal: GPT-5 adds stricter tool-call controls in the Responses API"));
 });
 
 test("phone footer renders every essential group without the desktop-only navigation hint", async () => {
@@ -323,7 +266,7 @@ test("phone footer renders every essential group without the desktop-only naviga
   assert.equal(within(footer).queryByText("Navigate"), null);
 });
 
-test("loading, error, filter-empty, help, and inspector reopen states stay reachable", async () => {
+test("loading, error, filter-empty, and help states stay reachable without an inspector", async () => {
   const user = userEvent.setup({ document });
   const view = render(<App edition={null} feedbackService={canonicalService()} />);
   assert.ok(screen.getByText("LOADING TODAY'S SIGNALS"));
@@ -340,5 +283,5 @@ test("loading, error, filter-empty, help, and inspector reopen states stay reach
   assert.ok(screen.getByRole("dialog", { name: "KEYBOARD CONTROLS" }));
   fireEvent.keyDown(document.activeElement, { key: "Escape" });
   await user.keyboard("{Escape}");
-  assert.ok(screen.getByRole("button", { name: "OPEN INSPECTOR" }));
+  assert.equal(screen.queryByRole("button", { name: "OPEN INSPECTOR" }), null);
 });

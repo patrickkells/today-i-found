@@ -1,7 +1,6 @@
 export function createInitialState(items = []) {
   return {
     selectedId: items[0]?.id ?? null,
-    inspectorOpen: Boolean(items.length),
     filtersOpen: false,
     helpOpen: false,
     query: "",
