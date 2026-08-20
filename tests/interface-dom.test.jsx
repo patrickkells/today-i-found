@@ -32,7 +32,7 @@ const React = await import("react");
 const { act, cleanup, fireEvent, render, screen, waitFor, within } = await import("@testing-library/react");
 const userEvent = (await import("@testing-library/user-event")).default;
 const { App, AppFooter } = await import("../src/App.jsx");
-const edition = (await import("../data/editions/2026-08-19.json", { with: { type: "json" } })).default;
+const edition = (await import("./fixtures/edition.json", { with: { type: "json" } })).default;
 const { seedVoteRecords } = await import("../src/feedback-service.js");
 
 function canonicalService(overrides = {}) {

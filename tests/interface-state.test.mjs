@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import edition from "../data/editions/2026-08-19.json" with { type: "json" };
+import edition from "./fixtures/edition.json" with { type: "json" };
 import {
   applyVote,
   createInitialState,

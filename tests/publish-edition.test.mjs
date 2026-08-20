@@ -11,7 +11,7 @@ import { publishEdition } from "../lib/publishing.js";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const node = process.execPath;
 const script = path.join(root, "scripts", "publish-edition.mjs");
-const fixture = path.join(root, "data", "editions", "2026-08-19.json");
+const fixture = path.join(root, "tests", "fixtures", "edition.json");
 
 async function runPublish(args, environment = {}) {
   const child = await new Promise((resolve, reject) => {
@@ -42,6 +42,7 @@ test("dry run validates a candidate and does not write its static archive", asyn
       "--history-dir", path.join(directory, "history"),
       "--output-dir", archiveDirectory,
       "--dry-run",
+      "--skip-source-audit",
     ]);
 
     assert.equal(result.code, 0, result.output);
@@ -59,7 +60,7 @@ test("a valid dry run with a registration URL makes no network request or file m
     const manifest = path.join(directory, "data", "manifest.json");
     await mkdir(archiveDirectory, { recursive: true });
     await writeFile(path.join(archiveDirectory, "2026-08-19.json"), "archive-before\n");
-    await writeFile(manifest, "manifest-before\n");
+    await writeFile(manifest, "{}\n");
     let registrations = 0;
 
     const result = await publishEdition({
@@ -79,7 +80,7 @@ test("a valid dry run with a registration URL makes no network request or file m
     assert.equal(result.dryRun, true);
     assert.equal(registrations, 0);
     assert.equal(await readFile(path.join(archiveDirectory, "2026-08-19.json"), "utf8"), "archive-before\n");
-    assert.equal(await readFile(manifest, "utf8"), "manifest-before\n");
+    assert.equal(await readFile(manifest, "utf8"), "{}\n");
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -137,6 +138,44 @@ test("invalid editions do not register with the feedback service or write an arc
     assert.match(result.output, /Publication blocked/i);
     assert.match(result.output, /validation: Edition must contain between 1 and 15 items/i);
     await assert.rejects(readFile(path.join(archiveDirectory, "2026-08-19.json"), "utf8"));
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("a failed source audit blocks registration and leaves the archive untouched", async () => {
+  const directory = await makeTempDirectory();
+  try {
+    const archiveDirectory = path.join(directory, "data", "editions");
+    const manifest = path.join(directory, "data", "manifest.json");
+    await mkdir(archiveDirectory, { recursive: true });
+    await writeFile(path.join(archiveDirectory, "2026-08-19.json"), "archive-before\n");
+    await writeFile(manifest, "{}\n");
+    let registrations = 0;
+
+    await assert.rejects(
+      publishEdition({
+        input: fixture,
+        outputDirectory: archiveDirectory,
+        historyDirectory: path.join(directory, "no-history"),
+        manifestFile: manifest,
+        auditSources: true,
+        registerUrl: "https://feedback.example/v1/editions",
+        curatorToken: "test-token",
+        fetchImpl: async (url, options) => {
+          if (options?.method === "POST") {
+            registrations += 1;
+            return new Response("{}", { status: 201 });
+          }
+          return { ok: false, status: 404, url };
+        },
+      }),
+      /source audit: openai-gpt-5-responses-tools source returned HTTP 404/i,
+    );
+
+    assert.equal(registrations, 0);
+    assert.equal(await readFile(path.join(archiveDirectory, "2026-08-19.json"), "utf8"), "archive-before\n");
+    assert.equal(await readFile(manifest, "utf8"), "{}\n");
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

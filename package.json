@@ -10,10 +10,12 @@
     "test": "node --import tsx --test tests/*.test.*",
     "test:feedback": "node --test tests/feedback-worker.test.mjs tests/feedback-schema.test.mjs",
     "test:sites": "node --test tests/sites-worker.test.mjs",
-    "validate:edition": "node scripts/validate-edition.mjs data/editions/2026-08-19.json",
+    "validate:edition": "node scripts/validate-edition.mjs data/editions/2026-08-20.json",
     "check:duplicates": "node scripts/check-duplicates.mjs",
     "validate:archives": "node scripts/validate-archives.mjs",
-    "curate:dry-run": "node scripts/publish-edition.mjs --input data/editions/2026-08-19.json --dry-run"
+    "curate:dry-run": "node scripts/publish-edition.mjs --input data/editions/2026-08-20.json --dry-run",
+    "discover:feeds": "node scripts/discover-feeds.mjs",
+    "audit:sources": "node scripts/audit-sources.mjs"
   },
   "dependencies": {
     "@fontsource/barlow-condensed": "^5.3.0",

@@ -10,7 +10,9 @@ Enable Pages for this repository with **GitHub Actions** as the source. Do not r
 
 ## Curator dry run
 
-Read `config/curation-policy.json` before creating a candidate. New candidates use edition schema version 2 and contain 1–15 qualifying items. Each item needs a verified primary source, `signal.whyNow`, `editorialTier`, and `rankingRationale`. The policy-backed validator also enforces prohibited-topic and structured substantive-update rules. It does not require category quotas or numerical quality scores.
+Read `config/curation-policy.json` before creating a candidate. New candidates use edition schema version 2 and contain 1–15 qualifying items. Each item needs direct dated primary evidence published within the seven-day freshness window, `publicationDate`, structured source evidence, edition-day verification, `signal.whyNow`, `editorialTier`, and `rankingRationale`. The policy-backed validator also enforces prohibited-topic and structured substantive-update rules. It does not require category quotas or numerical quality scores. Migration and deprecation items are valid only when they cite a dated migration notice and explicitly describe the transition.
+
+Run `npm run discover:feeds` before research to collect leads from the official RSS and Atom registry. Feed entries are discovery inputs only. Open the linked primary source, verify the claim and date, and record the direct evidence in the edition. Generic documentation cannot establish novelty.
 
 Use a candidate edition JSON that follows the current `data/editions` contract:
 
@@ -18,7 +20,7 @@ Use a candidate edition JSON that follows the current `data/editions` contract:
 node scripts/publish-edition.mjs --input /path/to/candidate.json --dry-run
 ```
 
-The command validates all hard selection gates and the deterministic 30-day duplicate checks against archived editions. The curator must separately compare candidate meaning with the recent archive so paraphrased repeats do not pass merely because their URL, keys, or normalized title differ. A dry run neither writes files nor registers an edition.
+The command validates all hard selection gates, audits every source URL, and runs deterministic 30-day duplicate checks against archived editions. The curator must separately compare candidate meaning with the recent archive so paraphrased repeats do not pass merely because their URL, keys, or normalized title differ. A dry run neither writes files nor registers an edition.
 
 `caveat` and `experiment` are optional. When present, an experiment needs a nonempty goal and one to three nonempty steps. The interface renders Caveat and Try This only when those fields exist. New editions do not use `impact`, `confidence`, `novelty`, `baseScore`, `adjustedScore`, or `timeToTry`; legacy archives may retain those fields.
 
@@ -47,7 +49,7 @@ node scripts/publish-edition.mjs \
   --register-url "$REGISTER_EDITION_URL"
 ```
 
-If validation, duplicate checks, configured feedback retrieval, or Worker registration fails, the command exits non-zero and does not write the archive. Missing optional Worker configuration does not block a valid static-only publication. The script never commits, pushes, or deploys anything itself.
+If validation, source auditing, duplicate checks, configured feedback retrieval, or Worker registration fails, the command exits non-zero and does not write the archive. Missing optional Worker configuration does not block a valid static-only publication. The script never commits, pushes, or deploys anything itself.
 
 ## Cloudflare Worker and D1
 

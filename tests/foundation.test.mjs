@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import manifest from "../data/manifest.json" with { type: "json" };
-import edition from "../data/editions/2026-08-19.json" with { type: "json" };
+import edition from "./fixtures/edition.json" with { type: "json" };
 import policy from "../config/curation-policy.json" with { type: "json" };
 import {
   canonicalizeUrl,
@@ -242,9 +242,9 @@ test("legacy validation reports null items without throwing", () => {
   assert.ok(validateEdition(legacy, { allowLegacy: true }).some((error) => error.includes("between 10 and 15")));
 });
 
-test("the manifest points to the dated edition and the 12-item fixture satisfies all curation contracts", () => {
-  assert.equal(manifest.latestEdition, "2026-08-19");
-  assert.deepEqual(manifest.editions, ["2026-08-19"]);
+test("the manifest points to the researched current edition and the test fixture satisfies its legacy contracts", () => {
+  assert.equal(manifest.latestEdition, "2026-08-20");
+  assert.deepEqual(manifest.editions, ["2026-08-20"]);
   assert.equal(edition.items.length, 12);
   assert.deepEqual(validateEdition(edition), []);
 });
@@ -333,6 +333,64 @@ test("validateEdition requires complete primary-source verification metadata", (
   delete incompleteVerification.items[0].source.verification.verifiedAt;
 
   assert.ok(validateEdition(incompleteVerification).some((error) => error.includes("verification.verifiedAt")));
+});
+
+test("validateEdition rejects stale and future-dated events instead of trusting a formatted publication date", () => {
+  const stale = structuredClone(edition);
+  stale.date = "2026-08-20";
+  stale.curatedAt = "2026-08-20T07:00:00-04:00";
+  stale.items = [stale.items[0]];
+  stale.items[0].publicationDate = "2026-08-12";
+  stale.items[0].source.verification.verifiedAt = "2026-08-20";
+  stale.items[0].source.evidence = {
+    type: "release",
+    dateBasis: "The official release page is dated August 12, 2026.",
+    productStatus: "active",
+  };
+
+  const future = structuredClone(stale);
+  future.items[0].publicationDate = "2026-08-21";
+
+  assert.ok(validateEdition(stale).some((error) => error.includes("seven days")));
+  assert.ok(validateEdition(future).some((error) => error.includes("after the edition date")));
+});
+
+test("validateEdition requires direct dated event evidence rather than generic documentation", () => {
+  const documentationOnly = structuredClone(edition);
+  documentationOnly.date = "2026-08-20";
+  documentationOnly.curatedAt = "2026-08-20T07:00:00-04:00";
+  documentationOnly.items = [documentationOnly.items[0]];
+  documentationOnly.items[0].publicationDate = "2026-08-19";
+  documentationOnly.items[0].source.verification.verifiedAt = "2026-08-20";
+  documentationOnly.items[0].source.evidence = {
+    type: "documentation",
+    dateBasis: "The generic documentation page was available when checked.",
+    productStatus: "active",
+  };
+
+  assert.ok(validateEdition(documentationOnly).some((error) => error.includes("direct dated event evidence")));
+});
+
+test("validateEdition permits a deprecation only as an explicitly labeled current migration notice", () => {
+  const misleading = structuredClone(edition);
+  misleading.date = "2026-08-20";
+  misleading.curatedAt = "2026-08-20T07:00:00-04:00";
+  misleading.items = [misleading.items[0]];
+  misleading.items[0].publicationDate = "2026-08-20";
+  misleading.items[0].source.verification.verifiedAt = "2026-08-20";
+  misleading.items[0].source.evidence = {
+    type: "release",
+    dateBasis: "The official notice is dated August 20, 2026.",
+    productStatus: "migration",
+  };
+
+  const migration = structuredClone(misleading);
+  migration.items[0].title = "Acme deprecates Evals v1; migrate to Datasets";
+  migration.items[0].summary = "The old API is shutting down, so builders should migrate current evaluation suites.";
+  migration.items[0].source.evidence.type = "migration-notice";
+
+  assert.ok(validateEdition(misleading).some((error) => error.includes("migration notice")));
+  assert.deepEqual(validateEdition(migration), []);
 });
 
 test("validateEdition rejects an impossible edition date", () => {

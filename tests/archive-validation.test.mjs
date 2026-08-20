@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const script = path.join(root, "scripts", "validate-archives.mjs");
-const fixture = path.join(root, "data", "editions", "2026-08-19.json");
+const fixture = path.join(root, "tests", "fixtures", "edition.json");
 
 async function runValidator(dataDirectory) {
   return new Promise((resolve, reject) => {
@@ -25,6 +25,15 @@ async function fixtureEdition(date) {
   const edition = JSON.parse(await readFile(fixture, "utf8"));
   edition.date = date;
   edition.curatedAt = `${date}T07:42:00-04:00`;
+  for (const item of edition.items) {
+    item.publicationDate = date;
+    item.source.verification.verifiedAt = date;
+    item.source.evidence = {
+      type: "dated-update",
+      dateBasis: `Test fixture update dated ${date}.`,
+      productStatus: "active",
+    };
+  }
   return edition;
 }
 

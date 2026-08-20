@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 2,
+  "date": "2026-08-20",
+  "timezone": "America/New_York",
+  "curatedAt": "2026-08-20T16:30:00-04:00",
+  "title": "today i found — August 20, 2026",
+  "summary": "Five current releases and platform changes with direct builder utility.",
+  "items": [
+    {
+      "id": "google-gemini-3-7-flash-ga",
+      "title": "Gemini 3.7 Flash is generally available for coding and agents",
+      "summary": "Google released the stable gemini-3.7-flash endpoint with improvements aimed at software engineering, web development, and agentic workflows.",
+      "caveat": "A new model can change latency, output style, and tool-call behavior even when its aggregate quality improves; evaluate it on your own failures before changing a production alias.",
+      "category": "Models",
+      "editorialTier": "must-try",
+      "rankingRationale": "Google's dated Gemini API changelog identifies a stable endpoint that builders can test immediately in existing coding and agent evaluations.",
+      "tags": ["gemini", "coding", "agents", "api"],
+      "publicationDate": "2026-08-13",
+      "entityKey": "google-gemini-3-7-flash",
+      "eventKey": "google-gemini-3-7-flash-ga",
+      "signal": { "whyNow": "The model reached general availability seven days ago, putting it inside the freshness window and making production-oriented evaluation timely." },
+      "source": {
+        "kind": "primary",
+        "publisher": "Google",
+        "title": "Gemini API release notes — August 13, 2026",
+        "url": "https://ai.google.dev/gemini-api/docs/changelog",
+        "evidence": {
+          "type": "changelog",
+          "dateBasis": "The official Gemini API changelog has an August 13, 2026 heading announcing Gemini 3.7 Flash general availability.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the official dated changelog and checked the current model status and nearby deprecation notices.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "experiment": {
+        "goal": "Decide whether Gemini 3.7 Flash improves one real coding workflow.",
+        "steps": [
+          "Run ten previously failed coding or tool-use cases against your current model and gemini-3.7-flash.",
+          "Compare task completion, invalid tool calls, latency, and output verbosity.",
+          "Adopt it only for the slice where the results improve without new regressions."
+        ]
+      }
+    },
+    {
+      "id": "cloudflare-qwen-3-8-27b-workers-ai",
+      "title": "Qwen 3.8 27B lands on Workers AI with vision and function calling",
+      "summary": "Cloudflare added a hosted Qwen 3.8 27B endpoint with image and text input, reasoning, function calling, and a 262,144-token context window.",
+      "caveat": "Hosted availability does not establish model quality for your workload; compare instruction following, tool reliability, latency, and total cost against an existing endpoint.",
+      "category": "Models",
+      "editorialTier": "notable",
+      "rankingRationale": "The dated Cloudflare release exposes a current multimodal, tool-capable model through APIs builders may already use for Workers applications.",
+      "tags": ["qwen", "multimodal", "function calling", "workers ai"],
+      "publicationDate": "2026-08-17",
+      "entityKey": "qwen-3-8-27b",
+      "eventKey": "cloudflare-workers-ai-qwen-3-8-27b",
+      "signal": { "whyNow": "The endpoint became available on August 17, making it possible to test a compact vision-and-tool model without operating inference infrastructure." },
+      "source": {
+        "kind": "primary",
+        "publisher": "Cloudflare",
+        "title": "Qwen 3.8 27B now available on Workers AI",
+        "url": "https://developers.cloudflare.com/changelog/post/2026-08-17-qwen-3.8-27b-workers-ai/",
+        "evidence": {
+          "type": "changelog",
+          "dateBasis": "The official Cloudflare changelog entry is dated August 17, 2026 and names the hosted model ID and supported capabilities.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the dated Cloudflare changelog and cross-checked the active model page, endpoint ID, context window, and capabilities.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "experiment": {
+        "goal": "Test whether the hosted model can handle a small multimodal tool workflow.",
+        "steps": [
+          "Send one representative image-and-text task to @cf/qwen/qwen3.8-27b.",
+          "Add a read-only function and repeat the task with tool use enabled.",
+          "Inspect the tool arguments and final answer against a known-good result."
+        ]
+      }
+    },
+    {
+      "id": "vercel-fish-audio-ai-gateway",
+      "title": "Vercel AI Gateway adds Fish Audio speech and transcription models",
+      "summary": "Four Fish Audio models are now accessible through AI Gateway, including streaming text-to-speech, voice cloning, multilingual speech, and word-timestamped transcription.",
+      "caveat": "The launch offer ends September 18. Standard model IDs begin billing afterward; the documented -free suffix stops serving instead of automatically charging.",
+      "category": "Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The announcement includes active model identifiers and runnable AI SDK examples for speech generation and transcription, so builders can verify the utility directly.",
+      "tags": ["audio", "speech", "transcription", "ai sdk"],
+      "publicationDate": "2026-08-19",
+      "entityKey": "vercel-ai-gateway-fish-audio",
+      "eventKey": "vercel-ai-gateway-fish-audio-launch",
+      "signal": { "whyNow": "The August 19 integration provides a low-friction window to prototype audio features and observe real latency and output quality." },
+      "source": {
+        "kind": "primary",
+        "publisher": "Vercel",
+        "title": "Fish Audio models now available on Vercel AI Gateway for free",
+        "url": "https://vercel.com/changelog/fish-audio-models-now-available-on-ai-gateway-for-free",
+        "evidence": {
+          "type": "changelog",
+          "dateBasis": "The official Vercel changelog entry is dated August 19, 2026 and lists the model IDs, capabilities, offer boundary, and AI SDK examples.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the dated Vercel changelog and checked model identifiers, supported operations, example code, and post-offer behavior.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "experiment": {
+        "goal": "Measure one speech feature with real input.",
+        "steps": [
+          "Use the documented -free model ID for either a short speech sample or a one-minute transcription.",
+          "Record latency, intelligibility or word accuracy, and timestamp quality.",
+          "Compare the result with your current provider before enabling a billable model ID."
+        ]
+      }
+    },
+    {
+      "id": "vercel-agent-slack-public-beta",
+      "title": "Vercel Agent enters Slack with approval-gated production actions",
+      "summary": "The public beta brings deployment, build, log, metric, configuration, and repository context into Slack for incident investigation, code changes, and approved remediation.",
+      "caveat": "The beta is limited to Pro and Enterprise teams. Only a limited number of simple requests are free, and paid work is billed on demand.",
+      "category": "Workflows",
+      "editorialTier": "watch",
+      "rankingRationale": "The workflow connects team discussion to production evidence while preserving read-only defaults, requester permissions, explicit approval, and action attribution.",
+      "tags": ["agents", "slack", "incident response", "approvals"],
+      "publicationDate": "2026-08-19",
+      "entityKey": "vercel-agent-slack",
+      "eventKey": "vercel-agent-slack-public-beta",
+      "signal": { "whyNow": "The August 19 public beta makes an approval-gated chat-to-production workflow available for eligible teams to evaluate." },
+      "source": {
+        "kind": "primary",
+        "publisher": "Vercel",
+        "title": "Vercel for Slack now in public beta",
+        "url": "https://vercel.com/changelog/vercel-for-slack-now-in-public-beta",
+        "evidence": {
+          "type": "release",
+          "dateBasis": "The official Vercel release is dated August 19, 2026 and states beta eligibility, permissions, approval behavior, and pricing limits.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the official release and checked access tier, read-only defaults, approval boundaries, attribution, and billing language.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "experiment": {
+        "goal": "Evaluate the agent without granting mutation authority.",
+        "steps": [
+          "Install the beta in a non-production Slack channel and keep the agent read-only.",
+          "Ask it to explain one known failed preview deployment using logs and build context.",
+          "Compare its diagnosis with the incident record before testing any approval-gated action."
+        ]
+      }
+    },
+    {
+      "id": "vercel-chat-sdk-instagram-adapter",
+      "title": "Chat SDK adds an Instagram adapter for DM bots",
+      "summary": "The adapter supports Instagram direct messages, media, quick replies, link buttons, typing indicators, reactions, and story replies through the Chat SDK interface.",
+      "caveat": "A working prototype still depends on Meta application setup, webhook configuration, permissions, review requirements, and compliance with Instagram platform policies.",
+      "category": "Utilities",
+      "editorialTier": "watch",
+      "rankingRationale": "The dated release provides a concrete adapter and code path for extending an existing Chat SDK bot to another user channel.",
+      "tags": ["chat sdk", "instagram", "bots", "messaging"],
+      "publicationDate": "2026-08-19",
+      "entityKey": "vercel-chat-sdk-instagram",
+      "eventKey": "vercel-chat-sdk-instagram-adapter",
+      "signal": { "whyNow": "The adapter shipped on August 19, reducing the custom transport work required for teams already using the Chat SDK." },
+      "source": {
+        "kind": "primary",
+        "publisher": "Vercel",
+        "title": "Chat SDK adds Instagram adapter",
+        "url": "https://vercel.com/changelog/chat-sdk-adds-instagram-adapter",
+        "evidence": {
+          "type": "changelog",
+          "dateBasis": "The official Vercel changelog entry is dated August 19, 2026 and includes the adapter package, supported interactions, and example initialization code.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the dated changelog and checked the adapter import, supported message features, and example code.",
+          "verifiedAt": "2026-08-20"
+        }
+      }
+    }
+  ]
+}

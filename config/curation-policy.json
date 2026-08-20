@@ -8,5 +8,12 @@
     "githubRepositoryAcceleration": true,
     "popularityIsEvidence": false
   },
+  "freshness": {
+    "enforceForEditionsOnOrAfter": "2026-08-20",
+    "maxAgeDays": 7,
+    "requireVerificationOnEditionDate": true,
+    "directEvidenceTypes": ["release", "changelog", "announcement", "research-paper", "repository-release", "dated-update", "migration-notice"],
+    "productStatuses": ["active", "migration"]
+  },
   "substantiveUpdateKinds": ["new-version", "new-capability", "api-access", "reproducible-evaluation", "expanded-utility"]
 }

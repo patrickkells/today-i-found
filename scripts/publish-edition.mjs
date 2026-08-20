@@ -26,6 +26,7 @@ async function main() {
     feedbackUrl: option("--feedback-url"),
     registerUrl: option("--register-url"),
     curatorToken: process.env.CURATOR_TOKEN,
+    auditSources: !process.argv.includes("--skip-source-audit"),
   });
   if (result.dryRun) console.log(`Dry run passed for ${result.edition.date}; no files were written or registered.`);
   else console.log(`Published ${result.edition.date} to ${outputDirectory}.`);

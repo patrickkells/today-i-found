@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { validateEdition } from "../lib/curation.js";
 
-const file = process.argv[2] ?? "data/editions/2026-08-19.json";
+const file = process.argv[2] ?? "data/editions/2026-08-20.json";
 const edition = JSON.parse(await readFile(file, "utf8"));
 const errors = validateEdition(edition);
 

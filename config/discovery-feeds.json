@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "feeds": [
+    { "id": "openai-news", "publisher": "OpenAI", "lane": "product", "url": "https://openai.com/news/rss.xml" },
+    { "id": "github-changelog", "publisher": "GitHub", "lane": "developer-tools", "url": "https://github.blog/changelog/feed/" },
+    { "id": "cloudflare-developer-platform", "publisher": "Cloudflare", "lane": "developer-tools", "url": "https://developers.cloudflare.com/changelog/rss/developer-platform.xml" },
+    { "id": "cloudflare-api-deprecations", "publisher": "Cloudflare", "lane": "deprecations", "url": "https://developers.cloudflare.com/fundamentals/api/reference/deprecations/index.xml" },
+    { "id": "hugging-face-blog", "publisher": "Hugging Face", "lane": "open-source", "url": "https://huggingface.co/blog/feed.xml" },
+    { "id": "arxiv-cs-ai", "publisher": "arXiv", "lane": "research", "url": "https://rss.arxiv.org/rss/cs.AI" },
+    { "id": "arxiv-cs-lg", "publisher": "arXiv", "lane": "research", "url": "https://rss.arxiv.org/rss/cs.LG" },
+    { "id": "arxiv-cs-cl", "publisher": "arXiv", "lane": "research", "url": "https://rss.arxiv.org/rss/cs.CL" },
+    { "id": "openai-python-releases", "publisher": "OpenAI", "lane": "releases", "url": "https://github.com/openai/openai-python/releases.atom" },
+    { "id": "anthropic-python-releases", "publisher": "Anthropic", "lane": "releases", "url": "https://github.com/anthropics/anthropic-sdk-python/releases.atom" },
+    { "id": "transformers-releases", "publisher": "Hugging Face", "lane": "releases", "url": "https://github.com/huggingface/transformers/releases.atom" },
+    { "id": "vllm-releases", "publisher": "vLLM", "lane": "releases", "url": "https://github.com/vllm-project/vllm/releases.atom" },
+    { "id": "ollama-releases", "publisher": "Ollama", "lane": "releases", "url": "https://github.com/ollama/ollama/releases.atom" },
+    { "id": "langgraph-releases", "publisher": "LangChain", "lane": "releases", "url": "https://github.com/langchain-ai/langgraph/releases.atom" },
+    { "id": "mcp-specification-releases", "publisher": "Model Context Protocol", "lane": "releases", "url": "https://github.com/modelcontextprotocol/specification/releases.atom" },
+    { "id": "a2a-releases", "publisher": "A2A Project", "lane": "releases", "url": "https://github.com/a2aproject/A2A/releases.atom" },
+    { "id": "vercel-ai-releases", "publisher": "Vercel", "lane": "releases", "url": "https://github.com/vercel/ai/releases.atom" },
+    { "id": "semantic-kernel-releases", "publisher": "Microsoft", "lane": "releases", "url": "https://github.com/microsoft/semantic-kernel/releases.atom" }
+  ]
+}
