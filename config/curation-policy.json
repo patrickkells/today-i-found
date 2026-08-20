@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "edition": { "minItems": 1, "maxItems": 15, "currentSchemaVersion": 2 },
+  "editorialTiers": ["must-try", "notable", "watch"],
+  "feedback": { "windowDays": 90, "halfLifeDays": 30, "minEffectiveVotes": 10, "maxAdjustment": 0.5 },
+  "discovery": {
+    "githubTrendingWindows": ["daily", "weekly"],
+    "githubRepositoryAcceleration": true,
+    "popularityIsEvidence": false
+  },
+  "substantiveUpdateKinds": ["new-version", "new-capability", "api-access", "reproducible-evaluation", "expanded-utility"]
+}

@@ -1,0 +1,11 @@
+name = "today-i-found-feedback"
+main = "index.js"
+compatibility_date = "2026-08-19"
+
+[vars]
+ALLOWED_ORIGIN = "https://patrickkells.github.io"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "today-i-found-feedback"
+database_id = "a836514d-e3e9-45dd-af7f-935caa5b2b7e"
