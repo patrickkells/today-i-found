@@ -174,7 +174,7 @@ test("vote keyboard activation stays separate from row selection and survives a 
     />,
   );
   const targetRow = screen.getByRole("link", { name: /Read source: Claude Code documents/i }).closest(".signal-row");
-  const targetVote = within(targetRow).getByRole("button", { name: /Useful, 11 votes/i });
+  const targetVote = within(targetRow).getByRole("button", { name: /^Useful, 0 votes$/i });
   targetVote.focus();
   await user.keyboard("{Enter}");
   assert.equal(targetVote.getAttribute("aria-pressed"), "true");
@@ -182,7 +182,7 @@ test("vote keyboard activation stays separate from row selection and survives a 
 
   const staleRecords = seedVoteRecords(edition.items);
   initial.resolve({ records: staleRecords, source: "remote" });
-  await waitFor(() => assert.match(targetVote.getAttribute("aria-label"), /12 votes/));
+  await waitFor(() => assert.match(targetVote.getAttribute("aria-label"), /1 votes/));
 });
 
 test("filter dialog traps focus, makes the background inert, ignores global shortcuts, and restores focus", async () => {

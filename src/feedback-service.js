@@ -1,10 +1,6 @@
 const VISITOR_KEY = "today-i-found:visitor-id";
 const VOTE_KEY_PREFIX = "today-i-found:votes:";
 
-function seedFor(id) {
-  return [...id].reduce((total, character) => total + character.charCodeAt(0), 0);
-}
-
 function validVote(value) {
   return value === "up" || value === "down" || value === null;
 }
@@ -57,13 +53,12 @@ function writeLocalVote(storage, visitorId, itemId, value) {
 export function seedVoteRecords(items, votes = {}) {
   return Object.fromEntries(
     items.map((item) => {
-      const seed = seedFor(item.id);
       const myVote = validVote(votes[item.id]) ? votes[item.id] : null;
       return [
         item.id,
         {
-          up: 6 + (seed % 19) + (myVote === "up" ? 1 : 0),
-          down: (seed % 5) + (myVote === "down" ? 1 : 0),
+          up: myVote === "up" ? 1 : 0,
+          down: myVote === "down" ? 1 : 0,
           myVote,
         },
       ];

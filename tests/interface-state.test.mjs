@@ -78,9 +78,14 @@ test("applyVote adds, changes, and removes one vote per signal", () => {
   assert.deepEqual(removed, { counts: { up: 10, down: 2 }, vote: null });
 });
 
-test("feedback service returns canonical local records when the network is unavailable", async () => {
+test("feedback fallback reports only votes actually stored in this browser", async () => {
+  const firstItem = edition.items[0];
+  const secondItem = edition.items[1];
   const service = createFeedbackService({
-    storage: memoryStorage(),
+    storage: memoryStorage({
+      "today-i-found:visitor-id": "visitor-test",
+      "today-i-found:votes:visitor-test": JSON.stringify({ [secondItem.id]: "down" }),
+    }),
     cryptoImpl: { randomUUID: () => "visitor-test" },
     fetchImpl: async () => {
       throw new Error("offline");
@@ -91,10 +96,15 @@ test("feedback service returns canonical local records when the network is unava
 
   assert.equal(result.source, "fallback");
   assert.ok(result.records, "fallback result must expose canonical records");
-  assert.deepEqual(result.records[edition.items[0].id], {
-    up: 6,
+  assert.deepEqual(result.records[firstItem.id], {
+    up: 0,
     down: 0,
     myVote: null,
+  });
+  assert.deepEqual(result.records[secondItem.id], {
+    up: 0,
+    down: 1,
+    myVote: "down",
   });
 });
 
