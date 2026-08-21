@@ -1,52 +1,197 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "date": "2026-08-20",
   "timezone": "America/New_York",
-  "curatedAt": "2026-08-20T16:30:00-04:00",
+  "curatedAt": "2026-08-21T04:53:18.991Z",
   "title": "today i found — August 20, 2026",
-  "summary": "Five current releases and platform changes with direct builder utility.",
+  "summary": "Forty current technology signals from official releases and GitHub Trending.",
   "items": [
     {
-      "id": "google-gemini-3-7-flash-ga",
-      "title": "Google makes Gemini 3.7 Flash generally available",
-      "summary": "The stable Gemini API endpoint includes improvements for software engineering, web development, and agent workflows.",
-      "category": "Models",
+      "id": "cloudflare-workers-vitest-plugin-v1",
+      "title": "Cloudflare renames its Workers Vitest integration",
+      "summary": "Version 1 uses @cloudflare/vitest-plugin instead of @cloudflare/vitest-pool-workers. Existing projects must update the dependency, imports, and TypeScript types; the configuration API is unchanged.",
+      "category": "Software & Developer Tools",
       "editorialTier": "must-try",
-      "rankingRationale": "Google's dated Gemini API changelog identifies a stable endpoint that builders can test immediately in existing coding and agent evaluations.",
-      "tags": ["gemini", "coding", "agents", "api"],
-      "publicationDate": "2026-08-13",
-      "entityKey": "google-gemini-3-7-flash",
-      "eventKey": "google-gemini-3-7-flash-ga",
-      "signal": { "whyNow": "The model reached general availability seven days ago, putting it inside the freshness window and making production-oriented evaluation timely." },
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:testing",
+        "format:migration",
+        "entity:cloudflare"
+      ],
+      "publicationDate": "2026-08-19",
+      "entityKey": "cloudflare-workers-vitest",
+      "eventKey": "cloudflare-workers-vitest-plugin-v1",
+      "signal": {
+        "whyNow": "The source falls inside the edition's freshness window."
+      },
       "source": {
         "kind": "primary",
-        "publisher": "Google",
-        "title": "Gemini API release notes — August 13, 2026",
-        "url": "https://ai.google.dev/gemini-api/docs/changelog",
+        "publisher": "Cloudflare",
+        "title": "@cloudflare/vitest-pool-workers is now @cloudflare/vitest-plugin",
+        "url": "https://developers.cloudflare.com/changelog/post/2026-08-19-vitest-plugin/",
         "evidence": {
-          "type": "changelog",
-          "dateBasis": "The official Gemini API changelog has an August 13, 2026 heading announcing Gemini 3.7 Flash general availability.",
+          "type": "migration-notice",
+          "freshnessClass": "standard",
+          "dateBasis": "Cloudflare published version 1 of its Workers Vitest integration as @cloudflare/vitest-plugin on August 19, 2026.",
           "productStatus": "active"
         },
         "verification": {
           "status": "verified",
-          "method": "Opened the official dated changelog and checked the current model status and nearby deprecation notices.",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
           "verifiedAt": "2026-08-20"
         }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "ollama-0-32-15",
+      "title": "Ollama 0.32.15 cuts model metadata lookup time",
+      "summary": "Release benchmarks show time to first token falling from about 995 ms to 524 ms. The update also fixes stalled chat and generation after mid-stream parser errors.",
+      "category": "AI & Automation",
+      "editorialTier": "must-try",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:local-inference",
+        "format:release",
+        "entity:ollama"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "ollama",
+      "eventKey": "ollama-0-32-15",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Ollama",
+        "title": "Ollama v0.32.15",
+        "url": "https://github.com/ollama/ollama/releases/tag/v0.32.15",
+        "evidence": {
+          "type": "repository-release",
+          "freshnessClass": "standard",
+          "dateBasis": "Ollama released version 0.32.15 on August 20, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-actions-windows-11-arm64-vs2026",
+      "title": "GitHub makes Windows 11 arm64 VS2026 runners generally available",
+      "summary": "The image is available on standard and larger GitHub-hosted runners for Actions workflows.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:ci-cd",
+        "format:changelog",
+        "entity:github-actions"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-actions-windows-arm64",
+      "eventKey": "github-actions-windows-11-arm64-vs2026-ga",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "GitHub",
+        "title": "Windows 11 arm64 VS2026 image generally available",
+        "url": "https://github.blog/changelog/2026-08-20-windows-11-arm64-vs2026-image-generally-available",
+        "evidence": {
+          "type": "changelog",
+          "freshnessClass": "standard",
+          "dateBasis": "GitHub published the changelog on August 20, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "cloudflare-browser-run-limits-2026-08",
+      "title": "Cloudflare increases Browser Run concurrency limits",
+      "summary": "Workers Paid defaults increase from 120 to 200 concurrent browsers, one to three new instances per second, and 10 to 30 Quick Actions requests per second.",
+      "category": "Web & Platforms",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:browser-automation",
+        "format:changelog",
+        "entity:cloudflare"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "cloudflare-browser-run",
+      "eventKey": "cloudflare-browser-run-limits-2026-08",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Cloudflare",
+        "title": "Run more headless browsers concurrently with Browser Run",
+        "url": "https://developers.cloudflare.com/changelog/post/2026-08-20-limits-increase/",
+        "evidence": {
+          "type": "changelog",
+          "freshnessClass": "standard",
+          "dateBasis": "Cloudflare published the Browser Run limit change on August 20, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
       }
     },
     {
       "id": "cloudflare-qwen-3-8-27b-workers-ai",
       "title": "Cloudflare adds Qwen 3.8 27B to Workers AI",
       "summary": "The hosted model accepts text and images, supports reasoning and function calls, and has a 262,144-token context window.",
-      "category": "Models",
+      "category": "AI & Automation",
       "editorialTier": "notable",
-      "rankingRationale": "The dated Cloudflare release exposes a current multimodal, tool-capable model through APIs builders may already use for Workers applications.",
-      "tags": ["qwen", "multimodal", "function calling", "workers ai"],
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:model-hosting",
+        "format:changelog",
+        "entity:qwen"
+      ],
       "publicationDate": "2026-08-17",
       "entityKey": "qwen-3-8-27b",
       "eventKey": "cloudflare-workers-ai-qwen-3-8-27b",
-      "signal": { "whyNow": "The endpoint became available on August 17, making it possible to test a compact vision-and-tool model without operating inference infrastructure." },
+      "signal": {
+        "whyNow": "The source falls inside the edition's freshness window."
+      },
       "source": {
         "kind": "primary",
         "publisher": "Cloudflare",
@@ -54,28 +199,125 @@
         "url": "https://developers.cloudflare.com/changelog/post/2026-08-17-qwen-3.8-27b-workers-ai/",
         "evidence": {
           "type": "changelog",
-          "dateBasis": "The official Cloudflare changelog entry is dated August 17, 2026 and names the hosted model ID and supported capabilities.",
+          "freshnessClass": "standard",
+          "dateBasis": "Cloudflare published the Workers AI changelog on August 17, 2026.",
           "productStatus": "active"
         },
         "verification": {
           "status": "verified",
-          "method": "Opened the dated Cloudflare changelog and cross-checked the active model page, endpoint ID, context window, and capabilities.",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
           "verifiedAt": "2026-08-20"
         }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "anthropic-python-sdk-1-0-0",
+      "title": "Anthropic releases Python SDK 1.0.0 with breaking HTTPX changes",
+      "summary": "The client upgrades to httpx2 and includes minor breaking changes. Anthropic directs existing users to MIGRATION.md.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "must-try",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:sdk",
+        "format:release",
+        "entity:anthropic"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "anthropic-python-sdk",
+      "eventKey": "anthropic-python-sdk-1-0-0",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Anthropic",
+        "title": "anthropic-sdk-python v1.0.0",
+        "url": "https://github.com/anthropics/anthropic-sdk-python/releases/tag/v1.0.0",
+        "evidence": {
+          "type": "repository-release",
+          "freshnessClass": "standard",
+          "dateBasis": "Anthropic released anthropic-sdk-python 1.0.0 on August 20, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "google-gemini-3-7-flash-ga",
+      "title": "Google makes Gemini 3.7 Flash generally available",
+      "summary": "The stable API endpoint improves software engineering, web development, and agent workflows. Introductory pricing lasts through December 31, 2026.",
+      "category": "AI & Automation",
+      "editorialTier": "must-try",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:models",
+        "format:changelog",
+        "entity:gemini"
+      ],
+      "publicationDate": "2026-08-13",
+      "entityKey": "google-gemini-3-7-flash",
+      "eventKey": "google-gemini-3-7-flash-ga",
+      "signal": {
+        "whyNow": "The source falls inside the edition's freshness window."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Google",
+        "title": "Gemini API release notes",
+        "url": "https://ai.google.dev/gemini-api/docs/changelog",
+        "evidence": {
+          "type": "changelog",
+          "freshnessClass": "standard",
+          "dateBasis": "Google made Gemini 3.7 Flash generally available on August 13, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
       }
     },
     {
       "id": "vercel-fish-audio-ai-gateway",
       "title": "Vercel adds four Fish Audio models to AI Gateway",
       "summary": "The models support speech generation and transcription. Free model IDs stop serving after September 18, while standard IDs use paid billing.",
-      "category": "Tools",
+      "category": "AI & Automation",
       "editorialTier": "notable",
-      "rankingRationale": "The announcement includes active model identifiers and runnable AI SDK examples for speech generation and transcription, so builders can verify the utility directly.",
-      "tags": ["audio", "speech", "transcription", "ai sdk"],
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:audio",
+        "format:changelog",
+        "entity:vercel"
+      ],
       "publicationDate": "2026-08-19",
       "entityKey": "vercel-ai-gateway-fish-audio",
       "eventKey": "vercel-ai-gateway-fish-audio-launch",
-      "signal": { "whyNow": "The August 19 integration provides a low-friction window to prototype audio features and observe real latency and output quality." },
+      "signal": {
+        "whyNow": "The source falls inside the edition's freshness window."
+      },
       "source": {
         "kind": "primary",
         "publisher": "Vercel",
@@ -83,28 +325,41 @@
         "url": "https://vercel.com/changelog/fish-audio-models-now-available-on-ai-gateway-for-free",
         "evidence": {
           "type": "changelog",
-          "dateBasis": "The official Vercel changelog entry is dated August 19, 2026 and lists the model IDs, capabilities, offer boundary, and AI SDK examples.",
+          "freshnessClass": "standard",
+          "dateBasis": "Vercel added four Fish Audio models to AI Gateway on August 19, 2026.",
           "productStatus": "active"
         },
         "verification": {
           "status": "verified",
-          "method": "Opened the dated Vercel changelog and checked model identifiers, supported operations, example code, and post-offer behavior.",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
           "verifiedAt": "2026-08-20"
         }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
       }
     },
     {
       "id": "vercel-agent-slack-public-beta",
       "title": "Vercel releases its Slack agent as a public beta",
       "summary": "Pro and Enterprise teams can investigate deployment issues from Slack and approve production changes. Only a limited number of simple requests are free before usage-based billing.",
-      "category": "Workflows",
+      "category": "Software & Developer Tools",
       "editorialTier": "watch",
-      "rankingRationale": "The workflow connects team discussion to production evidence while preserving read-only defaults, requester permissions, explicit approval, and action attribution.",
-      "tags": ["agents", "slack", "incident response", "approvals"],
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:incident-response",
+        "format:release",
+        "entity:vercel"
+      ],
       "publicationDate": "2026-08-19",
       "entityKey": "vercel-agent-slack",
       "eventKey": "vercel-agent-slack-public-beta",
-      "signal": { "whyNow": "The August 19 public beta makes an approval-gated chat-to-production workflow available for eligible teams to evaluate." },
+      "signal": {
+        "whyNow": "The source falls inside the edition's freshness window."
+      },
       "source": {
         "kind": "primary",
         "publisher": "Vercel",
@@ -112,28 +367,41 @@
         "url": "https://vercel.com/changelog/vercel-for-slack-now-in-public-beta",
         "evidence": {
           "type": "release",
-          "dateBasis": "The official Vercel release is dated August 19, 2026 and states beta eligibility, permissions, approval behavior, and pricing limits.",
+          "freshnessClass": "standard",
+          "dateBasis": "Vercel released its Slack agent as a public beta on August 19, 2026.",
           "productStatus": "active"
         },
         "verification": {
           "status": "verified",
-          "method": "Opened the official release and checked access tier, read-only defaults, approval boundaries, attribution, and billing language.",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
           "verifiedAt": "2026-08-20"
         }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
       }
     },
     {
       "id": "vercel-chat-sdk-instagram-adapter",
       "title": "Vercel adds Instagram messaging to Chat SDK",
       "summary": "The adapter handles direct messages, media, quick replies, reactions, and story replies without a separate Instagram transport integration.",
-      "category": "Utilities",
+      "category": "Software & Developer Tools",
       "editorialTier": "watch",
-      "rankingRationale": "The dated release provides a concrete adapter and code path for extending an existing Chat SDK bot to another user channel.",
-      "tags": ["chat sdk", "instagram", "bots", "messaging"],
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:messaging",
+        "format:changelog",
+        "entity:vercel"
+      ],
       "publicationDate": "2026-08-19",
       "entityKey": "vercel-chat-sdk-instagram",
       "eventKey": "vercel-chat-sdk-instagram-adapter",
-      "signal": { "whyNow": "The adapter shipped on August 19, reducing the custom transport work required for teams already using the Chat SDK." },
+      "signal": {
+        "whyNow": "The source falls inside the edition's freshness window."
+      },
       "source": {
         "kind": "primary",
         "publisher": "Vercel",
@@ -141,15 +409,1415 @@
         "url": "https://vercel.com/changelog/chat-sdk-adds-instagram-adapter",
         "evidence": {
           "type": "changelog",
-          "dateBasis": "The official Vercel changelog entry is dated August 19, 2026 and includes the adapter package, supported interactions, and example initialization code.",
+          "freshnessClass": "standard",
+          "dateBasis": "Vercel added an Instagram adapter to Chat SDK on August 19, 2026.",
           "productStatus": "active"
         },
         "verification": {
           "status": "verified",
-          "method": "Opened the dated changelog and checked the adapter import, supported message features, and example code.",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
           "verifiedAt": "2026-08-20"
         }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-cathrynlavery-diagram-design",
+      "title": "diagram-design supplies 38 diagram templates for coding agents",
+      "summary": "The HTML and SVG collection works with Claude Code, Codex, and Pi. It appeared on GitHub's weekly Trending list today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:diagrams",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-cathrynlavery-diagram-design",
+      "eventKey": "github-cathrynlavery-diagram-design-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "cathrynlavery",
+        "title": "cathrynlavery/diagram-design repository",
+        "url": "https://github.com/cathrynlavery/diagram-design",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "cathrynlavery/diagram-design: 38 editorial diagram types for Claude Code, Codex, and Pi. Self-contained HTML + SVG. No shadows. No Mermaid slop.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-volcengine-openviking",
+      "title": "OpenViking combines agent memory, retrieval, and skills",
+      "summary": "The Python project provides a context database for AI agents. It appeared on GitHub's daily and weekly Trending lists today.",
+      "category": "AI & Automation",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:agent-memory",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-volcengine-openviking",
+      "eventKey": "github-volcengine-openviking-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "volcengine",
+        "title": "volcengine/OpenViking repository",
+        "url": "https://github.com/volcengine/OpenViking",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "volcengine/OpenViking: Self-evolving Context Database for AI Agents. Unify Agent Memory, Knowledge RAG and Skills.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily",
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-basecamp-omarchy",
+      "title": "Omarchy packages an opinionated Linux desktop",
+      "summary": "The Shell-based project provides a complete Linux environment. It appeared on GitHub's weekly Trending list today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:linux",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-basecamp-omarchy",
+      "eventKey": "github-basecamp-omarchy-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "basecamp",
+        "title": "basecamp/omarchy repository",
+        "url": "https://github.com/basecamp/omarchy",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "basecamp/omarchy: Beautiful, Modern & Opinionated Linux",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-cactus-compute-needle",
+      "title": "Needle runs a 14MB foundation model on small devices",
+      "summary": "The Python project targets phones, wearables, smart-home hardware, and robots. It appeared on GitHub's weekly Trending list today.",
+      "category": "Hardware & Devices",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:on-device-ai",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-cactus-compute-needle",
+      "eventKey": "github-cactus-compute-needle-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "cactus-compute",
+        "title": "cactus-compute/needle repository",
+        "url": "https://github.com/cactus-compute/needle",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "cactus-compute/needle: 14MB foundation model for tiny devices; phones, wearables, smart home, and robots.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-semantica-agi-semantica",
+      "title": "Semantica stores AI context in a graph-native system",
+      "summary": "The Python project provides context infrastructure for accountable AI systems. It appeared on GitHub's weekly Trending list today.",
+      "category": "AI & Automation",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:knowledge-graphs",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-semantica-agi-semantica",
+      "eventKey": "github-semantica-agi-semantica-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "semantica-agi",
+        "title": "semantica-agi/semantica repository",
+        "url": "https://github.com/semantica-agi/semantica",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "semantica-agi/semantica: Graph-Native Infrastructure for Context and Accountable AI Systems",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-nvidia-nemo-switchyard",
+      "title": "Switchyard routes LLM requests across models and providers",
+      "summary": "The Rust project preserves OpenAI and Anthropic API compatibility for model selection, benchmarking, and cost-performance testing. It appeared on GitHub's weekly Trending list today.",
+      "category": "AI & Automation",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:model-routing",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-nvidia-nemo-switchyard",
+      "eventKey": "github-nvidia-nemo-switchyard-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "NVIDIA-NeMo",
+        "title": "NVIDIA-NeMo/Switchyard repository",
+        "url": "https://github.com/NVIDIA-NeMo/Switchyard",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "NVIDIA-NeMo/Switchyard: Switchyard lets LLM applications route traffic across models and providers while preserving native OpenAI and Anthropic API compatibility - enabling flexible model selection, benchmarking, and cost/performance optimization.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-modular-modular",
+      "title": "Modular maintains the MAX and Mojo platform",
+      "summary": "The repository contains the MAX engine and Mojo language. It appeared on GitHub's daily and weekly Trending lists today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:programming-language",
+        "entity:mojo",
+        "format:repository"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-modular-modular",
+      "eventKey": "github-modular-modular-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "modular",
+        "title": "modular/modular repository",
+        "url": "https://github.com/modular/modular",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "modular/modular: The Modular Platform (includes MAX & Mojo)",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily",
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-harry0703-moneyprinterturbo",
+      "title": "MoneyPrinterTurbo generates short videos from a topic",
+      "summary": "The Python workflow uses AI models to create HD short videos from a topic or keyword. It appeared on GitHub's daily and weekly Trending lists today.",
+      "category": "AI & Automation",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:video-generation",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-harry0703-moneyprinterturbo",
+      "eventKey": "github-harry0703-moneyprinterturbo-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "harry0703",
+        "title": "harry0703/MoneyPrinterTurbo repository",
+        "url": "https://github.com/harry0703/MoneyPrinterTurbo",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "harry0703/MoneyPrinterTurbo: 利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily",
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-public-apis-public-apis",
+      "title": "public-apis collects free APIs in one repository",
+      "summary": "The community-maintained directory groups public APIs for software projects. It appeared on GitHub's daily and weekly Trending lists today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:apis",
+        "format:directory",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-public-apis-public-apis",
+      "eventKey": "github-public-apis-public-apis-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "public-apis",
+        "title": "public-apis/public-apis repository",
+        "url": "https://github.com/public-apis/public-apis",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "public-apis/public-apis: A collective list of free APIs",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-megadose-holehe",
+      "title": "holehe checks where an email address is registered",
+      "summary": "The Python utility uses account-recovery flows to identify services associated with an address. It appeared on GitHub's daily and weekly Trending lists today.",
+      "category": "Security & Privacy",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:osint",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-megadose-holehe",
+      "eventKey": "github-megadose-holehe-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "megadose",
+        "title": "megadose/holehe repository",
+        "url": "https://github.com/megadose/holehe",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "megadose/holehe: holehe allows you to check if the mail is used on different sites like twitter, instagram and will retrieve information on sites with the forgotten password function.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-aprilnea-openlogi",
+      "title": "OpenLogi remaps Logitech hardware without an account",
+      "summary": "The local-first Rust app controls buttons, DPI, and SmartShift over HID++ without telemetry. It appeared on GitHub's daily and weekly Trending lists today.",
+      "category": "Hardware & Devices",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:peripherals",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-aprilnea-openlogi",
+      "eventKey": "github-aprilnea-openlogi-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "AprilNEA",
+        "title": "AprilNEA/OpenLogi repository",
+        "url": "https://github.com/AprilNEA/OpenLogi",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "AprilNEA/OpenLogi: ⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily",
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-lightningpixel-modly",
+      "title": "modly generates 3D models locally from images or prompts",
+      "summary": "The desktop app runs on a local GPU instead of a hosted service. It appeared on GitHub's daily and weekly Trending lists today.",
+      "category": "AI & Automation",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:3d-generation",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-lightningpixel-modly",
+      "eventKey": "github-lightningpixel-modly-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "lightningpixel",
+        "title": "lightningpixel/modly repository",
+        "url": "https://github.com/lightningpixel/modly",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "lightningpixel/modly: Desktop app to generate 3D models from images or prompt using local AI — runs entirely on your GPU",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-macro-inc-macro",
+      "title": "Macro combines team communication and work in one workspace",
+      "summary": "The project links email, chat, documents, tasks, calls, CRM, and agents through shared AI memory. It appeared on GitHub's daily and weekly Trending lists today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:collaboration",
+        "format:repository",
+        "entity:macro"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-macro-inc-macro",
+      "eventKey": "github-macro-inc-macro-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "macro-inc",
+        "title": "macro-inc/macro repository",
+        "url": "https://github.com/macro-inc/macro",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "macro-inc/macro: Macro is a unified workspace for teams: email, chat, docs, tasks, agents, calls, and CRM — @-linked together with shared AI memory.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-unslothai-unsloth",
+      "title": "Unsloth runs and trains models through a local interface",
+      "summary": "The interface supports language and diffusion models, including Qwen3.8, Kimi K3, Gemma 4, DeepSeek-V4, and FLUX. It appeared on GitHub's daily Trending list today.",
+      "category": "AI & Automation",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:model-training",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-unslothai-unsloth",
+      "eventKey": "github-unslothai-unsloth-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "unslothai",
+        "title": "unslothai/unsloth repository",
+        "url": "https://github.com/unslothai/unsloth",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "unslothai/unsloth: Local UI to run and train LLMs and diffusion models, including Qwen3.8, Kimi K3, MiniMax-H3, Gemma 4, DeepSeek-V4, FLUX and more.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-akitaonrails-ai-memory",
+      "title": "ai-memory shares long-term memory across coding agents",
+      "summary": "The project supports handoffs between agent coding CLIs from different vendors. It appeared on GitHub's daily Trending list today.",
+      "category": "AI & Automation",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:agent-memory",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-akitaonrails-ai-memory",
+      "eventKey": "github-akitaonrails-ai-memory-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "akitaonrails",
+        "title": "akitaonrails/ai-memory repository",
+        "url": "https://github.com/akitaonrails/ai-memory",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "akitaonrails/ai-memory: Solution for long term memory for agent coding CLIs and to facilitate handoff between different agent vendors",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily",
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-jundot-omlx",
+      "title": "omlx serves language models on Apple Silicon",
+      "summary": "The macOS inference server supports continuous batching and SSD caching from a menu-bar app. It appeared on GitHub's daily Trending list today.",
+      "category": "AI & Automation",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:local-inference",
+        "format:repository",
+        "entity:apple-silicon"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-jundot-omlx",
+      "eventKey": "github-jundot-omlx-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "jundot",
+        "title": "jundot/omlx repository",
+        "url": "https://github.com/jundot/omlx",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "jundot/omlx: LLM inference server with continuous batching & SSD caching for Apple Silicon — managed from the macOS menu bar",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-alexsjones-llmfit",
+      "title": "llmfit matches language models to local hardware",
+      "summary": "The command-line utility compares hundreds of models and providers against a machine's available resources. It appeared on GitHub's daily Trending list today.",
+      "category": "AI & Automation",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:model-selection",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-alexsjones-llmfit",
+      "eventKey": "github-alexsjones-llmfit-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "AlexsJones",
+        "title": "AlexsJones/llmfit repository",
+        "url": "https://github.com/AlexsJones/llmfit",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "AlexsJones/llmfit: Hundreds of models & providers. One command to find what runs on your hardware.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-codebuffai-freebuff",
+      "title": "freebuff provides a free coding agent",
+      "summary": "The repository packages a coding agent for local developer workflows. It appeared on GitHub's daily Trending list today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "watch",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:coding-agent",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-codebuffai-freebuff",
+      "eventKey": "github-codebuffai-freebuff-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "CodebuffAI",
+        "title": "CodebuffAI/freebuff repository",
+        "url": "https://github.com/CodebuffAI/freebuff",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "CodebuffAI/freebuff: The free coding agent",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "weekly"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-mattpocock-skills",
+      "title": "Matt Pocock publishes agent skills for software engineering",
+      "summary": "The repository collects reusable skills from a working .agents directory. It appeared on GitHub's daily Trending list today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:agent-skills",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-mattpocock-skills",
+      "eventKey": "github-mattpocock-skills-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "mattpocock",
+        "title": "mattpocock/skills repository",
+        "url": "https://github.com/mattpocock/skills",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "mattpocock/skills: Skills for Real Engineers. Straight from my .agents directory.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-obra-superpowers",
+      "title": "Superpowers packages a development workflow for coding agents",
+      "summary": "The framework organizes reusable agent skills and software-development methods. It appeared on GitHub's daily Trending list today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:agent-skills",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-obra-superpowers",
+      "eventKey": "github-obra-superpowers-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "obra",
+        "title": "obra/superpowers repository",
+        "url": "https://github.com/obra/superpowers",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "obra/superpowers: An agentic skills framework & software development methodology that works.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-cursor-plugins",
+      "title": "Cursor publishes its plugin specification and official plugins",
+      "summary": "The repository documents Cursor's plugin format and includes maintained examples. It appeared on GitHub's daily Trending list today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:plugins",
+        "format:repository",
+        "entity:cursor"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-cursor-plugins",
+      "eventKey": "github-cursor-plugins-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "cursor",
+        "title": "cursor/plugins repository",
+        "url": "https://github.com/cursor/plugins",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "cursor/plugins: Cursor plugin specification and official plugins",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-santifer-career-ops",
+      "title": "career-ops automates an open-source job search workflow",
+      "summary": "The local workflow scans listings, grades them with a rubric, tailors a CV, and tracks applications through coding CLIs. It appeared on GitHub's daily Trending list today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:automation",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-santifer-career-ops",
+      "eventKey": "github-santifer-career-ops-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "santifer",
+        "title": "santifer/career-ops repository",
+        "url": "https://github.com/santifer/career-ops",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "santifer/career-ops: Open-source AI job search: scan job portals, evaluate listings with a structured A-F rubric into a 1.0-5.0 score, tailor your CV, track applications — runs locally in your AI coding CLI (Claude Code, Codex, OpenCode, Antigravity…)",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-agent-substrate-substrate",
+      "title": "Substrate provides a core runtime for agents",
+      "summary": "The repository contains the Agent Substrate core system. It appeared on GitHub's daily Trending list today.",
+      "category": "AI & Automation",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:agent-runtime",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-agent-substrate-substrate",
+      "eventKey": "github-agent-substrate-substrate-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "agent-substrate",
+        "title": "agent-substrate/substrate repository",
+        "url": "https://github.com/agent-substrate/substrate",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "agent-substrate/substrate: Agent Substrate: the core system",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-chaitanyagiri-munder-difflin",
+      "title": "munder-difflin provides a local multi-agent harness",
+      "summary": "The repository packages a harness for running multiple agents locally. It appeared on GitHub's daily Trending list today.",
+      "category": "AI & Automation",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:multi-agent",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-chaitanyagiri-munder-difflin",
+      "eventKey": "github-chaitanyagiri-munder-difflin-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "chaitanyagiri",
+        "title": "chaitanyagiri/munder-difflin repository",
+        "url": "https://github.com/chaitanyagiri/munder-difflin",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "chaitanyagiri/munder-difflin: local multi-agent harness",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-posthog-posthog",
+      "title": "PostHog combines analytics and AI observability",
+      "summary": "The platform includes session replay, feature flags, experiments, error tracking, logs, and agent context. It appeared on GitHub's daily Trending list today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:product-analytics",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-posthog-posthog",
+      "eventKey": "github-posthog-posthog-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "PostHog",
+        "title": "PostHog/posthog repository",
+        "url": "https://github.com/PostHog/posthog",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "PostHog/posthog: 🦔 PostHog is the leading platform for building self-driving products. Our developer tools – AI observability, analytics, session replay, flags, experiments, error tracking, logs, and more – capture all the context agents need to diagnose problems, uncover opportunities, and ship fixes. Steer it all from Slack, web, desktop, or the MCP.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-mahlernim-google-timeline-visualizer",
+      "title": "Google Timeline Visualizer maps a year of location history",
+      "summary": "The project turns exported Google Location History data into a travel visualization. It appeared on GitHub's daily Trending list today.",
+      "category": "Consumer Technology",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:location-history",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-mahlernim-google-timeline-visualizer",
+      "eventKey": "github-mahlernim-google-timeline-visualizer-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "mahlernim",
+        "title": "mahlernim/google-timeline-visualizer repository",
+        "url": "https://github.com/mahlernim/google-timeline-visualizer",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "mahlernim/google-timeline-visualizer: Visualize your year in travel using your Google Location History (Timeline) data",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-juliusbrussee-caveman",
+      "title": "caveman compresses coding-agent output",
+      "summary": "The Claude Code skill uses abbreviated language to reduce token output. It appeared on GitHub's daily Trending list today.",
+      "category": "Curiosities",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:token-efficiency",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-juliusbrussee-caveman",
+      "eventKey": "github-juliusbrussee-caveman-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "JuliusBrussee",
+        "title": "JuliusBrussee/caveman repository",
+        "url": "https://github.com/JuliusBrussee/caveman",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "JuliusBrussee/caveman: 🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-makeplane-plane",
+      "title": "Plane provides an open-source project management platform",
+      "summary": "The platform covers tasks, sprints, documents, and triage as an alternative to hosted work trackers. It appeared on GitHub's daily Trending list today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:project-management",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-makeplane-plane",
+      "eventKey": "github-makeplane-plane-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "makeplane",
+        "title": "makeplane/plane repository",
+        "url": "https://github.com/makeplane/plane",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "makeplane/plane: 🔥🔥🔥 Open-source Jira, Linear, Monday, and ClickUp alternative. Plane is a modern project management platform to manage tasks, sprints, docs, and triage.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-tencent-ai-infra-guard",
+      "title": "AI-Infra-Guard scans AI infrastructure and agent components",
+      "summary": "The security platform tests agents, skills, MCP servers, AI infrastructure, and model jailbreak defenses. It appeared on GitHub's daily Trending list today.",
+      "category": "Security & Privacy",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:ai-security",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-tencent-ai-infra-guard",
+      "eventKey": "github-tencent-ai-infra-guard-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Tencent",
+        "title": "Tencent/AI-Infra-Guard repository",
+        "url": "https://github.com/Tencent/AI-Infra-Guard",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "Tencent/AI-Infra-Guard: A full-stack AI Red Teaming platform securing AI ecosystems via Agent Scan, Skills Scan, MCP scan, AI Infra scan and LLM jailbreak evaluation.",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-ryancodrai-turbovec",
+      "title": "turbovec provides a Rust vector index with Python bindings",
+      "summary": "The project builds on TurboQuant for vector search workloads. It appeared on GitHub's daily Trending list today.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The source documents a current, usable technology change or an edition-day repository discovery with direct practical detail.",
+      "tags": [
+        "topic:vector-search",
+        "format:repository",
+        "license:open-source"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "github-ryancodrai-turbovec",
+      "eventKey": "github-ryancodrai-turbovec-trending-2026-08-20",
+      "signal": {
+        "whyNow": "The source or discovery is current on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "RyanCodrai",
+        "title": "RyanCodrai/turbovec repository",
+        "url": "https://github.com/RyanCodrai/turbovec",
+        "evidence": {
+          "type": "repository-trending",
+          "freshnessClass": "current-discovery",
+          "dateBasis": "RyanCodrai/turbovec: A vector index built on TurboQuant, written in Rust with Python bindings",
+          "productStatus": "active",
+          "observedAt": "2026-08-20",
+          "trendingWindows": [
+            "daily"
+          ]
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Opened the current primary source and checked its availability, status, and stated facts.",
+          "verifiedAt": "2026-08-20"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
       }
     }
-  ]
+  ],
+  "discoveryStats": {
+    "rawCandidates": 1421,
+    "clusteredCandidates": 1187,
+    "eligibleCandidates": 40,
+    "publishedItems": 40,
+    "trendingReviewed": 30,
+    "explorationItems": 0
+  }
 }
