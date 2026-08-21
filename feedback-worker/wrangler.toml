@@ -3,7 +3,7 @@ main = "index.js"
 compatibility_date = "2026-08-19"
 
 [vars]
-ALLOWED_ORIGIN = "https://patrickkells.github.io"
+ALLOWED_ORIGIN = "https://patrickkells.github.io,https://today-i-found.pages.dev"
 
 [[d1_databases]]
 binding = "DB"

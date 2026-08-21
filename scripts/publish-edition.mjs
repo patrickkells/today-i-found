@@ -26,6 +26,7 @@ async function main() {
     ledgerFile: option("--ledger"),
     feedbackUrl: option("--feedback-url"),
     registerUrl: option("--register-url"),
+    registrationProxyUrl: option("--registration-proxy-url"),
     curatorToken: process.env.CURATOR_TOKEN,
     auditSources: !process.argv.includes("--skip-source-audit"),
   });

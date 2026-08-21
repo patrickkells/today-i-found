@@ -44,3 +44,18 @@ export function applyVote(counts, currentVote, requestedVote) {
   next[requestedVote] += 1;
   return { counts: next, vote: requestedVote };
 }
+
+export function getReportSelection(items, records) {
+  const selection = { itemIds: [], liked: 0, unvoted: 0, excluded: 0 };
+  for (const item of items) {
+    const vote = records[item.id]?.myVote ?? null;
+    if (vote === "down") {
+      selection.excluded += 1;
+    } else {
+      selection.itemIds.push(item.id);
+      if (vote === "up") selection.liked += 1;
+      else selection.unvoted += 1;
+    }
+  }
+  return selection;
+}

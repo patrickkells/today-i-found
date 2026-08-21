@@ -1,4 +1,4 @@
 # Copy to .dev.vars for local development. Do not commit real values.
 CURATOR_TOKEN=replace-with-a-local-curator-token
 HMAC_SECRET=replace-with-a-long-random-local-hmac-secret
-ALLOWED_ORIGIN=http://localhost:5173
+ALLOWED_ORIGIN=http://localhost:5173,http://127.0.0.1:4173

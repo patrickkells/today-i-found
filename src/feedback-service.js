@@ -1,5 +1,6 @@
 const VISITOR_KEY = "today-i-found:visitor-id";
 const VOTE_KEY_PREFIX = "today-i-found:votes:";
+const OUTBOX_KEY_PREFIX = "today-i-found:vote-outbox:";
 
 function validVote(value) {
   return value === "up" || value === "down" || value === null;
@@ -39,15 +40,51 @@ function readLocalVotes(storage, visitorId) {
   return readJson(storage, localVoteKey(visitorId), {});
 }
 
-function writeLocalVote(storage, visitorId, itemId, value) {
-  const votes = readLocalVotes(storage, visitorId);
-  if (value) votes[itemId] = value;
-  else delete votes[itemId];
+function outboxKey(visitorId) {
+  return `${OUTBOX_KEY_PREFIX}${visitorId}`;
+}
+
+function readOutbox(storage, visitorId) {
+  const entries = readJson(storage, outboxKey(visitorId), {});
+  if (!entries || typeof entries !== "object" || Array.isArray(entries)) return {};
+  return Object.fromEntries(Object.entries(entries).filter(([, entry]) => (
+    entry
+    && typeof entry === "object"
+    && validVote(entry.value)
+    && Number.isFinite(entry.updatedAt)
+  )));
+}
+
+function writeOutbox(storage, visitorId, outbox) {
+  if (typeof storage?.setItem !== "function") return false;
   try {
-    storage?.setItem(localVoteKey(visitorId), JSON.stringify(votes));
+    storage.setItem(outboxKey(visitorId), JSON.stringify(outbox));
+    return true;
   } catch {
-    // A blocked storage write does not prevent the current-session vote.
+    return false;
   }
+}
+
+function localSelections(storage, visitorId, outbox) {
+  const legacy = readLocalVotes(storage, visitorId);
+  const queued = Object.fromEntries(Object.entries(outbox).map(([itemId, entry]) => [itemId, entry.value]));
+  return { ...legacy, ...queued };
+}
+
+function applyLocalSelection(record, value) {
+  if (!validVote(value) || record.myVote === value) return record;
+  const next = { ...record };
+  if (next.myVote) next[next.myVote] = Math.max(0, next[next.myVote] - 1);
+  if (value) next[value] += 1;
+  next.myVote = value;
+  return next;
+}
+
+function overlayLocalSelections(records, selections) {
+  return Object.fromEntries(Object.entries(records).map(([itemId, record]) => [
+    itemId,
+    applyLocalSelection(record, selections[itemId]),
+  ]));
 }
 
 export function seedVoteRecords(items, votes = {}) {
@@ -117,11 +154,73 @@ export function createFeedbackService({
   storage = globalThis.localStorage,
   cryptoImpl = globalThis.crypto,
   apiBase = "",
+  now = () => Date.now(),
 } = {}) {
   const visitorId = getOrCreateVisitorId(storage, cryptoImpl);
   const normalizedApiBase = typeof apiBase === "string" ? apiBase.trim().replace(/\/+$/, "") : "";
   const apiUrl = (path) => `${normalizedApiBase}${path}`;
   const mutationQueues = new Map();
+  const outbox = readOutbox(storage, visitorId);
+  const durableVersions = new Map(Object.entries(outbox).map(([itemId, mutation]) => [itemId, mutation.updatedAt]));
+  let lastMutationAt = 0;
+
+  const persistOutbox = () => {
+    if (!writeOutbox(storage, visitorId, outbox)) return false;
+    durableVersions.clear();
+    for (const [itemId, mutation] of Object.entries(outbox)) durableVersions.set(itemId, mutation.updatedAt);
+    return true;
+  };
+  const isDurable = (itemId, mutation) => durableVersions.get(itemId) === mutation.updatedAt;
+  const nextMutationAt = () => {
+    lastMutationAt = Math.max(now(), lastMutationAt + 1);
+    return lastMutationAt;
+  };
+
+  const acknowledge = (itemId, updatedAt) => {
+    if (outbox[itemId]?.updatedAt !== updatedAt) return false;
+    delete outbox[itemId];
+    durableVersions.delete(itemId);
+    persistOutbox();
+    return true;
+  };
+
+  const migrateLegacyVotes = () => {
+    const legacy = readLocalVotes(storage, visitorId);
+    let migrated = false;
+    let hasLegacySelections = false;
+    for (const [itemId, value] of Object.entries(legacy)) {
+      if (!validVote(value)) continue;
+      hasLegacySelections = true;
+      if (Object.hasOwn(outbox, itemId)) continue;
+      outbox[itemId] = { value, updatedAt: nextMutationAt() };
+      migrated = true;
+    }
+    if (migrated && !persistOutbox()) return;
+    if (!hasLegacySelections) return;
+    try {
+      storage?.removeItem(localVoteKey(visitorId));
+    } catch {
+      // A blocked legacy cleanup will be retried after the next remote load.
+    }
+  };
+
+  const sendMutation = async (itemId, mutation) => {
+    if (!fetchImpl) throw new Error("Fetch is unavailable");
+    const response = await fetchImpl(apiUrl(`/v1/items/${itemId}/vote`), {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ value: mutation.value, visitorId }),
+    });
+    if (!response.ok) {
+      const error = new Error(`Feedback update failed: ${response.status}`);
+      error.status = response.status;
+      throw error;
+    }
+    const payload = await response.json();
+    const record = canonicalRecord(payload.record ?? payload);
+    acknowledge(itemId, mutation.updatedAt);
+    return record;
+  };
 
   const enqueueMutation = (itemId, task) => {
     const previous = mutationQueues.get(itemId) ?? Promise.resolve();
@@ -145,40 +244,62 @@ export function createFeedbackService({
           { headers: { accept: "application/json" } },
         );
         if (!response.ok) throw new Error(`Feedback request failed: ${response.status}`);
-        return { records: canonicalRecords(await response.json()), source: "remote" };
+        let records = canonicalRecords(await response.json());
+        migrateLegacyVotes();
+        const visibleIds = new Set(items.map((item) => item.id));
+        records = overlayLocalSelections(records, localSelections(storage, visitorId, outbox));
+        let persistenceFailed = false;
+        const visibleEntries = Object.entries(outbox).filter(([itemId]) => visibleIds.has(itemId));
+        if (visibleEntries.some(([itemId, mutation]) => !isDurable(itemId, mutation)) && !persistOutbox()) {
+          persistenceFailed = true;
+        }
+        for (const [itemId, mutation] of Object.entries(outbox)) {
+          if (!visibleIds.has(itemId)) continue;
+          if (!isDurable(itemId, mutation)) continue;
+          try {
+            records[itemId] = await enqueueMutation(itemId, () => sendMutation(itemId, mutation));
+          } catch {
+            // Keep the durable mutation for a future load or retry.
+          }
+        }
+        const pending = Object.keys(outbox).some((itemId) => visibleIds.has(itemId));
+        return {
+          records,
+          source: persistenceFailed ? "local" : pending ? "syncing" : "synced",
+          ...(persistenceFailed ? { persistence: "failed" } : {}),
+        };
       } catch {
         return {
-          records: seedVoteRecords(items, readLocalVotes(storage, visitorId)),
-          source: "fallback",
+          records: seedVoteRecords(items, localSelections(storage, visitorId, outbox)),
+          source: "local",
         };
       }
     },
 
     setVote(itemId, value, fallbackRecord) {
       if (!validVote(value)) throw new Error("Vote value must be up, down, or null");
-      return enqueueMutation(itemId, async () => {
+      const mutation = { value, updatedAt: nextMutationAt() };
+      outbox[itemId] = mutation;
+      const fallback = canonicalRecord({
+        up: fallbackRecord?.up ?? 0,
+        down: fallbackRecord?.down ?? 0,
+        myVote: value,
+      });
+      if (!persistOutbox()) {
+        return Object.assign(Promise.resolve({ record: fallback, source: "local", persistence: "failed" }), {
+          initialSource: "local",
+          initialPersistence: "failed",
+        });
+      }
+      const request = enqueueMutation(itemId, async () => {
         try {
-          if (!fetchImpl) throw new Error("Fetch is unavailable");
-          const response = await fetchImpl(apiUrl(`/v1/items/${itemId}/vote`), {
-            method: "PUT",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify({ value, visitorId }),
-          });
-          if (!response.ok) throw new Error(`Feedback update failed: ${response.status}`);
-          const payload = await response.json();
-          const record = canonicalRecord(payload.record ?? payload);
-          writeLocalVote(storage, visitorId, itemId, record.myVote);
-          return { record, source: "remote" };
-        } catch {
-          const record = canonicalRecord({
-            up: fallbackRecord?.up ?? 0,
-            down: fallbackRecord?.down ?? 0,
-            myVote: value,
-          });
-          writeLocalVote(storage, visitorId, itemId, value);
-          return { record, source: "fallback" };
+          const record = await sendMutation(itemId, mutation);
+          return { record, source: Object.hasOwn(outbox, itemId) ? "syncing" : "synced", persistence: "durable" };
+        } catch (error) {
+          return { record: fallback, source: error?.status === 429 ? "syncing" : "local", persistence: "durable" };
         }
       });
+      return Object.assign(request, { initialSource: "syncing", initialPersistence: "durable" });
     },
   };
 }

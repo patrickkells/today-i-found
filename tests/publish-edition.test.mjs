@@ -87,6 +87,35 @@ test("a valid dry run with a registration URL makes no network request or file m
   }
 });
 
+test("the local registration proxy is called without a token before public files are written", async () => {
+  const directory = await makeTempDirectory();
+  try {
+    const archiveDirectory = path.join(directory, "data", "editions");
+    const manifest = path.join(directory, "data", "manifest.json");
+    let registration;
+    const result = await publishEdition({
+      input: fixture,
+      outputDirectory: archiveDirectory,
+      historyDirectory: path.join(directory, "no-history"),
+      manifestFile: manifest,
+      registrationProxyUrl: "http://127.0.0.1:43123/register/one-time",
+      fetchImpl: async (url, init) => {
+        registration = { url: String(url), init };
+        await assert.rejects(readFile(path.join(archiveDirectory, "2026-08-19.json"), "utf8"));
+        await assert.rejects(readFile(manifest, "utf8"));
+        return new Response(null, { status: 204 });
+      },
+    });
+    assert.equal(result.dryRun, false);
+    assert.equal(registration.url, "http://127.0.0.1:43123/register/one-time");
+    assert.equal("authorization" in registration.init.headers, false);
+    assert.equal(JSON.parse(registration.init.body).date, "2026-08-19");
+    assert.equal(JSON.parse(await readFile(path.join(archiveDirectory, "2026-08-19.json"), "utf8")).date, "2026-08-19");
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test("dry runs apply supported feedback only as an editorial-tier tie-break", async () => {
   const directory = await makeTempDirectory();
   try {

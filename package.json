@@ -16,7 +16,14 @@
     "curate:dry-run": "node scripts/publish-edition.mjs --input data/editions/2026-08-20.json --dry-run",
     "discover:feeds": "node scripts/discover-feeds.mjs",
     "discover:candidates": "node scripts/discover-candidates.mjs",
-    "audit:sources": "node scripts/audit-sources.mjs"
+    "audit:sources": "node scripts/audit-sources.mjs",
+    "report:companion": "node report-companion/cli.js",
+    "test:report-companion": "node --test tests/report-companion.test.mjs",
+    "publication:gate": "node scripts/publication-run-gate.mjs",
+    "publication:receipt": "node scripts/publication-run-receipt.mjs",
+    "publication:watchdog": "node scripts/publication-watchdog.mjs",
+    "launch-agents:install": "node scripts/install-launch-agents.mjs",
+    "launch-agents:uninstall": "node scripts/uninstall-launch-agents.mjs"
   },
   "dependencies": {
     "@fontsource/barlow-condensed": "^5.3.0",

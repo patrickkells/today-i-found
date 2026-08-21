@@ -8,6 +8,7 @@ const DECAY_HALF_LIFE_DAYS = 30;
 const PRIOR_UP = 2;
 const PRIOR_DOWN = 2;
 const PREFERENCE_ELIGIBILITY_THRESHOLD = 10;
+const SERVICE_VERSION = "1";
 const BROAD_CATEGORIES = new Set([
   "AI & Automation",
   "Software & Developer Tools",
@@ -126,7 +127,9 @@ export function createFeedbackWorker({ now = () => Date.now(), cryptoImpl = glob
         const voteMatch = url.pathname.match(/^\/v1\/items\/([^/]+)\/vote$/);
 
         let response;
-        if (request.method === "GET" && editionMatch) {
+        if (request.method === "GET" && url.pathname === "/v1/health") {
+          response = jsonResponse({ status: "ok", version: SERVICE_VERSION });
+        } else if (request.method === "GET" && editionMatch) {
           response = await getEditionVotes(env, decodeURIComponent(editionMatch[1]), url.searchParams);
         } else if (request.method === "PUT" && voteMatch) {
           response = await putVote(request, env, decodeURIComponent(voteMatch[1]), now(), cryptoImpl);
@@ -395,13 +398,12 @@ function unauthorized() {
 }
 
 function isAllowedOrigin(origin, configuredOrigin) {
-  if (origin === configuredOrigin) return true;
-  try {
-    const url = new URL(origin);
-    return url.protocol === "http:" && (url.hostname === "localhost" || url.hostname === "127.0.0.1" || url.hostname === "[::1]");
-  } catch {
-    return false;
-  }
+  if (typeof origin !== "string" || typeof configuredOrigin !== "string") return false;
+  return configuredOrigin
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean)
+    .includes(origin);
 }
 
 function cors(origin) {

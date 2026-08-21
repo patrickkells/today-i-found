@@ -327,11 +327,15 @@ input:focus-visible {
   text-align: center;
 }
 
-.signal-list {
+.signal-scroll {
   min-height: 0;
   overflow-y: auto;
   scrollbar-color: #3a4245 transparent;
   scrollbar-width: thin;
+}
+
+.signal-list {
+  min-width: 0;
 }
 
 .signal-row {
@@ -436,6 +440,193 @@ input:focus-visible {
 
 .signal-source-inline:hover {
   color: var(--lime);
+}
+
+.report-generator {
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) minmax(280px, 0.85fr);
+  min-height: 132px;
+  border-top: 1px solid #4a5455;
+  background: #0b1012;
+}
+
+.report-heading {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px;
+  border-right: 1px solid var(--line);
+}
+
+.report-heading > div {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.report-heading > div > svg {
+  flex: 0 0 auto;
+  color: var(--lime);
+}
+
+.report-heading h2 {
+  margin: 0;
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: 19px;
+  letter-spacing: 0.045em;
+}
+
+.report-heading p,
+.report-status p {
+  margin: 7px 0 0;
+  color: #929896;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.report-heading > span {
+  flex: 0 0 auto;
+  color: #646c6d;
+  font-size: 8px;
+  letter-spacing: 0.06em;
+}
+
+.report-status {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px 24px;
+  color: #b9bfbc;
+  font-size: 10px;
+}
+
+.report-status strong {
+  color: var(--text);
+  font-family: "Barlow Condensed", Impact, sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+}
+
+.report-primary,
+.report-pairing button {
+  min-height: 38px;
+  padding: 0 16px;
+  border: 1px solid #93b82c;
+  background: var(--lime);
+  color: #0a0e0d;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.report-primary:disabled,
+.report-pairing button:disabled {
+  border-color: #343d3e;
+  background: #202628;
+  color: #697171;
+  cursor: not-allowed;
+}
+
+.report-origin-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 12px;
+  text-decoration: none;
+}
+
+.report-secondary {
+  min-height: 31px;
+  margin-top: 11px;
+  padding: 0 11px;
+  border: 1px solid #465052;
+  background: transparent;
+  color: #bbc1be;
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.report-pairing {
+  width: 100%;
+}
+
+.report-pairing > label {
+  display: block;
+  margin-bottom: 6px;
+  color: #9da4a1;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.report-pairing > div {
+  display: flex;
+  gap: 7px;
+}
+
+.report-pairing input {
+  min-width: 0;
+  width: 112px;
+  padding: 0 10px;
+  border: 1px solid #4a5557;
+  border-radius: 0;
+  background: #080c0e;
+  color: var(--text);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+}
+
+.report-pairing [role="alert"],
+.report-complete [role="alert"] {
+  color: var(--orange);
+}
+
+.report-progress,
+.report-complete {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.report-progress progress {
+  width: 100%;
+  height: 3px;
+  margin-top: 11px;
+  border: 0;
+  background: #202729;
+  color: var(--lime);
+  accent-color: var(--lime);
+}
+
+.report-progress > span {
+  margin-top: 5px;
+  color: #747c7b;
+  font-size: 8px;
+}
+
+.report-complete > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.report-complete button {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  border: 1px solid #4d5859;
+  background: transparent;
+  color: var(--lime);
+  font-size: 9px;
+  cursor: pointer;
 }
 
 .accent-lime {
@@ -807,6 +998,15 @@ kbd {
   .signal-category {
     display: none;
   }
+
+  .report-generator {
+    grid-template-columns: 1fr;
+  }
+
+  .report-heading {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
 }
 
 @media (max-width: 720px) {
@@ -898,6 +1098,31 @@ kbd {
 
   .signal-summary {
     font-size: 9px;
+  }
+
+  .report-heading,
+  .report-status {
+    padding: 18px 12px;
+  }
+
+  .report-heading {
+    gap: 10px;
+  }
+
+  .report-heading > span {
+    display: none;
+  }
+
+  .report-pairing > div {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .report-pairing input,
+  .report-pairing button,
+  .report-primary {
+    width: 100%;
+    min-height: 42px;
   }
 
   .app-footer {

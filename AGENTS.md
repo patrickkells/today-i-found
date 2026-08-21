@@ -20,6 +20,8 @@ For daily curation, prefer accuracy over item count. RSS, GitHub Trending, and c
 
 Keep the briefing list self-contained and compact. Do not use a persistent story inspector, generated experiments, generic "why it matters" copy, or generic caveats. Put the publisher, verification date, and primary-source link directly in each story row. State only decision-relevant limitations as factual story copy.
 
+Keep report generation as a compact surface after the final story. Reports include every liked or unvoted story in the displayed edition and exclude every thumbs-down story, regardless of active filters. The report runner is private to Patrick's paired Mac and produces TTS-friendly narration. Preserve the existing dense technical-instrument design across desktop, tablet, and phone layouts.
+
 Generate new story copy with `config/copy-prompt.md`. Headlines name the actor or product and a concrete change without decorative verbs. Summaries add the mechanism, capability, practical consequence, or a decision-relevant limit without repeating the headline. Keep every factual anchor inside the verified evidence and apply the compact Unslop rules without adding opinions or manufactured personality.
 
 Preserve source evidence and prompt versions so future prompt comparisons use identical facts. Recalibrate only against a larger representative corpus, changing one prompt rule at a time and rerunning the same copy evaluations. Optimize copy for accuracy, information density, specificity, currency, and precise distinctions between new releases, updates, and newly discovered older projects.

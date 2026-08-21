@@ -159,7 +159,7 @@ function makeContext() {
     DB: new FakeD1(),
     CURATOR_TOKEN: "curator-secret",
     HMAC_SECRET: "hmac-secret-with-enough-entropy-32",
-    ALLOWED_ORIGIN: ORIGIN,
+    ALLOWED_ORIGIN: `${ORIGIN},https://today-i-found.pages.dev,http://localhost:5173`,
   };
   const worker = createFeedbackWorker({ now: () => now });
   return {
@@ -411,12 +411,28 @@ test("CORS permits the configured Pages origin and local development only", asyn
   assert.equal(allowed.headers.get("access-control-allow-origin"), ORIGIN);
   assert.equal(allowed.headers.get("vary"), "Origin");
 
+  const dedicatedPages = await context.worker.fetch(request("/v1/editions/2026-08-19/votes?visitorId=browser-a", {
+    origin: "https://today-i-found.pages.dev",
+  }), context.env);
+  assert.equal(dedicatedPages.status, 200);
+  assert.equal(dedicatedPages.headers.get("access-control-allow-origin"), "https://today-i-found.pages.dev");
+
   const denied = await context.worker.fetch(request("/v1/editions/2026-08-19/votes?visitorId=browser-a", {
-    origin: "https://evil.example",
+    origin: "https://today-i-found.pages.dev.evil.example",
   }), context.env);
   assert.equal(denied.status, 403);
   assert.equal(denied.headers.get("access-control-allow-origin"), null);
   assert.equal((await json(denied)).error.code, "origin_not_allowed");
+});
+
+test("public health reports only the feedback service status and version", async () => {
+  const context = makeContext();
+
+  const response = await context.worker.fetch(request("/v1/health"), context.env);
+
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("access-control-allow-origin"), ORIGIN);
+  assert.deepEqual(await json(response), { status: "ok", version: "1" });
 });
 
 test("the D1-backed IP limit permits 60 vote mutations per hour", async () => {
