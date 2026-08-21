@@ -3,5 +3,7 @@
   "product": "today i found",
   "timezone": "America/New_York",
   "latestEdition": "2026-08-20",
-  "editions": ["2026-08-20"]
+  "editions": [
+    "2026-08-20"
+  ]
 }
