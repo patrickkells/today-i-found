@@ -8,8 +8,8 @@
   "items": [
     {
       "id": "google-gemini-3-7-flash-ga",
-      "title": "Gemini 3.7 Flash is generally available for coding and agents",
-      "summary": "Google released the stable gemini-3.7-flash endpoint with improvements aimed at software engineering, web development, and agentic workflows.",
+      "title": "Google makes Gemini 3.7 Flash generally available",
+      "summary": "The stable Gemini API endpoint includes improvements for software engineering, web development, and agent workflows.",
       "category": "Models",
       "editorialTier": "must-try",
       "rankingRationale": "Google's dated Gemini API changelog identifies a stable endpoint that builders can test immediately in existing coding and agent evaluations.",
@@ -37,8 +37,8 @@
     },
     {
       "id": "cloudflare-qwen-3-8-27b-workers-ai",
-      "title": "Qwen 3.8 27B lands on Workers AI with vision and function calling",
-      "summary": "Cloudflare added a hosted Qwen 3.8 27B endpoint with image and text input, reasoning, function calling, and a 262,144-token context window.",
+      "title": "Cloudflare adds Qwen 3.8 27B to Workers AI",
+      "summary": "The hosted model accepts text and images, supports reasoning and function calls, and has a 262,144-token context window.",
       "category": "Models",
       "editorialTier": "notable",
       "rankingRationale": "The dated Cloudflare release exposes a current multimodal, tool-capable model through APIs builders may already use for Workers applications.",
@@ -66,8 +66,8 @@
     },
     {
       "id": "vercel-fish-audio-ai-gateway",
-      "title": "Vercel AI Gateway adds Fish Audio speech and transcription models",
-      "summary": "Four Fish Audio models are now accessible through AI Gateway for speech and transcription. The free launch period ends September 18; -free model IDs stop serving afterward, while standard IDs begin billing.",
+      "title": "Vercel adds four Fish Audio models to AI Gateway",
+      "summary": "The models support speech generation and transcription. Free model IDs stop serving after September 18, while standard IDs use paid billing.",
       "category": "Tools",
       "editorialTier": "notable",
       "rankingRationale": "The announcement includes active model identifiers and runnable AI SDK examples for speech generation and transcription, so builders can verify the utility directly.",
@@ -95,8 +95,8 @@
     },
     {
       "id": "vercel-agent-slack-public-beta",
-      "title": "Vercel Agent enters Slack with approval-gated production actions",
-      "summary": "The public beta brings deployment, build, log, metric, configuration, and repository context into Slack for investigation and approved remediation. It is available to Pro and Enterprise teams; only limited simple requests are free before usage-based billing.",
+      "title": "Vercel releases its Slack agent as a public beta",
+      "summary": "Pro and Enterprise teams can investigate deployment issues from Slack and approve production changes. Only a limited number of simple requests are free before usage-based billing.",
       "category": "Workflows",
       "editorialTier": "watch",
       "rankingRationale": "The workflow connects team discussion to production evidence while preserving read-only defaults, requester permissions, explicit approval, and action attribution.",
@@ -124,8 +124,8 @@
     },
     {
       "id": "vercel-chat-sdk-instagram-adapter",
-      "title": "Chat SDK adds an Instagram adapter for DM bots",
-      "summary": "The adapter supports Instagram direct messages, media, quick replies, link buttons, typing indicators, reactions, and story replies through the Chat SDK interface.",
+      "title": "Vercel adds Instagram messaging to Chat SDK",
+      "summary": "The adapter handles direct messages, media, quick replies, reactions, and story replies without a separate Instagram transport integration.",
       "category": "Utilities",
       "editorialTier": "watch",
       "rankingRationale": "The dated release provides a concrete adapter and code path for extending an existing Chat SDK bot to another user channel.",

@@ -260,7 +260,12 @@ test("schema 3 publication derives public discovery statistics from a completed 
           clusterId: "one",
           origin: { kind: "rss" },
           decision: { status: "eligible", itemId: candidate.items[0].id, rationale: "Verified current release." },
-          copy: { promptVersion: "broad-tech-baseline-v1", evidenceFacts: ["The maintainer shipped a current release."], title: candidate.items[0].title, summary: candidate.items[0].summary },
+          copy: {
+            promptVersion: "broad-tech-copy-v2",
+            evidenceFacts: [candidate.items[0].title, candidate.items[0].summary],
+            title: candidate.items[0].title,
+            summary: candidate.items[0].summary,
+          },
         },
         { discoveryId: "github:old/repo", clusterId: "two", origin: { kind: "github-trending" }, decision: { status: "rejected", reason: "inactive", rationale: "No current activity." } },
       ],

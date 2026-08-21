@@ -36,7 +36,7 @@ Each eligible ledger record retains:
 ```json
 {
   "copy": {
-    "promptVersion": "broad-tech-baseline-v1",
+    "promptVersion": "broad-tech-copy-v2",
     "evidenceFacts": ["Exact source-supported fact."],
     "title": "Published title",
     "summary": "Published factual summary."
@@ -44,7 +44,7 @@ Each eligible ledger record retains:
 }
 ```
 
-This is a stable corpus marker, not a claim that the copy prompt is optimized. Prompt calibration happens later against preserved facts.
+Generate this copy with `config/copy-prompt.md`. The publisher rejects obsolete prompt versions, unsupported factual anchors, generic AI phrasing, decorative headline verbs, excessive length, and summaries that repeat their titles.
 
 ## Dry run and publication
 

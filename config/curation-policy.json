@@ -1,6 +1,7 @@
 {
   "schemaVersion": 2,
   "edition": { "minItems": 1, "maxItems": 40, "maxCandidateItems": 500, "currentSchemaVersion": 3 },
+  "copy": { "promptVersion": "broad-tech-copy-v2", "titleMaxCharacters": 90, "summaryMaxWords": 45 },
   "categories": [
     "AI & Automation",
     "Software & Developer Tools",

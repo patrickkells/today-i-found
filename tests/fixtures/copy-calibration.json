@@ -1,0 +1,125 @@
+[
+  {
+    "id": "google-gemini-3-7-flash-ga",
+    "evidenceFacts": [
+      "Google made Gemini 3.7 Flash generally available on August 13, 2026.",
+      "The stable Gemini API endpoint includes improvements for software engineering, web development, and agent workflows."
+    ],
+    "variants": [
+      {
+        "label": "baseline",
+        "title": "Gemini 3.7 Flash is generally available for coding and agents",
+        "summary": "Google released the stable gemini-3.7-flash endpoint with improvements aimed at software engineering, web development, and agentic workflows."
+      },
+      {
+        "label": "selected",
+        "title": "Google makes Gemini 3.7 Flash generally available",
+        "summary": "The stable Gemini API endpoint includes improvements for software engineering, web development, and agent workflows."
+      },
+      {
+        "label": "product-led",
+        "title": "Gemini 3.7 Flash reaches general availability",
+        "summary": "Google now offers a stable API endpoint with updates for coding, web development, and agent workflows."
+      }
+    ]
+  },
+  {
+    "id": "cloudflare-qwen-3-8-27b-workers-ai",
+    "evidenceFacts": [
+      "Cloudflare added Qwen 3.8 27B to Workers AI on August 17, 2026.",
+      "The hosted model accepts text and images, supports reasoning and function calls, and has a 262,144-token context window."
+    ],
+    "variants": [
+      {
+        "label": "baseline",
+        "title": "Qwen 3.8 27B lands on Workers AI with vision and function calling",
+        "summary": "Cloudflare added a hosted Qwen 3.8 27B endpoint with image and text input, reasoning, function calling, and a 262,144-token context window."
+      },
+      {
+        "label": "selected",
+        "title": "Cloudflare adds Qwen 3.8 27B to Workers AI",
+        "summary": "The hosted model accepts text and images, supports reasoning and function calls, and has a 262,144-token context window."
+      },
+      {
+        "label": "platform-led",
+        "title": "Workers AI adds hosted Qwen 3.8 27B",
+        "summary": "The endpoint handles text and images, supports function calls and reasoning, and provides a 262,144-token context window."
+      }
+    ]
+  },
+  {
+    "id": "vercel-fish-audio-ai-gateway",
+    "evidenceFacts": [
+      "Vercel added four Fish Audio models to AI Gateway on August 19, 2026.",
+      "The models support speech generation and transcription.",
+      "Free model IDs stop serving after September 18, while standard IDs use paid billing."
+    ],
+    "variants": [
+      {
+        "label": "baseline",
+        "title": "Vercel AI Gateway adds Fish Audio speech and transcription models",
+        "summary": "Four Fish Audio models are now accessible through AI Gateway for speech and transcription. The free launch period ends September 18; -free model IDs stop serving afterward, while standard IDs begin billing."
+      },
+      {
+        "label": "selected",
+        "title": "Vercel adds four Fish Audio models to AI Gateway",
+        "summary": "The models support speech generation and transcription. Free model IDs stop serving after September 18, while standard IDs use paid billing."
+      },
+      {
+        "label": "capability-led",
+        "title": "AI Gateway adds Fish Audio speech and transcription",
+        "summary": "Vercel now hosts four Fish Audio models. The free IDs expire after September 18, and the standard IDs require paid usage."
+      }
+    ]
+  },
+  {
+    "id": "vercel-agent-slack-public-beta",
+    "evidenceFacts": [
+      "Vercel released its Slack agent as a public beta on August 19, 2026.",
+      "Pro and Enterprise teams can investigate deployments from Slack and approve production changes.",
+      "Only a limited number of simple requests are free before usage-based billing."
+    ],
+    "variants": [
+      {
+        "label": "baseline",
+        "title": "Vercel Agent enters Slack with approval-gated production actions",
+        "summary": "The public beta brings deployment, build, log, metric, configuration, and repository context into Slack for investigation and approved remediation. It is available to Pro and Enterprise teams; only limited simple requests are free before usage-based billing."
+      },
+      {
+        "label": "selected",
+        "title": "Vercel releases its Slack agent as a public beta",
+        "summary": "Pro and Enterprise teams can investigate deployment issues from Slack and approve production changes. Only a limited number of simple requests are free before usage-based billing."
+      },
+      {
+        "label": "workflow-led",
+        "title": "Vercel adds approval-gated production actions to Slack",
+        "summary": "The public beta lets Pro and Enterprise teams investigate deployments and approve changes in Slack. Usage-based billing applies beyond limited simple requests."
+      }
+    ]
+  },
+  {
+    "id": "vercel-chat-sdk-instagram-adapter",
+    "evidenceFacts": [
+      "Vercel added an Instagram adapter to Chat SDK on August 19, 2026.",
+      "The adapter supports direct messages, media, quick replies, link buttons, typing indicators, reactions, and story replies.",
+      "The adapter reduces the need to build a separate Instagram transport integration."
+    ],
+    "variants": [
+      {
+        "label": "baseline",
+        "title": "Chat SDK adds an Instagram adapter for DM bots",
+        "summary": "The adapter supports Instagram direct messages, media, quick replies, link buttons, typing indicators, reactions, and story replies through the Chat SDK interface."
+      },
+      {
+        "label": "selected",
+        "title": "Vercel adds Instagram messaging to Chat SDK",
+        "summary": "The adapter handles direct messages, media, quick replies, reactions, and story replies without a separate Instagram transport integration."
+      },
+      {
+        "label": "builder-led",
+        "title": "Chat SDK adds an Instagram messaging adapter",
+        "summary": "Bots can now handle Instagram messages, media, quick replies, reactions, and story replies through the existing Chat SDK interface."
+      }
+    ]
+  }
+]
