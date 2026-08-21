@@ -33,6 +33,7 @@ const { act, cleanup, fireEvent, render, screen, waitFor, within } = await impor
 const userEvent = (await import("@testing-library/user-event")).default;
 const { App, AppFooter } = await import("../src/App.jsx");
 const edition = (await import("./fixtures/edition.json", { with: { type: "json" } })).default;
+const broadEdition = (await import("./fixtures/edition-v3.json", { with: { type: "json" } })).default;
 const { seedVoteRecords } = await import("../src/feedback-service.js");
 
 function canonicalService(overrides = {}) {
@@ -99,6 +100,16 @@ test("renders focus categories in the selected mock's fixed order", () => {
     "Demos1",
     "Utilities2",
   ]);
+});
+
+test("renders broad categories, readable tags, and exact edition accounting", () => {
+  render(<App edition={broadEdition} feedbackService={canonicalService()} />);
+
+  assert.ok(screen.getByRole("button", { name: "Software & Developer Tools 1" }));
+  assert.ok(screen.getByText("OPEN SOURCE"));
+  assert.ok(screen.getByText("1 selected from 12 candidates"));
+  assert.ok(screen.getByText("3 GitHub Trending reviewed"));
+  assert.ok(screen.getByText("0 exploration picks"));
 });
 
 test("omits unreliable usefulness and time-to-try metrics from the briefing interface", () => {

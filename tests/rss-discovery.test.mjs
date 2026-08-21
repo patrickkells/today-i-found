@@ -64,6 +64,28 @@ test("feed discovery isolates broken feeds instead of discarding healthy results
   assert.deepEqual(result.failures, [{ feedId: "broken", reason: "HTTP 503" }]);
 });
 
+test("unfiltered discovery preserves source metadata and stale entries for the candidate ledger", async () => {
+  const result = await discoveryModule.collectFeedDiscoveries({
+    feeds: [{
+      id: "security-feed",
+      publisher: "Security Lab",
+      lane: "security",
+      topics: ["Security & Privacy"],
+      sourceRole: "primary",
+      freshnessClass: "standard",
+      url: "https://feeds.example/security",
+    }],
+    editionDate: "2026-08-20",
+    fetchImpl: async () => new Response(rss, { status: 200 }),
+  });
+
+  assert.equal(result.discoveries.length, 2);
+  assert.equal(result.discoveries[1].ageDays, 19);
+  assert.equal(result.discoveries[1].sourceRole, "primary");
+  assert.deepEqual(result.discoveries[1].topics, ["Security & Privacy"]);
+  assert.equal(result.discoveries[1].origin.kind, "rss");
+});
+
 test("source auditing rejects broken links and redirects to an unrelated publisher", async () => {
   assert.ok(sourceAuditModule, "source audit module should exist");
   const edition = {

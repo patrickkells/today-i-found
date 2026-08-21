@@ -14,7 +14,7 @@ export function filterSignals(items, filters) {
   const query = filters.query?.trim().toLowerCase() ?? "";
 
   return items.filter((item) => {
-    const searchable = [item.title, item.summary, item.category, item.source?.publisher]
+    const searchable = [item.title, item.summary, item.category, item.source?.publisher, ...(item.tags ?? [])]
       .filter(Boolean)
       .join(" ")
       .toLowerCase();

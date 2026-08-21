@@ -8,6 +8,17 @@ const DECAY_HALF_LIFE_DAYS = 30;
 const PRIOR_UP = 2;
 const PRIOR_DOWN = 2;
 const PREFERENCE_ELIGIBILITY_THRESHOLD = 10;
+const BROAD_CATEGORIES = new Set([
+  "AI & Automation",
+  "Software & Developer Tools",
+  "Web & Platforms",
+  "Security & Privacy",
+  "Hardware & Devices",
+  "Science & Emerging Tech",
+  "Consumer Technology",
+  "Curiosities",
+]);
+const STRUCTURED_TAG_PATTERN = /^(topic|format|entity|license|depth):[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 const SQL = {
   editionByDate: `/* edition.byDate */
@@ -312,6 +323,7 @@ function validateEdition(payload) {
   if (!validText(payload.curatedAt) || !Number.isFinite(Date.parse(payload.curatedAt))) return "curatedAt must be a timestamp.";
   if (!validText(payload.timezone)) return "timezone is required.";
   if (!Array.isArray(payload.items) || payload.items.length === 0) return "items must be a non-empty array.";
+  if (payload.items.length > 40) return "items must contain at most 40 entries.";
 
   const ids = new Set();
   for (const item of payload.items) {
@@ -320,6 +332,13 @@ function validateEdition(payload) {
     ids.add(item.id);
     if (!validText(item.title) || !validText(item.category)) return "Every item requires title and category.";
     if (!validText(item.source?.publisher)) return "Every item requires source.publisher.";
+    if (payload.schemaVersion === 3) {
+      if (!BROAD_CATEGORIES.has(item.category)) return "Every schema 3 item requires a valid broad technology category.";
+      if (!Array.isArray(item.tags) || item.tags.length < 1 || item.tags.length > 12
+        || item.tags.some((tag) => typeof tag !== "string" || !STRUCTURED_TAG_PATTERN.test(tag))) {
+        return "Every schema 3 item requires one to twelve structured tags.";
+      }
+    }
   }
   return null;
 }

@@ -246,6 +246,30 @@ test("curator registration is protected, idempotent, and keeps stable item IDs",
   assert.equal(context.env.DB.items.get("signal-one").publicationDate, "2026-08-19");
 });
 
+test("schema 3 registration accepts broad categories and rejects malformed tags or more than forty items", async () => {
+  const context = makeContext();
+  const item = {
+    id: "broad-one",
+    title: "Broad signal",
+    category: "Security & Privacy",
+    publicationDate: "2026-08-19",
+    tags: ["topic:security", "format:release"],
+    source: { publisher: "Security Lab" },
+  };
+  const accepted = await register(context, edition({ schemaVersion: 3, items: [item] }));
+  assert.equal(accepted.status, 201);
+
+  const malformed = await register(context, edition({ schemaVersion: 3, date: "2026-08-20", items: [{ ...item, id: "bad", tags: ["security"] }] }));
+  assert.equal(malformed.status, 400);
+
+  const tooMany = await register(context, edition({
+    schemaVersion: 3,
+    date: "2026-08-21",
+    items: Array.from({ length: 41 }, (_, index) => ({ ...item, id: `item-${index}` })),
+  }));
+  assert.equal(tooMany.status, 400);
+});
+
 test("re-registration reconciles membership while preserving retained votes and exact-repeat state", async () => {
   const context = makeContext();
   await register(context);

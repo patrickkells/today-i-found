@@ -12,6 +12,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const node = process.execPath;
 const script = path.join(root, "scripts", "publish-edition.mjs");
 const fixture = path.join(root, "tests", "fixtures", "edition.json");
+const broadFixture = path.join(root, "tests", "fixtures", "edition-v3.json");
 
 async function runPublish(args, environment = {}) {
   const child = await new Promise((resolve, reject) => {
@@ -236,6 +237,78 @@ test("a static-only publication writes a dated archive and manifest without hist
     assert.equal(networkCalls, 0);
     assert.equal((await JSON.parse(await readFile(manifest, "utf8"))).latestEdition, "2026-08-19");
     assert.equal((await JSON.parse(await readFile(path.join(archiveDirectory, "2026-08-19.json"), "utf8"))).date, "2026-08-19");
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("schema 3 publication derives public discovery statistics from a completed private ledger", async () => {
+  const directory = await makeTempDirectory();
+  try {
+    const input = path.join(directory, "candidate.json");
+    const ledgerFile = path.join(directory, "ledger.json");
+    const candidate = JSON.parse(await readFile(broadFixture, "utf8"));
+    delete candidate.discoveryStats;
+    const ledger = {
+      schemaVersion: 1,
+      editionDate: candidate.date,
+      createdAt: "2026-08-20T11:00:00.000Z",
+      failures: [],
+      candidates: [
+        {
+          discoveryId: "feed:one",
+          clusterId: "one",
+          origin: { kind: "rss" },
+          decision: { status: "eligible", itemId: candidate.items[0].id, rationale: "Verified current release." },
+          copy: { promptVersion: "broad-tech-baseline-v1", evidenceFacts: ["The maintainer shipped a current release."], title: candidate.items[0].title, summary: candidate.items[0].summary },
+        },
+        { discoveryId: "github:old/repo", clusterId: "two", origin: { kind: "github-trending" }, decision: { status: "rejected", reason: "inactive", rationale: "No current activity." } },
+      ],
+    };
+    await writeFile(input, `${JSON.stringify(candidate, null, 2)}\n`);
+    await writeFile(ledgerFile, `${JSON.stringify(ledger, null, 2)}\n`);
+    const before = await readFile(ledgerFile, "utf8");
+
+    const result = await publishEdition({ input, ledgerFile, dryRun: true, auditSources: false, historyDirectory: path.join(directory, "history") });
+
+    assert.equal(result.edition.items.length, 1);
+    assert.deepEqual(result.edition.discoveryStats, {
+      rawCandidates: 2,
+      clusteredCandidates: 2,
+      eligibleCandidates: 1,
+      publishedItems: 1,
+      trendingReviewed: 1,
+      explorationItems: 0,
+    });
+    assert.equal(result.ledgerPreview.candidates[0].selection.status, "published");
+    assert.equal(await readFile(ledgerFile, "utf8"), before);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("a completed zero-eligible schema 3 ledger skips publication without touching the manifest", async () => {
+  const directory = await makeTempDirectory();
+  try {
+    const input = path.join(directory, "candidate.json");
+    const ledgerFile = path.join(directory, "ledger.json");
+    const manifestFile = path.join(directory, "manifest.json");
+    const candidate = JSON.parse(await readFile(broadFixture, "utf8"));
+    candidate.items = [];
+    delete candidate.discoveryStats;
+    const ledger = {
+      schemaVersion: 1,
+      editionDate: candidate.date,
+      failures: [],
+      candidates: [{ discoveryId: "feed:old", clusterId: "old", decision: { status: "rejected", reason: "stale", rationale: "Outside its freshness window." } }],
+    };
+    await writeFile(input, JSON.stringify(candidate));
+    await writeFile(ledgerFile, JSON.stringify(ledger));
+    await writeFile(manifestFile, "manifest-before\n");
+
+    const result = await publishEdition({ input, ledgerFile, manifestFile, dryRun: false, historyDirectory: path.join(directory, "history") });
+    assert.deepEqual(result, { edition: null, dryRun: false, skipped: true, reason: "no-qualifying-candidates" });
+    assert.equal(await readFile(manifestFile, "utf8"), "manifest-before\n");
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

@@ -15,6 +15,7 @@
     "validate:archives": "node scripts/validate-archives.mjs",
     "curate:dry-run": "node scripts/publish-edition.mjs --input data/editions/2026-08-20.json --dry-run",
     "discover:feeds": "node scripts/discover-feeds.mjs",
+    "discover:candidates": "node scripts/discover-candidates.mjs",
     "audit:sources": "node scripts/audit-sources.mjs"
   },
   "dependencies": {

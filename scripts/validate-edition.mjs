@@ -3,7 +3,7 @@ import { validateEdition } from "../lib/curation.js";
 
 const file = process.argv[2] ?? "data/editions/2026-08-20.json";
 const edition = JSON.parse(await readFile(file, "utf8"));
-const errors = validateEdition(edition);
+const errors = validateEdition(edition, { allowLegacy: process.argv.includes("--allow-legacy") });
 
 if (errors.length) {
   console.error(`Edition validation failed for ${file}:`);

@@ -15,6 +15,7 @@ feedback-worker/.wrangler/
 # Local review and QA artifacts
 .superpowers/
 qa-*.png
+.curation/
 
 # Operating-system files
 .DS_Store

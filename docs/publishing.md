@@ -2,61 +2,82 @@
 
 ## GitHub Pages
 
-Set the repository Actions variable `FEEDBACK_API_BASE` to the public HTTPS origin of the deployed feedback Worker, without a trailing slash. The Pages build exposes it to the client as `VITE_FEEDBACK_API_BASE`; when it is absent or unreachable, voting falls back to browser-local state.
+The checked-in workflow at `.github/workflows/deploy-pages.yml` validates archives, builds the Vite client, runs the Node and feedback suites, and uploads only `dist/client`. The build copies `data/manifest.json` and `data/editions/*.json`; it must never copy `.curation`.
 
-The checked-in workflow at `.github/workflows/deploy-pages.yml` installs from `package-lock.json`, validates the edition and duplicate gate, builds the Vite client, runs the test suites, and uploads only `dist/client` to GitHub Pages. The build copies `data/manifest.json` and every `data/editions/<date>.json` archive into that static directory.
+Set the repository Actions variable `FEEDBACK_API_BASE` to the public feedback Worker origin without a trailing slash. When it is absent or unreachable, voting falls back locally without blocking editions.
 
-Enable Pages for this repository with **GitHub Actions** as the source. Do not run a separate branch-push deploy: the workflow already supplies the Pages artifact and deployment token. For a project site, the workflow emits assets under `/<repository-name>/`. For a user or organization root site, set `VITE_BASE_PATH: /` in the build job instead.
+## Private curation workspace
 
-## Curator dry run
+Daily discovery and evidence live outside the public artifact:
 
-Read `config/curation-policy.json` before creating a candidate. New candidates use edition schema version 2 and contain 1–15 qualifying items. Each item needs direct dated primary evidence published within the seven-day freshness window, `publicationDate`, structured source evidence, edition-day verification, `signal.whyNow`, `editorialTier`, and `rankingRationale`. The policy-backed validator also enforces prohibited-topic and structured substantive-update rules. It does not require category quotas or numerical quality scores. Migration and deprecation items are valid only when they cite a dated migration notice and explicitly describe the transition.
-
-Run `npm run discover:feeds` before research to collect leads from the official RSS and Atom registry. Feed entries are discovery inputs only. Open the linked primary source, verify the claim and date, and record the direct evidence in the edition. Generic documentation cannot establish novelty.
-
-Use a candidate edition JSON that follows the current `data/editions` contract:
-
-```sh
-node scripts/publish-edition.mjs --input /path/to/candidate.json --dry-run
+```text
+.curation/ledgers/YYYY-MM-DD.json
+.curation/candidates/YYYY-MM-DD.json
 ```
 
-The command validates all hard selection gates, audits every source URL, and runs deterministic 30-day duplicate checks against archived editions. The curator must separately compare candidate meaning with the recent archive so paraphrased repeats do not pass merely because their URL, keys, or normalized title differ. A dry run neither writes files nor registers an edition.
+`.curation/` is ignored by Git. The ledger records every discovery, cluster, decision, rejection reason, copy evidence, and final selection. It is the source for exact candidate totals and exclusion answers.
 
-New editions do not generate `caveat` or `experiment` fields. Put only concrete, decision-relevant access, pricing, migration, compatibility, or availability limits directly into the factual summary. The interface keeps each story self-contained and links its verified primary source inline. Legacy archives may retain `caveat`, `experiment`, `impact`, `confidence`, `novelty`, `baseScore`, `adjustedScore`, or `timeToTry`; the current interface does not render them.
-
-For a local candidate review with the Worker summary saved to disk:
+Create the day's ledger:
 
 ```sh
-node scripts/publish-edition.mjs --input /path/to/candidate.json --feedback /path/to/feedback-summary.json --dry-run
+npm run discover:candidates -- --edition-date YYYY-MM-DD
 ```
 
-Feedback preferences use the policy's 90-day window, 30-day half-life, and minimum of 10 effective votes. The script averages only eligible matching category, publisher, and tag adjustments, caps the resulting `feedbackSignal` at `-0.5` to `+0.5`, and records `eligiblePreferenceCount`. Feedback can reorder items only within the same editorial tier. It cannot change tiers, selection, or any hard gate, and equal signals preserve the curator's original order. These `curation` annotations are retained in the published dated JSON archive.
+Complete every ledger decision before publishing. Candidate editions use schema version 3, zero to 500 eligible items, the eight broad categories, structured tags, and context-aware evidence. The public publisher emits one to forty items. A completed zero-eligible ledger produces no edition and does not update the manifest.
 
-After review, publish the static archive without touching a remote service:
+## Evidence and copy
 
-```sh
-node scripts/publish-edition.mjs --input /path/to/candidate.json
+Use a seven-day window for releases, news, security developments, and product changes. Use fourteen days for research, benchmarks, and exceptional explainers. An older repository needs current Trending or resurgence evidence and copy that says it is being rediscovered rather than newly released.
+
+Prefer primary evidence. Credible original reporting may establish facts unavailable from a primary source. Community and popularity signals cannot be the sole evidence.
+
+Each eligible ledger record retains:
+
+```json
+{
+  "copy": {
+    "promptVersion": "broad-tech-baseline-v1",
+    "evidenceFacts": ["Exact source-supported fact."],
+    "title": "Published title",
+    "summary": "Published factual summary."
+  }
+}
 ```
 
-This writes `data/editions/<date>.json` and updates `data/manifest.json`. It does not commit, push, deploy, or create a schedule.
+This is a stable corpus marker, not a claim that the copy prompt is optimized. Prompt calibration happens later against preserved facts.
 
-To retrieve protected feedback and register a validated edition with the feedback Worker before writing the static archive, put `CURATOR_TOKEN` in the scheduled task's secret store and pass the configured protected endpoints explicitly:
+## Dry run and publication
+
+Run a static dry run:
 
 ```sh
 node scripts/publish-edition.mjs \
-  --input /path/to/candidate.json \
-  --feedback-url "$FEEDBACK_SUMMARY_URL" \
-  --register-url "$REGISTER_EDITION_URL"
+  --input .curation/candidates/YYYY-MM-DD.json \
+  --ledger .curation/ledgers/YYYY-MM-DD.json \
+  --dry-run
 ```
 
-If validation, source auditing, duplicate checks, configured feedback retrieval, or Worker registration fails, the command exits non-zero and does not write the archive. Missing optional Worker configuration does not block a valid static-only publication. The script never commits, pushes, or deploys anything itself.
+With protected feedback:
+
+```sh
+node scripts/publish-edition.mjs \
+  --input .curation/candidates/YYYY-MM-DD.json \
+  --ledger .curation/ledgers/YYYY-MM-DD.json \
+  --feedback-url "$FEEDBACK_SUMMARY_URL" \
+  --register-url "$REGISTER_EDITION_URL" \
+  --dry-run
+```
+
+The dry run validates the candidate pool and ledger, audits sources, checks the previous thirty days for deterministic duplicates, applies eligible preference-first selection, enforces the twenty-percent exploration ceiling, validates the one-to-forty-item public edition, and writes nothing.
+
+Remove `--dry-run` only after review. Registration happens before public archive writes. Missing optional Worker configuration does not block a valid static-only publication. A configured feedback or registration failure does block publication.
+
+Feedback uses a ninety-day window, thirty-day half-life, Bayesian smoothing, and a minimum of ten effective votes per category, publisher, or structured tag. It never bypasses evidence, freshness, exclusions, or duplicate checks. Cold-start runs preserve curator order and do not manufacture exploration picks.
 
 ## Cloudflare Worker and D1
 
-`feedback-worker/wrangler.toml` and `feedback-worker/.dev.vars.example` are intentionally unprovisioned examples. Before enabling remote feedback, create a D1 database, apply `feedback-worker/schema.sql`, set the real database ID and Pages origin, and configure `CURATOR_TOKEN` and a 32+-character `HMAC_SECRET` as Worker secrets. Keep those values out of Git, examples, and Codex prompts.
-
-The static client works without this setup: it uses its local feedback fallback when the Worker is unavailable.
+The Worker stores public vote counts and protected preference summaries. Keep `CURATOR_TOKEN` and the 32-character-or-longer `HMAC_SECRET` in Worker or task secrets, never files or prompts. The D1 schema remains unchanged because structured tag strings carry the new preference dimensions.
 
 ## Daily schedule
 
-Use `docs/curator-scheduled-task.md` as the reusable instruction for the active Codex scheduled task. Keep it at `07:00` in `America/New_York`, attached to this repository, with protected Worker credentials only in the task's secret configuration.
+Use `docs/curator-scheduled-task.md` for the enabled task. Keep it at `07:00` in `America/New_York`, attached to this repository, with protected endpoints and tokens only in task secret configuration.

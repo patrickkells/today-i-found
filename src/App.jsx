@@ -24,15 +24,16 @@ import {
   reconcileMutationRecord,
   seedVoteRecords,
 } from "./feedback-service.js";
+import { CATEGORY_PRESENTATION, PRIMARY_CATEGORIES } from "../shared/editorial-contract.js";
 
-const CATEGORY_ORDER = ["Models", "Tools", "Workflows", "Demos", "Utilities"];
-const CATEGORY_ACCENTS = {
-  Models: "lime",
-  Tools: "cyan",
-  Workflows: "lime",
-  Demos: "orange",
-  Utilities: "violet",
+const LEGACY_CATEGORY_PRESENTATION = {
+  Models: { short: "MODEL", accent: "lime" },
+  Tools: { short: "TOOL", accent: "cyan" },
+  Workflows: { short: "WORKFLOW", accent: "lime" },
+  Demos: { short: "DEMO", accent: "orange" },
+  Utilities: { short: "UTILITY", accent: "violet" },
 };
+const CATEGORY_ORDER = [...PRIMARY_CATEGORIES, ...Object.keys(LEGACY_CATEGORY_PRESENTATION)];
 const FOCUSABLE = 'button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 function rankItems(items) {
@@ -73,13 +74,12 @@ function shiftDate(date, amount) {
 }
 
 function shortCategory(category) {
-  return ({
-    Models: "MODEL",
-    Tools: "TOOL",
-    Workflows: "WORKFLOW",
-    Demos: "DEMO",
-    Utilities: "UTILITY",
-  })[category] ?? category.toUpperCase();
+  return CATEGORY_PRESENTATION[category]?.short ?? LEGACY_CATEGORY_PRESENTATION[category]?.short ?? category.toUpperCase();
+}
+
+export function displayTag(tag = "") {
+  const value = tag.includes(":") ? tag.slice(tag.indexOf(":") + 1) : tag;
+  return value.replaceAll("-", " ").toUpperCase();
 }
 
 function countBy(items, predicate) {
@@ -207,7 +207,8 @@ function VoteControls({ itemId, record, onVote }) {
 }
 
 function SignalRow({ item, selected, record, onVote }) {
-  const accent = CATEGORY_ACCENTS[item.category] ?? "lime";
+  const accent = CATEGORY_PRESENTATION[item.category]?.accent ?? LEGACY_CATEGORY_PRESENTATION[item.category]?.accent ?? "lime";
+  const tags = (item.tags ?? []).map(displayTag).filter((tag, index, values) => tag && values.indexOf(tag) === index).slice(0, 4);
   return (
     <article className={`signal-row ${selected ? "is-selected" : ""}`} role="listitem">
       <span className="signal-rank">{String(item.rank).padStart(2, "0")}</span>
@@ -222,6 +223,7 @@ function SignalRow({ item, selected, record, onVote }) {
           data-signal-id={item.id}
         >{item.title}</a>
         <span className="signal-summary">{item.summary}</span>
+        {tags.length ? <span className="signal-tags">{tags.map((tag) => <span key={tag}>{tag}</span>)}</span> : null}
         <a
           className="signal-source-inline"
           href={item.source.url}
@@ -238,6 +240,17 @@ function SignalRow({ item, selected, record, onVote }) {
       <span className={`signal-category accent-${accent}`}>{shortCategory(item.category)}</span>
       <VoteControls itemId={item.id} record={record} onVote={onVote} />
     </article>
+  );
+}
+
+function EditionTransparency({ stats }) {
+  if (!stats || !Number.isInteger(stats.rawCandidates)) return null;
+  return (
+    <div className="edition-transparency" aria-label="Edition discovery summary">
+      <span>{stats.publishedItems} selected from {stats.rawCandidates} candidates</span>
+      <span>{stats.trendingReviewed} GitHub Trending reviewed</span>
+      <span>{stats.explorationItems} exploration picks</span>
+    </div>
   );
 }
 
@@ -431,6 +444,7 @@ function SignalExperience({ edition, manifest, loadEdition, feedbackService: pro
           </aside>
           <section className="signal-table" aria-label="Ranked signals">
             <div className="table-header" aria-hidden="true"><span>#</span><span>SIGNAL</span><span>CATEGORY</span><span>VOTES</span></div>
+            <EditionTransparency stats={activeEdition?.discoveryStats} />
             <div className="signal-list" role="list" aria-label="Signals">
               {visibleItems.map((item) => (
                 <SignalRow

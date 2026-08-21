@@ -59,3 +59,9 @@ test("signal copy wraps without truncation so rows can grow with their content",
   assert.notEqual(summary.overflow, "hidden");
   assert.equal(source.flexWrap, "wrap");
 });
+
+test("broad topic tags and transparency copy wrap instead of overflowing", async () => {
+  const css = await readFile(new URL("../src/styles.css", import.meta.url), "utf8");
+  assert.match(css, /\.signal-tags\s*\{[\s\S]*?flex-wrap:\s*wrap;/);
+  assert.match(css, /\.edition-transparency\s*\{[\s\S]*?flex-wrap:\s*wrap;/);
+});

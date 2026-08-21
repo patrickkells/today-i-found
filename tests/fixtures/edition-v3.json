@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 3,
+  "date": "2026-08-20",
+  "timezone": "America/New_York",
+  "curatedAt": "2026-08-20T07:00:00-04:00",
+  "title": "today i found — August 20, 2026",
+  "summary": "One current technology signal.",
+  "discoveryStats": {
+    "rawCandidates": 12,
+    "clusteredCandidates": 10,
+    "eligibleCandidates": 1,
+    "publishedItems": 1,
+    "trendingReviewed": 3,
+    "explorationItems": 0
+  },
+  "items": [
+    {
+      "id": "acme-browser-release",
+      "title": "Acme releases a browser debugging utility",
+      "summary": "The utility records network and rendering traces in one local file.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The maintainer release provides a current, directly usable debugging capability.",
+      "tags": ["format:release", "topic:browser", "license:open-source"],
+      "publicationDate": "2026-08-19",
+      "entityKey": "acme-browser-debugger",
+      "eventKey": "acme-browser-debugger-v1",
+      "signal": { "whyNow": "The first stable release shipped yesterday." },
+      "source": {
+        "kind": "primary",
+        "publisher": "Acme",
+        "title": "Acme Browser Debugger v1",
+        "url": "https://example.com/acme-browser-debugger-v1",
+        "evidence": {
+          "type": "repository-release",
+          "freshnessClass": "standard",
+          "dateBasis": "The maintainer release is dated August 19, 2026.",
+          "productStatus": "active"
+        },
+        "verification": { "status": "verified", "method": "maintainer release", "verifiedAt": "2026-08-20" }
+      }
+    }
+  ]
+}

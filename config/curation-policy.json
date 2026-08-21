@@ -1,18 +1,31 @@
 {
-  "schemaVersion": 1,
-  "edition": { "minItems": 1, "maxItems": 15, "currentSchemaVersion": 2 },
+  "schemaVersion": 2,
+  "edition": { "minItems": 1, "maxItems": 40, "maxCandidateItems": 500, "currentSchemaVersion": 3 },
+  "categories": [
+    "AI & Automation",
+    "Software & Developer Tools",
+    "Web & Platforms",
+    "Security & Privacy",
+    "Hardware & Devices",
+    "Science & Emerging Tech",
+    "Consumer Technology",
+    "Curiosities"
+  ],
   "editorialTiers": ["must-try", "notable", "watch"],
-  "feedback": { "windowDays": 90, "halfLifeDays": 30, "minEffectiveVotes": 10, "maxAdjustment": 0.5 },
+  "feedback": { "windowDays": 90, "halfLifeDays": 30, "minEffectiveVotes": 10, "maxAdjustment": 0.5, "explorationRatio": 0.2 },
   "discovery": {
     "githubTrendingWindows": ["daily", "weekly"],
     "githubRepositoryAcceleration": true,
-    "popularityIsEvidence": false
+    "popularityIsEvidence": false,
+    "maxDiscoveryAgeDays": 30
   },
   "freshness": {
     "enforceForEditionsOnOrAfter": "2026-08-20",
     "maxAgeDays": 7,
+    "windows": { "standard": 7, "extended": 14 },
     "requireVerificationOnEditionDate": true,
-    "directEvidenceTypes": ["release", "changelog", "announcement", "research-paper", "repository-release", "dated-update", "migration-notice"],
+    "currentDiscoveryTypes": ["repository-trending"],
+    "directEvidenceTypes": ["release", "changelog", "announcement", "research-paper", "repository-release", "dated-update", "migration-notice", "original-reporting", "repository-trending"],
     "productStatuses": ["active", "migration"]
   },
   "substantiveUpdateKinds": ["new-version", "new-capability", "api-access", "reproducible-evaluation", "expanded-utility"]

@@ -33,3 +33,23 @@ test("the Pages build installs the checked-in pnpm lockfile reproducibly", async
   assert.match(workflow, /pnpm install --frozen-lockfile/);
   assert.doesNotMatch(workflow, /npm ci/);
 });
+
+test("the curator instruction describes the broad accounted workflow", async () => {
+  const text = await readFile(path.join(root, "docs/curator-scheduled-task.md"), "utf8");
+  assert.match(text, /one to forty/i);
+  assert.match(text, /complete GitHub Trending all-language daily and weekly/i);
+  assert.match(text, /candidate-ledger/i);
+  assert.match(text, /twenty percent/i);
+  assert.match(text, /promptVersion/);
+  assert.match(text, /publish no edition/i);
+  for (const category of [
+    "AI & Automation",
+    "Software & Developer Tools",
+    "Web & Platforms",
+    "Security & Privacy",
+    "Hardware & Devices",
+    "Science & Emerging Tech",
+    "Consumer Technology",
+    "Curiosities",
+  ]) assert.match(text, new RegExp(category.replaceAll("&", "&")));
+});

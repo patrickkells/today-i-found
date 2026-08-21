@@ -23,13 +23,20 @@ async function main() {
     manifestFile: option("--manifest", path.join(path.dirname(outputDirectory), "manifest.json")),
     dryRun: process.argv.includes("--dry-run"),
     feedbackFile: option("--feedback"),
+    ledgerFile: option("--ledger"),
     feedbackUrl: option("--feedback-url"),
     registerUrl: option("--register-url"),
     curatorToken: process.env.CURATOR_TOKEN,
     auditSources: !process.argv.includes("--skip-source-audit"),
   });
-  if (result.dryRun) console.log(`Dry run passed for ${result.edition.date}; no files were written or registered.`);
-  else console.log(`Published ${result.edition.date} to ${outputDirectory}.`);
+  if (result.skipped) {
+    console.log("No edition published: no qualifying candidates.");
+  } else {
+    const stats = result.edition.discoveryStats;
+    if (stats) console.log(`Candidates ${stats.rawCandidates}; clustered ${stats.clusteredCandidates}; eligible ${stats.eligibleCandidates}; published ${stats.publishedItems}; Trending reviewed ${stats.trendingReviewed}; exploration ${stats.explorationItems}.`);
+    if (result.dryRun) console.log(`Dry run passed for ${result.edition.date}; no files were written or registered.`);
+    else console.log(`Published ${result.edition.date} to ${outputDirectory}.`);
+  }
 }
 
 main().catch((error) => {

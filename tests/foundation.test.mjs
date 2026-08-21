@@ -4,7 +4,10 @@ import test from "node:test";
 import manifest from "../data/manifest.json" with { type: "json" };
 import currentEdition from "../data/editions/2026-08-20.json" with { type: "json" };
 import edition from "./fixtures/edition.json" with { type: "json" };
+import broadEdition from "./fixtures/edition-v3.json" with { type: "json" };
 import policy from "../config/curation-policy.json" with { type: "json" };
+import feeds from "../config/discovery-feeds.json" with { type: "json" };
+import { PRIMARY_CATEGORIES } from "../shared/editorial-contract.js";
 import {
   canonicalizeUrl,
   findDuplicates,
@@ -174,9 +177,73 @@ test("a substantive update cannot bypass an ID-less duplicate", () => {
 
 test("the evidence-first policy allows one strong item and configures GitHub discovery", () => {
   assert.equal(policy.edition.minItems, 1);
-  assert.equal(policy.edition.maxItems, 15);
+  assert.equal(policy.edition.maxItems, 40);
   assert.deepEqual(policy.discovery.githubTrendingWindows, ["daily", "weekly"]);
   assert.equal(policy.feedback.minEffectiveVotes, 10);
+});
+
+test("schema version 3 exposes the broad technology contract", () => {
+  assert.equal(policy.edition.currentSchemaVersion, 3);
+  assert.deepEqual(PRIMARY_CATEGORIES, [
+    "AI & Automation",
+    "Software & Developer Tools",
+    "Web & Platforms",
+    "Security & Privacy",
+    "Hardware & Devices",
+    "Science & Emerging Tech",
+    "Consumer Technology",
+    "Curiosities",
+  ]);
+  assert.deepEqual(validateEdition(broadEdition), []);
+});
+
+test("the broad source catalog records role, topic, and freshness metadata", () => {
+  assert.equal(feeds.schemaVersion, 2);
+  for (const feed of feeds.feeds.filter((item) => item.enabled !== false)) {
+    assert.ok(["primary", "discovery"].includes(feed.sourceRole), feed.id);
+    assert.ok(["standard", "extended"].includes(feed.freshnessClass), feed.id);
+    assert.ok(Array.isArray(feed.topics) && feed.topics.length, feed.id);
+    assert.ok(feed.topics.every((topic) => PRIMARY_CATEGORIES.includes(topic)), feed.id);
+  }
+  for (const category of PRIMARY_CATEGORIES) {
+    assert.ok(feeds.feeds.filter((feed) => feed.enabled !== false && feed.topics.includes(category)).length >= 2, category);
+  }
+});
+
+test("schema version 3 applies context-aware freshness", () => {
+  const release = structuredClone(broadEdition);
+  release.items[0].publicationDate = "2026-08-12";
+  assert.ok(validateEdition(release).some((error) => error.includes("seven days")));
+
+  const research = structuredClone(release);
+  research.items[0].source.evidence.freshnessClass = "extended";
+  research.items[0].source.evidence.type = "research-paper";
+  research.items[0].tags = ["format:research", "topic:robotics"];
+  assert.deepEqual(validateEdition(research), []);
+});
+
+test("an older repository needs edition-day Trending evidence", () => {
+  const trending = structuredClone(broadEdition);
+  trending.items[0].publicationDate = "2024-01-01";
+  trending.items[0].source.evidence = {
+    type: "repository-trending",
+    freshnessClass: "current-discovery",
+    observedAt: "2026-08-20",
+    trendingWindows: ["daily", "weekly"],
+    dateBasis: "Observed on both GitHub Trending lists on the edition date.",
+    productStatus: "active",
+  };
+  assert.deepEqual(validateEdition(trending), []);
+  trending.items[0].source.evidence.observedAt = "2026-08-19";
+  assert.ok(validateEdition(trending).some((error) => error.includes("edition date")));
+});
+
+test("schema version 3 accepts a zero-item candidate pool but not a zero-item public edition", () => {
+  const empty = structuredClone(broadEdition);
+  empty.items = [];
+  delete empty.discoveryStats;
+  assert.deepEqual(validateEdition(empty, { candidatePool: true }), []);
+  assert.ok(validateEdition(empty).some((error) => error.includes("between 1 and 40")));
 });
 
 test("schema version 2 accepts one category and optional action material", () => {
@@ -292,8 +359,14 @@ test("validateEdition reports a non-array item collection instead of throwing", 
     "edition.timezone is required.",
     "edition.curatedAt must be a full ISO timestamp with a timezone.",
     "edition.summary is required.",
-    "edition.schemaVersion must be 2.",
-    "Edition must contain between 1 and 15 items.",
+    "edition.schemaVersion must be 3.",
+    "Edition must contain between 1 and 40 items.",
+    "edition.discoveryStats.rawCandidates must be a non-negative integer.",
+    "edition.discoveryStats.clusteredCandidates must be a non-negative integer.",
+    "edition.discoveryStats.eligibleCandidates must be a non-negative integer.",
+    "edition.discoveryStats.publishedItems must be a non-negative integer.",
+    "edition.discoveryStats.trendingReviewed must be a non-negative integer.",
+    "edition.discoveryStats.explorationItems must be a non-negative integer.",
   ]);
 });
 

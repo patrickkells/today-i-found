@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import edition from "./fixtures/edition.json" with { type: "json" };
+import broadEdition from "./fixtures/edition-v3.json" with { type: "json" };
 import {
   applyVote,
   createInitialState,
@@ -48,6 +49,11 @@ test("filterSignals uses search and category while ignoring retired metric filte
   });
 
   assert.deepEqual(result.map((item) => item.id), [edition.items[0].id]);
+});
+
+test("filterSignals searches structured tags and broad categories", () => {
+  assert.deepEqual(filterSignals(broadEdition.items, { query: "open-source", categories: [] }).map((item) => item.id), ["acme-browser-release"]);
+  assert.deepEqual(filterSignals(broadEdition.items, { query: "", categories: ["Software & Developer Tools"] }).map((item) => item.id), ["acme-browser-release"]);
 });
 
 test("getNextSelection supports wrapping j/k and arrow navigation", () => {
