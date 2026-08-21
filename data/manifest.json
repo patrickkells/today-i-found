@@ -2,8 +2,9 @@
   "schemaVersion": 1,
   "product": "today i found",
   "timezone": "America/New_York",
-  "latestEdition": "2026-08-20",
+  "latestEdition": "2026-08-21",
   "editions": [
-    "2026-08-20"
+    "2026-08-20",
+    "2026-08-21"
   ]
 }

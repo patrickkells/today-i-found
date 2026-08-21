@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import manifest from "../data/manifest.json" with { type: "json" };
-import currentEdition from "../data/editions/2026-08-20.json" with { type: "json" };
 import edition from "./fixtures/edition.json" with { type: "json" };
 import broadEdition from "./fixtures/edition-v3.json" with { type: "json" };
 import policy from "../config/curation-policy.json" with { type: "json" };
@@ -15,6 +15,8 @@ import {
   isProhibitedTopic,
   validateEdition,
 } from "../lib/curation.js";
+
+const currentEdition = JSON.parse(await readFile(new URL(`../data/editions/${manifest.latestEdition}.json`, import.meta.url), "utf8"));
 
 test("canonicalizeUrl removes tracking data and normalizes a primary URL", () => {
   assert.equal(
@@ -310,17 +312,16 @@ test("legacy validation reports null items without throwing", () => {
   assert.ok(validateEdition(legacy, { allowLegacy: true }).some((error) => error.includes("between 10 and 15")));
 });
 
-test("the manifest points to the researched current edition and the test fixture satisfies its legacy contracts", () => {
-  assert.equal(manifest.latestEdition, "2026-08-20");
-  assert.deepEqual(manifest.editions, ["2026-08-20"]);
+test("the manifest points to its latest valid researched edition and the test fixture satisfies its legacy contracts", () => {
+  assert.equal(manifest.editions.at(-1), manifest.latestEdition);
+  assert.equal(currentEdition.date, manifest.latestEdition);
+  assert.deepEqual(validateEdition(currentEdition), []);
   assert.equal(edition.items.length, 12);
   assert.deepEqual(validateEdition(edition), []);
 });
 
-test("the current edition omits generated action material while retaining concrete access limits", () => {
+test("the current edition omits generated action material", () => {
   assert.ok(currentEdition.items.every((item) => !Object.hasOwn(item, "experiment") && !Object.hasOwn(item, "caveat")));
-  assert.match(currentEdition.items.find((item) => item.id === "vercel-fish-audio-ai-gateway").summary, /September 18/i);
-  assert.match(currentEdition.items.find((item) => item.id === "vercel-agent-slack-public-beta").summary, /Pro and Enterprise/i);
 });
 
 test("the schema version 2 edition fixture is monotonically ordered by editorial tier", () => {

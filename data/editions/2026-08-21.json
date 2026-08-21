@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 3,
+  "date": "2026-08-21",
+  "timezone": "America/New_York",
+  "curatedAt": "2026-08-21T14:35:32.183Z",
+  "title": "today i found — August 21, 2026",
+  "summary": "Ten verified technology signals from current releases, advisories, and technical explainers.",
+  "items": [
+    {
+      "id": "deepseek-v4-flash-vision-exp",
+      "title": "DeepSeek adds image input to V4 Flash Vision Exp",
+      "summary": "The experimental model accepts mixed text and images through Chat Completions, Messages, and Responses. Images cost up to 384 tokens each at V4 Flash pricing.",
+      "category": "AI & Automation",
+      "editorialTier": "must-try",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or technical finding with a direct practical consequence.",
+      "tags": [
+        "topic:multimodal-ai",
+        "format:release",
+        "entity:deepseek"
+      ],
+      "publicationDate": "2026-08-21",
+      "entityKey": "deepseek-v4-flash-vision-exp",
+      "eventKey": "deepseek-v4-flash-vision-exp-release",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "DeepSeek",
+        "title": "DeepSeek-V4-Flash-Vision-Exp Release: Multimodal API Now Live",
+        "url": "https://api-docs.deepseek.com/news/news260821",
+        "evidence": {
+          "type": "announcement",
+          "freshnessClass": "standard",
+          "dateBasis": "DeepSeek published the DeepSeek-V4-Flash-Vision-Exp release announcement on August 21, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and any access or migration limits.",
+          "verifiedAt": "2026-08-21"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "cisco-secure-workload-hardening-2026-08",
+      "title": "Cisco fixes five Secure Workload vulnerability classes",
+      "summary": "Two classes have 10.0 CVSS scores. SaaS customers still need to upgrade Agent and Connector software; on-premises fixes start at 3.10.9.1 and 4.0.4.16.",
+      "category": "Security & Privacy",
+      "editorialTier": "must-try",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or technical finding with a direct practical consequence.",
+      "tags": [
+        "topic:vulnerability-management",
+        "format:security-advisory",
+        "entity:cisco"
+      ],
+      "publicationDate": "2026-08-19",
+      "entityKey": "cisco-secure-workload",
+      "eventKey": "cisco-secure-workload-hardening-2026-08",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Cisco",
+        "title": "Cisco Secure Workload Software Security Hardening Release: August 2026",
+        "url": "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-csw1-shSvndWP",
+        "evidence": {
+          "type": "announcement",
+          "freshnessClass": "standard",
+          "dateBasis": "Cisco first published the Secure Workload security advisory on August 19, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and any access or migration limits.",
+          "verifiedAt": "2026-08-21"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "aws-security-agent-budget-revalidation",
+      "title": "AWS adds cost caps and finding revalidation to Security Agent",
+      "summary": "Penetration tests can stop at a preset or custom task-hour limit while preserving findings. Teams can retest selected findings without rerunning a full test.",
+      "category": "Security & Privacy",
+      "editorialTier": "must-try",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or technical finding with a direct practical consequence.",
+      "tags": [
+        "topic:application-security",
+        "format:changelog",
+        "entity:aws"
+      ],
+      "publicationDate": "2026-08-19",
+      "entityKey": "aws-security-agent",
+      "eventKey": "aws-security-agent-budget-revalidation",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "AWS",
+        "title": "AWS Security Agent now supports budget controls and finding revalidation",
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/aws-security-agent/",
+        "evidence": {
+          "type": "changelog",
+          "freshnessClass": "standard",
+          "dateBasis": "AWS published the Security Agent update on August 19, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and any access or migration limits.",
+          "verifiedAt": "2026-08-21"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "duckdb-v2-peg-parser",
+      "title": "DuckDB v2.0 replaces its SQL parser with a PEG grammar",
+      "summary": "The replacement is designed for runtime extension and easier syntax changes. DuckDB says the parser change should preserve existing query behavior.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "must-try",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or technical finding with a direct practical consequence.",
+      "tags": [
+        "topic:databases",
+        "format:announcement",
+        "entity:duckdb"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "duckdb-sql-parser",
+      "eventKey": "duckdb-v2-peg-parser",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "DuckDB",
+        "title": "DuckDB v2.0: Your Database Deserves a Better Parser",
+        "url": "https://duckdb.org/2026/08/20/duckdb-20-peg-parser",
+        "evidence": {
+          "type": "announcement",
+          "freshnessClass": "standard",
+          "dateBasis": "DuckDB published its v2.0 parser announcement on August 20, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and any access or migration limits.",
+          "verifiedAt": "2026-08-21"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "docker-sandboxes-github-agentic-workflows",
+      "title": "Docker documents agent sandboxes for GitHub Actions",
+      "summary": "GitHub Agentic Workflows 0.82.9 can run coding agents in disposable Docker microVMs with network policy and secret injection while retaining Docker and unrestricted shell access inside.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or technical finding with a direct practical consequence.",
+      "tags": [
+        "topic:agent-sandboxing",
+        "format:technical-explainer",
+        "entity:docker"
+      ],
+      "publicationDate": "2026-08-21",
+      "entityKey": "docker-sandboxes-github-actions",
+      "eventKey": "docker-sandboxes-gh-aw-explainer-2026-08",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Docker",
+        "title": "Running AI agents in GitHub Actions with Docker Sandboxes",
+        "url": "https://www.docker.com/blog/running-ai-agents-in-github-actions-with-docker-sandboxes/",
+        "evidence": {
+          "type": "dated-update",
+          "freshnessClass": "extended",
+          "dateBasis": "Docker published the technical explainer on August 21, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and any access or migration limits.",
+          "verifiedAt": "2026-08-21"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "kio-snapshot-btrfs-kde",
+      "title": "KIO Snapshot adds Btrfs history to KDE file browsing",
+      "summary": "Dolphin and other KDE apps can browse previous file and subvolume versions through snapshot://. The tool reads existing snapshots but does not create them.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or technical finding with a direct practical consequence.",
+      "tags": [
+        "topic:linux-desktop",
+        "format:release",
+        "entity:kde"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "kio-snapshot",
+      "eventKey": "kio-snapshot-release-2026-08",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "KIO Snapshot",
+        "title": "Btrfs Snapshot Integration in KDE",
+        "url": "https://bharadwajraju.com/posts/btrfs-snapshots-in-kde/",
+        "evidence": {
+          "type": "release",
+          "freshnessClass": "standard",
+          "dateBasis": "The KIO Snapshot developer published the release article on August 20, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and any access or migration limits.",
+          "verifiedAt": "2026-08-21"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "bazzite-deck-44",
+      "title": "Bazzite 44 updates Deck images with new VRAM controls",
+      "summary": "The release prioritizes game textures with dmemcg, backports scheduler changes, and adds optional HDMI 2.1 FRL, ALLM, and VRR support.",
+      "category": "Consumer Technology",
+      "editorialTier": "notable",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or technical finding with a direct practical consequence.",
+      "tags": [
+        "topic:gaming-linux",
+        "format:release",
+        "entity:bazzite"
+      ],
+      "publicationDate": "2026-08-19",
+      "entityKey": "bazzite",
+      "eventKey": "bazzite-deck-44",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Bazzite",
+        "title": "Bazzite's Biggest Update - Deck 44 has Launched",
+        "url": "https://universal-blue.discourse.group/t/bazzites-biggest-update-deck-44-has-launched-happy-birthday-to-universal-blue/12373",
+        "evidence": {
+          "type": "release",
+          "freshnessClass": "standard",
+          "dateBasis": "Bazzite published the Deck 44 release announcement on August 19, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and any access or migration limits.",
+          "verifiedAt": "2026-08-21"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "asr-benchmark-optimization-tests",
+      "title": "Hugging Face publishes tests for ASR benchmark optimization",
+      "summary": "Across 11 open-source ASR models, several top systems reproduced benchmark transcripts even when audio contradicted them or relevant words were silenced.",
+      "category": "Science & Emerging Tech",
+      "editorialTier": "watch",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or technical finding with a direct practical consequence.",
+      "tags": [
+        "topic:speech-recognition",
+        "format:research",
+        "depth:technical"
+      ],
+      "publicationDate": "2026-08-21",
+      "entityKey": "asr-benchmark-optimization",
+      "eventKey": "asr-benchmark-optimization-tests-2026-08",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Hugging Face",
+        "title": "Measuring benchmark optimization in speech recognition",
+        "url": "https://huggingface.co/blog/asr-benchmark-optimization",
+        "evidence": {
+          "type": "research-paper",
+          "freshnessClass": "extended",
+          "dateBasis": "Hugging Face published the speech-recognition benchmark study on August 21, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and any access or migration limits.",
+          "verifiedAt": "2026-08-21"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "encore-crackling-microvm-api",
+      "title": "Encore builds a shared microVM API for Linux and macOS",
+      "summary": "crackling drives Firecracker on Linux and Apple's Virtualization.framework on macOS while booting the same images. The backends expose different networking, snapshot, filesystem-sharing, and Rosetta capabilities.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "watch",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or technical finding with a direct practical consequence.",
+      "tags": [
+        "topic:virtualization",
+        "format:technical-explainer",
+        "entity:encore"
+      ],
+      "publicationDate": "2026-08-18",
+      "entityKey": "encore-crackling",
+      "eventKey": "encore-crackling-apple-silicon-explainer",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Encore",
+        "title": "We rebuilt the Linux microVM stack on Apple Silicon",
+        "url": "https://encore.dev/blog/firecracker-apple-silicon",
+        "evidence": {
+          "type": "dated-update",
+          "freshnessClass": "extended",
+          "dateBasis": "Encore published the microVM technical explainer on August 18, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and any access or migration limits.",
+          "verifiedAt": "2026-08-21"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "raspberry-pi-product-carbon-accounting",
+      "title": "Raspberry Pi documents carbon accounting from bills of materials",
+      "summary": "Its method weighs components, maps materials to the ecoinvent database, and adds manufacturing and transport estimates to calculate embodied Scope 3 emissions.",
+      "category": "Hardware & Devices",
+      "editorialTier": "watch",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or technical finding with a direct practical consequence.",
+      "tags": [
+        "topic:hardware-sustainability",
+        "format:technical-explainer",
+        "entity:raspberry-pi"
+      ],
+      "publicationDate": "2026-08-21",
+      "entityKey": "raspberry-pi-carbon-accounting",
+      "eventKey": "raspberry-pi-carbon-accounting-explainer-2026-08",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Raspberry Pi",
+        "title": "Measuring what's inside: calculating the carbon footprint of our products",
+        "url": "https://www.raspberrypi.com/news/measuring-whats-inside-calculating-the-carbon-footprint-of-our-products/",
+        "evidence": {
+          "type": "dated-update",
+          "freshnessClass": "extended",
+          "dateBasis": "Raspberry Pi published its product carbon-accounting method on August 21, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and any access or migration limits.",
+          "verifiedAt": "2026-08-21"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    }
+  ],
+  "discoveryStats": {
+    "rawCandidates": 1405,
+    "clusteredCandidates": 1353,
+    "eligibleCandidates": 10,
+    "publishedItems": 10,
+    "trendingReviewed": 30,
+    "explorationItems": 0
+  }
+}
