@@ -17,7 +17,7 @@ import {
 import { PairingStore } from "../report-companion/pairing-store.js";
 import { loadTrustedSelection } from "../report-companion/edition-store.js";
 import { htmlToPlainText } from "../report-companion/html-text.js";
-import { createSourceFetcher } from "../report-companion/source-fetcher.js";
+import { createPinnedLookup, createSourceFetcher } from "../report-companion/source-fetcher.js";
 import {
   buildCodexInvocation,
   createProcessSpawner,
@@ -231,6 +231,20 @@ test("source retrieval pins a public DNS result and validates each redirect", as
     { url: "https://primary.example/article", address: "93.184.216.34" },
     { url: "https://cdn.example/story", address: "1.1.1.1" },
   ]);
+});
+
+test("pinned DNS lookup supports Node single-address and all-address modes", async () => {
+  const lookup = createPinnedLookup("93.184.216.34", 4);
+  const single = await new Promise((resolve, reject) => lookup("example.com", {}, (error, address, family) => {
+    if (error) reject(error);
+    else resolve({ address, family });
+  }));
+  const all = await new Promise((resolve, reject) => lookup("example.com", { all: true }, (error, addresses) => {
+    if (error) reject(error);
+    else resolve(addresses);
+  }));
+  assert.deepEqual(single, { address: "93.184.216.34", family: 4 });
+  assert.deepEqual(all, [{ address: "93.184.216.34", family: 4 }]);
 });
 
 test("source retrieval rejects HTTP, private DNS, private redirects, oversized bodies, and timeouts", async () => {

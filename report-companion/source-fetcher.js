@@ -3,6 +3,13 @@ import https from "node:https";
 import { isPrivateAddress } from "./security.js";
 import { htmlToPlainText } from "./html-text.js";
 
+export function createPinnedLookup(address, family) {
+  return (_hostname, options, callback) => {
+    if (options?.all) callback(null, [{ address, family }]);
+    else callback(null, address, family);
+  };
+}
+
 function productionRequest(url, { address, family, signal, maxBytes }) {
   return new Promise((resolve, reject) => {
     const request = https.request({
@@ -16,7 +23,7 @@ function productionRequest(url, { address, family, signal, maxBytes }) {
         "user-agent": "today-i-found-local-report/1.0",
       },
       servername: url.hostname,
-      lookup: (_hostname, _options, callback) => callback(null, address, family),
+      lookup: createPinnedLookup(address, family),
       signal,
     }, (response) => {
       const chunks = [];
