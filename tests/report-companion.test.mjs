@@ -514,6 +514,38 @@ test("a schema-invalid batch is retried once and counts usage from both attempts
   assert.deepEqual(result.report.usage, { inputTokens: 30, outputTokens: 7, totalTokens: 37 });
 });
 
+test("a schema-invalid final edit is retried with the exact validation failure", async () => {
+  const edition = JSON.parse(await readFile("data/editions/2026-08-21.json", "utf8"));
+  const items = edition.items.slice(0, 5);
+  let editCalls = 0;
+  let validationFeedback;
+  const pipeline = createReportPipeline({
+    fetchSource: async (url) => ({ text: `Facts ${url}`, finalUrl: url }),
+    codexRunner: { run: async ({ phase, input }) => {
+      if (phase === "summarize") return { stories: input.stories.map(summaryFor) };
+      editCalls += 1;
+      validationFeedback = input.validationFeedback;
+      if (editCalls === 1) {
+        return {
+          stories: input.drafts.map((story, index) => index === 0
+            ? { ...story, paragraphs: [paragraph("short-a", 87), paragraph("short-b", 87)] }
+            : story),
+        };
+      }
+      return { stories: input.drafts };
+    } },
+    artifactStore: createArtifactStore({ outputDir: await mkdtemp(path.join(tmpdir(), "tif-reports-")) }),
+    tempRoot: await mkdtemp(path.join(tmpdir(), "tif-jobs-")),
+  });
+
+  const result = await pipeline.run({ edition, items });
+  assert.equal(editCalls, 2);
+  assert.deepEqual(validationFeedback, [
+    `Story ${items[0].id} must contain 180 to 350 words; received 174`,
+  ]);
+  assert.equal(result.report.stories.length, 5);
+});
+
 test("permanent authentication and configuration failures are attempted only once", async () => {
   const edition = JSON.parse(await readFile("data/editions/2026-08-21.json", "utf8"));
   for (const message of ["ChatGPT authentication is required", "Codex executable is unavailable"]) {

@@ -33,15 +33,22 @@ async function retryOnce(operation, signal) {
 }
 
 async function runValidated(codexRunner, { phase, input, expectedIds, signal, recordUsage }) {
+  let validationFeedback;
   return retryOnce(async () => {
     let response;
-    try { response = await codexRunner.run({ phase, input, signal }); }
+    const attemptInput = validationFeedback ? { ...input, validationFeedback } : input;
+    try { response = await codexRunner.run({ phase, input: attemptInput, signal }); }
     catch (error) {
       if (error?.usage) recordUsage(error.usage);
       throw error;
     }
     if (response.usage) recordUsage(response.usage);
-    return { response, stories: validateStorySummaries(response.stories, expectedIds) };
+    try {
+      return { response, stories: validateStorySummaries(response.stories, expectedIds) };
+    } catch (error) {
+      if (error?.retryable === true) validationFeedback = [error.message];
+      throw error;
+    }
   }, signal);
 }
 
