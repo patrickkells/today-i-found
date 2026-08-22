@@ -27,6 +27,7 @@ import {
   seedVoteRecords,
 } from "./feedback-service.js";
 import { CATEGORY_PRESENTATION, PRIMARY_CATEGORIES } from "../shared/editorial-contract.js";
+import { prepareVisitorTransfer } from "./visitor-transfer.js";
 
 const LEGACY_CATEGORY_PRESENTATION = {
   Models: { short: "MODEL", accent: "lime" },
@@ -312,6 +313,7 @@ export function ReportGenerator({
   votesReady = true,
   pageOrigin = globalThis.location?.origin ?? globalThis.window?.location?.origin,
   reportAppOrigin = DEFAULT_REPORT_APP_ORIGIN,
+  visitorId,
 }) {
   const originAvailable = isReportCapableOrigin(pageOrigin, reportAppOrigin);
   const selection = useMemo(() => getReportSelection(edition.items, records), [edition.items, records]);
@@ -540,7 +542,7 @@ export function ReportGenerator({
       </div>
       <div className="report-status" aria-live="polite">
         {mode === "checking" ? <p>CHECKING REPORT COMPANION</p> : null}
-        {mode === "origin" ? <><strong>REPORTS USE THE PRIVATE-CAPABLE SITE</strong><p>The GitHub Pages mirror is read-only for local report access.</p><a className="report-primary report-origin-link" href={`${reportAppOrigin}/`}>Open report-capable site</a></> : null}
+        {mode === "origin" ? <><strong>REPORTS USE THE PRIVATE-CAPABLE SITE</strong><p>The GitHub Pages mirror is read-only for local report access.</p><a className="report-primary report-origin-link" href={`${reportAppOrigin}/`} onClick={() => prepareVisitorTransfer(globalThis.window, visitorId, reportAppOrigin)}>Open report-capable site</a></> : null}
         {mode === "offline" ? <><strong>REPORT COMPANION OFFLINE</strong><p>Report generation is only available on Patrick&apos;s paired Mac.</p><button type="button" className="report-secondary" onClick={checkHealth}>Retry companion</button></> : null}
         {mode === "locked" ? <><strong>PAIRED MAC REQUIRED</strong><p>This local report runner is paired with another browser.</p><button type="button" className="report-secondary" onClick={checkHealth}>Retry companion</button></> : null}
         {mode === "auth" ? <><strong>PAIRING REQUIRED</strong><p>This browser&apos;s pairing has expired. Reset the local companion before pairing again.</p><button type="button" className="report-secondary" onClick={checkHealth}>Check companion</button></> : null}
@@ -798,7 +800,7 @@ function SignalExperience({ edition, manifest, loadEdition, feedbackService: pro
                 ))}
                 {!visibleItems.length ? <EmptyState date={currentDate} filtered={isPublishedDate} status={archiveStatus} onReset={resetFilters} onReturn={() => setCurrentDate(latestDate)} /> : null}
               </div>
-              {reportService && activeEdition?.items?.length ? <ReportGenerator key={activeEdition.date} edition={activeEdition} records={records} service={reportService} pollInterval={reportPollInterval} saveDownload={saveReportDownload} onActiveChange={setReportActive} votesReady={feedbackEditionDate === activeEdition.date} pageOrigin={reportOrigin} reportAppOrigin={reportAppOrigin} /> : null}
+              {reportService && activeEdition?.items?.length ? <ReportGenerator key={activeEdition.date} edition={activeEdition} records={records} service={reportService} pollInterval={reportPollInterval} saveDownload={saveReportDownload} onActiveChange={setReportActive} votesReady={feedbackEditionDate === activeEdition.date} pageOrigin={reportOrigin} reportAppOrigin={reportAppOrigin} visitorId={feedbackService.visitorId} /> : null}
             </div>
           </section>
         </div>

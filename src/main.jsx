@@ -9,12 +9,17 @@ import { App } from "./App.jsx";
 import { loadArchive } from "./edition-loader.js";
 import { createFeedbackService } from "./feedback-service.js";
 import { createReportCompanionClient } from "./report-companion-client.js";
+import { consumeVisitorTransfer } from "./visitor-transfer.js";
 import "./styles.css";
 
 const root = createRoot(document.getElementById("root"));
+const reportAppOrigin = import.meta.env.VITE_REPORT_APP_ORIGIN || "https://today-i-found.pages.dev";
+consumeVisitorTransfer(globalThis.window, globalThis.localStorage, {
+  allowedSourceOrigins: ["https://patrickkells.github.io"],
+  targetOrigin: reportAppOrigin,
+});
 const feedbackService = createFeedbackService({ apiBase: import.meta.env.VITE_FEEDBACK_API_BASE });
 const reportService = createReportCompanionClient({ baseUrl: import.meta.env.VITE_REPORT_COMPANION_BASE });
-const reportAppOrigin = import.meta.env.VITE_REPORT_APP_ORIGIN || "https://today-i-found.pages.dev";
 const render = (props) => root.render(<React.StrictMode><App {...props} feedbackService={feedbackService} reportService={reportService} reportAppOrigin={reportAppOrigin} /></React.StrictMode>);
 
 render({ edition: null });

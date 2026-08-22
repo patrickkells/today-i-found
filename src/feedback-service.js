@@ -1,4 +1,5 @@
-const VISITOR_KEY = "today-i-found:visitor-id";
+import { VISITOR_STORAGE_KEY } from "./visitor-transfer.js";
+
 const VOTE_KEY_PREFIX = "today-i-found:votes:";
 const OUTBOX_KEY_PREFIX = "today-i-found:vote-outbox:";
 
@@ -21,11 +22,11 @@ function createVisitorId(cryptoImpl) {
 }
 
 export function getOrCreateVisitorId(storage, cryptoImpl = globalThis.crypto) {
-  const existing = storage?.getItem(VISITOR_KEY);
+  const existing = storage?.getItem(VISITOR_STORAGE_KEY);
   if (existing) return existing;
   const visitorId = createVisitorId(cryptoImpl);
   try {
-    storage?.setItem(VISITOR_KEY, visitorId);
+    storage?.setItem(VISITOR_STORAGE_KEY, visitorId);
   } catch {
     // The in-memory identifier still keeps this service instance consistent.
   }
