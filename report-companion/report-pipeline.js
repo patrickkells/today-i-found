@@ -20,21 +20,26 @@ async function mapLimit(values, limit, operation) {
   return results;
 }
 
-async function retryOnce(operation, signal) {
-  if (signal?.aborted) throw signal.reason ?? new Error("Report cancelled");
-  try { return await operation(); } catch (firstError) {
-    if (signal?.aborted) throw signal.reason ?? firstError;
-    if (firstError?.retryable !== true) throw firstError;
-    try { return await operation(); } catch (secondError) {
-      secondError.cause ??= firstError;
-      throw secondError;
+async function retryOperation(operation, signal) {
+  let firstError;
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    if (signal?.aborted) throw signal.reason ?? firstError ?? new Error("Report cancelled");
+    try { return await operation(); } catch (error) {
+      if (signal?.aborted) throw signal.reason ?? error;
+      firstError ??= error;
+      const maxAttempts = error?.code === "report_schema" ? 3 : 2;
+      if (error?.retryable !== true || attempt >= maxAttempts) {
+        error.cause ??= firstError === error ? undefined : firstError;
+        throw error;
+      }
     }
   }
+  throw firstError;
 }
 
 async function runValidated(codexRunner, { phase, input, expectedIds, signal, recordUsage }) {
   let validationFeedback;
-  return retryOnce(async () => {
+  return retryOperation(async () => {
     let response;
     const attemptInput = validationFeedback ? { ...input, validationFeedback } : input;
     try { response = await codexRunner.run({ phase, input: attemptInput, signal }); }

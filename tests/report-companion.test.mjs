@@ -319,6 +319,7 @@ test("Codex runner returns validated JSON and strips API-key fallback credential
   assert.equal(spawned.env.CODEX_API_KEY, undefined);
   assert.equal(spawned.env.PATH, "/bin");
   assert.match(spawned.stdin, /untrusted source data/i);
+  assert.match(spawned.stdin, /target 210 to 300 words/i);
   assert.equal(spawned.stdin.includes(injection), false);
   assert.match(spawned.stdin, /\\u003c\/UNTRUSTED_SOURCE_DATA\\u003e/);
   assert.match(spawned.cwd, /today-i-found-codex-runs/);
@@ -493,7 +494,7 @@ test("larger reports batch at five, cap work at three calls, retry a failed batc
   assert.deepEqual(calls.map(({ phase, size }) => `${phase}:${size}`).sort(), ["edit:10", "summarize:5", "summarize:5", "summarize:5"].sort());
 });
 
-test("a schema-invalid batch is retried once and counts usage from both attempts", async () => {
+test("two schema-invalid batch outputs receive focused repair attempts and count all usage", async () => {
   const edition = JSON.parse(await readFile("data/editions/2026-08-21.json", "utf8"));
   const item = edition.items[0];
   let calls = 0;
@@ -501,17 +502,17 @@ test("a schema-invalid batch is retried once and counts usage from both attempts
     fetchSource: async (url) => ({ text: `Facts ${url}`, finalUrl: url }),
     codexRunner: { run: async () => {
       calls += 1;
-      return calls === 1
-        ? { stories: [{ id: item.id, title: item.title, paragraphs: ["Too short.", "Still short."] }], usage: { inputTokens: 10, outputTokens: 2, totalTokens: 12 } }
-        : { stories: [summaryFor(item)], usage: { inputTokens: 20, outputTokens: 5, totalTokens: 25 } };
+      if (calls === 1) return { stories: [{ id: item.id, title: item.title, paragraphs: ["Too short.", "Still short."] }], usage: { inputTokens: 10, outputTokens: 2, totalTokens: 12 } };
+      if (calls === 2) return { stories: [{ id: item.id, title: item.title, paragraphs: [paragraph("short-a", 87), paragraph("short-b", 87)] }], usage: { inputTokens: 20, outputTokens: 5, totalTokens: 25 } };
+      return { stories: [summaryFor(item)], usage: { inputTokens: 30, outputTokens: 8, totalTokens: 38 } };
     } },
     artifactStore: createArtifactStore({ outputDir: await mkdtemp(path.join(tmpdir(), "tif-reports-")) }),
     tempRoot: await mkdtemp(path.join(tmpdir(), "tif-jobs-")),
   });
   const result = await pipeline.run({ edition, items: [item] });
-  assert.equal(calls, 2);
+  assert.equal(calls, 3);
   assert.equal(result.report.stories[0].id, item.id);
-  assert.deepEqual(result.report.usage, { inputTokens: 30, outputTokens: 7, totalTokens: 37 });
+  assert.deepEqual(result.report.usage, { inputTokens: 60, outputTokens: 15, totalTokens: 75 });
 });
 
 test("a schema-invalid final edit is retried with the exact validation failure", async () => {

@@ -24,7 +24,7 @@ function spokenWordCount(paragraphs) {
 }
 
 function schemaError(message) {
-  return Object.assign(new Error(message), { retryable: true });
+  return Object.assign(new Error(message), { code: "report_schema", retryable: true });
 }
 
 function assertTtsFriendly(value, label, { paragraph = false } = {}) {

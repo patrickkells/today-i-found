@@ -134,7 +134,7 @@ function modelPrompt(phase, input) {
     .replaceAll("\u2029", "\\u2029");
   return `You are preparing a private spoken technology briefing. ${instruction}
 
-Every story must have exactly 2 to 4 short paragraphs and 180 to 350 words total. Use plain spoken English. Expand acronyms on first use. Preserve concrete versions, dates, limits, and technical facts. Do not include raw URLs, decorative phrasing, generic why-it-matters claims, forced takeaways, or invented implications.
+Every story must have exactly 2 to 4 short paragraphs. Target 210 to 300 words total so the result stays safely inside the hard 180-to-350-word validator limits. Use plain spoken English. Expand acronyms on first use. Preserve concrete versions, dates, limits, and technical facts. Do not include raw URLs, decorative phrasing, generic why-it-matters claims, forced takeaways, or invented implications.
 
 If the supplied JSON contains validationFeedback, correct every listed schema failure precisely. Do not change factual claims merely to satisfy formatting or length constraints.
 
