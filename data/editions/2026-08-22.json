@@ -1,0 +1,581 @@
+{
+  "schemaVersion": 3,
+  "date": "2026-08-22",
+  "timezone": "America/New_York",
+  "curatedAt": "2026-08-22T11:15:25.977Z",
+  "title": "today i found — August 22, 2026",
+  "summary": "Thirteen verified technology signals from current releases, security updates, platform changes, and research.",
+  "discoveryStats": {
+    "rawCandidates": 753,
+    "clusteredCandidates": 744,
+    "eligibleCandidates": 13,
+    "publishedItems": 13,
+    "trendingReviewed": 29,
+    "explorationItems": 0
+  },
+  "items": [
+    {
+      "id": "framework-laptop-12-core-series-3",
+      "title": "Framework updates Laptop 12 with Core Series 3 and a Fedora option",
+      "summary": "The new mainboard, fingerprint reader, and backlit input cover fit the original Laptop 12. Fedora 44 prebuilt systems start at $699; Core Series 3 Linux support requires kernel 7.1 or newer, and Batch 1 ships in October.",
+      "category": "Hardware & Devices",
+      "editorialTier": "must-try",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:repairability",
+        "topic:linux",
+        "format:release",
+        "entity:framework",
+        "depth:practical"
+      ],
+      "publicationDate": "2026-08-18",
+      "entityKey": "framework-laptop-12",
+      "eventKey": "framework-laptop-12-core-series-3",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Framework",
+        "title": "Framework Laptop 12, now with Core Series 3",
+        "url": "https://community.frame.work/t/framework-laptop-12-now-with-core-series-3/84179",
+        "evidence": {
+          "type": "release",
+          "freshnessClass": "standard",
+          "dateBasis": "Framework announced the Core Series 3 Framework Laptop 12 on August 18, 2026, with Batch 1 planned to ship in October.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "chrome-151-security-updates-2026-08",
+      "title": "Google fixes three critical Chrome 151 flaws across two updates",
+      "summary": "The August 18 and 20 stable releases address 22 issues, including critical WebGL and Dawn buffer overflows and a Chromoting use-after-free. Google says rollout will take days or weeks and does not report active exploitation.",
+      "category": "Security & Privacy",
+      "editorialTier": "must-try",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:browser-security",
+        "format:security-update",
+        "entity:google-chrome",
+        "depth:practical"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "google-chrome-151",
+      "eventKey": "chrome-151-security-updates-2026-08-18-20",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Google",
+        "title": "Chrome Releases: August 2026",
+        "url": "https://chromereleases.googleblog.com/2026/08/",
+        "evidence": {
+          "type": "dated-update",
+          "freshnessClass": "standard",
+          "dateBasis": "Google's August 18, 2026 Chrome 151 stable update included 15 security fixes, including critical WebGL and Dawn buffer overflows.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "samsung-ai-assistant-interactive-displays",
+      "title": "Samsung adds transcripts, quizzes, and search to classroom displays",
+      "summary": "Compatible Android displays can caption speech, share transcripts, and generate quizzes from lessons. Voice features need an external microphone; model, language, and regional availability vary.",
+      "category": "Consumer Technology",
+      "editorialTier": "notable",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:education-technology",
+        "topic:accessibility",
+        "format:product-update",
+        "entity:samsung",
+        "depth:practical"
+      ],
+      "publicationDate": "2026-08-19",
+      "entityKey": "samsung-interactive-displays-ai-assistant",
+      "eventKey": "samsung-ai-assistant-interactive-displays-2026-08",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Samsung",
+        "title": "Samsung AI Assistant helps teachers create more engaging and accessible lessons",
+        "url": "https://news.samsung.com/global/video-samsung-ai-assistant-helps-teachers-create-more-engaging-and-accessible-lessons",
+        "evidence": {
+          "type": "dated-update",
+          "freshnessClass": "standard",
+          "dateBasis": "Samsung published its Interactive Display AI Assistant update on August 19, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "nasa-lunar-microbe-survival-model",
+      "title": "NASA maps where human-carried microbes could persist near the lunar south pole",
+      "summary": "Simulations combine lunar elevation, temperature, and radiation models at three sites. Survival means remaining alive for one Earth day, not growing; dormant contamination could still complicate future chemical or life-detection measurements.",
+      "category": "Science & Emerging Tech",
+      "editorialTier": "notable",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:astrobiology",
+        "topic:planetary-protection",
+        "format:research",
+        "entity:nasa",
+        "depth:technical"
+      ],
+      "publicationDate": "2026-08-19",
+      "entityKey": "nasa-lunar-south-pole-microbes",
+      "eventKey": "nasa-lunar-microbe-survival-model-2026",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "NASA",
+        "title": "Human-related microbes may survive Moon's south pole, NASA finds",
+        "url": "https://science.nasa.gov/humans-in-space/human-related-microbes-may-survive-moons-south-pole-nasa-finds/",
+        "evidence": {
+          "type": "research-paper",
+          "freshnessClass": "extended",
+          "dateBasis": "NASA published the research summary on August 19, 2026 for a NASA-led Science Advances study.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "caltech-conformal-spectra-quantum-simulator",
+      "title": "Caltech measures conformal-field spectra with trapped atoms",
+      "summary": "Laser modulation mapped response peaks from chains of up to 35 strontium atoms to Ising and tricritical Ising predictions. The result is a specialized fundamental-physics experiment, not a general-purpose quantum computer.",
+      "category": "Science & Emerging Tech",
+      "editorialTier": "watch",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:quantum-simulation",
+        "topic:fundamental-physics",
+        "format:research",
+        "entity:caltech",
+        "depth:technical"
+      ],
+      "publicationDate": "2026-08-19",
+      "entityKey": "caltech-conformal-field-spectra",
+      "eventKey": "caltech-quantum-simulator-conformal-spectra-2026",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Caltech",
+        "title": "Universal pattern revealed in quantum matter",
+        "url": "https://www.caltech.edu/about/news/universal-pattern-revealed-in-quantum-matter",
+        "evidence": {
+          "type": "research-paper",
+          "freshnessClass": "extended",
+          "dateBasis": "Caltech published the research announcement on August 19, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "cloudflare-wrangler-mcp-optional-oauth-scopes",
+      "title": "Cloudflare lets users trim OAuth scopes for Wrangler and its API MCP server",
+      "summary": "The consent screen keeps required scopes selected while allowing optional permissions to be declined. A command that later needs a declined scope requires reauthorization.",
+      "category": "Web & Platforms",
+      "editorialTier": "must-try",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:oauth",
+        "topic:least-privilege",
+        "format:changelog",
+        "entity:cloudflare"
+      ],
+      "publicationDate": "2026-08-22",
+      "entityKey": "cloudflare-wrangler-api-mcp-oauth",
+      "eventKey": "cloudflare-wrangler-mcp-optional-oauth-scopes",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Cloudflare",
+        "title": "Choose OAuth scopes for Wrangler and the Cloudflare API MCP server",
+        "url": "https://developers.cloudflare.com/changelog/post/2026-08-22-wrangler-mcp-optional-oauth-scopes/",
+        "evidence": {
+          "type": "changelog",
+          "freshnessClass": "standard",
+          "dateBasis": "Cloudflare published the Wrangler and API MCP server OAuth update on August 22, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "aws-eks-managed-ca-rotation",
+      "title": "AWS adds managed certificate-authority rotation to EKS",
+      "summary": "AWS updates managed components and provides safeguards and rollback. Customers must replace their worker nodes and update external clients before activation; the feature is free in all commercial Regions.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "must-try",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:kubernetes",
+        "topic:certificate-management",
+        "format:changelog",
+        "entity:aws"
+      ],
+      "publicationDate": "2026-08-20",
+      "entityKey": "amazon-eks-ca-rotation",
+      "eventKey": "amazon-eks-managed-ca-rotation-2026",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "AWS",
+        "title": "Amazon EKS now supports certificate authority rotation with automated lifecycle management",
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-eks-certificate-authority-ca-rotation-automated-lifecycle-management",
+        "evidence": {
+          "type": "changelog",
+          "freshnessClass": "standard",
+          "dateBasis": "AWS published the Amazon EKS certificate-authority rotation update on August 20, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "aws-glue-6-iceberg-v3-pricing",
+      "title": "AWS releases Glue 6.0 with 30% lower pricing and Iceberg v3",
+      "summary": "The generally available runtime moves to Spark 4.1, Python 3.13, and Scala 2.13, and adds VARIANT shredding, deletion vectors, Arrow-native Python UDFs, and real-time streaming. It is available across commercial, GovCloud, and China regions.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "must-try",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:data-engineering",
+        "topic:apache-iceberg",
+        "format:release",
+        "entity:aws"
+      ],
+      "publicationDate": "2026-08-21",
+      "entityKey": "aws-glue",
+      "eventKey": "aws-glue-6-0-release",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "AWS",
+        "title": "AWS Glue 6.0 delivers 30% price reduction and Iceberg v3 support",
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/aws-glue-6-0-price-reduction-iceberg-v3",
+        "evidence": {
+          "type": "release",
+          "freshnessClass": "standard",
+          "dateBasis": "AWS published the generally available Glue 6.0 release on August 21, 2026 with pricing 30% lower than previous Glue versions.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "aws-agentcore-web-search-filters",
+      "title": "AWS adds source and date filters to AgentCore Web Search",
+      "summary": "Connector 1.2.0 accepts per-call include and exclude lists of up to 100 domains plus inclusive date bounds. It is available in US East (N. Virginia), Europe (Ireland), and Asia Pacific (Tokyo), and existing calls remain compatible.",
+      "category": "AI & Automation",
+      "editorialTier": "must-try",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:web-search",
+        "topic:agent-tooling",
+        "format:changelog",
+        "entity:aws"
+      ],
+      "publicationDate": "2026-08-19",
+      "entityKey": "amazon-bedrock-agentcore-web-search",
+      "eventKey": "agentcore-web-search-filtering-1-2-0",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "AWS",
+        "title": "Web Search in Amazon Bedrock AgentCore adds domain and published date filtering",
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/08/web-search-amazon-bedrock/",
+        "evidence": {
+          "type": "changelog",
+          "freshnessClass": "standard",
+          "dateBasis": "AWS published the AgentCore Web Search update on August 19, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "cloudflare-r2-us-jurisdiction",
+      "title": "Cloudflare adds a United States storage jurisdiction to R2",
+      "summary": "Buckets in the us jurisdiction stay stored and processed in the United States and use a jurisdiction-specific S3 endpoint or Worker binding. A bucket's jurisdiction cannot be changed after creation.",
+      "category": "Web & Platforms",
+      "editorialTier": "notable",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:object-storage",
+        "topic:data-residency",
+        "format:changelog",
+        "entity:cloudflare"
+      ],
+      "publicationDate": "2026-08-17",
+      "entityKey": "cloudflare-r2",
+      "eventKey": "cloudflare-r2-us-jurisdiction",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Cloudflare",
+        "title": "New us jurisdiction for R2",
+        "url": "https://developers.cloudflare.com/changelog/post/2026-08-17-r2-us-jurisdiction/",
+        "evidence": {
+          "type": "changelog",
+          "freshnessClass": "standard",
+          "dateBasis": "Cloudflare published the R2 us jurisdiction update on August 17, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "apple-eu-app-terms-2026",
+      "title": "Apple replaces the EU Core Technology Fee with a 5% commission",
+      "summary": "The migration takes effect October 1 for qualifying digital transactions outside the App Store. The new terms also expand marketplace and web-distribution eligibility and let apps offer alternative payments beside In-App Purchase.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:app-distribution",
+        "topic:payments",
+        "format:migration-notice",
+        "entity:apple"
+      ],
+      "publicationDate": "2026-08-18",
+      "entityKey": "apple-eu-app-distribution",
+      "eventKey": "apple-eu-app-terms-october-2026",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Apple",
+        "title": "Changes for apps in the European Union",
+        "url": "https://developer.apple.com/news/?id=gmws0jgp",
+        "evidence": {
+          "type": "migration-notice",
+          "freshnessClass": "standard",
+          "dateBasis": "Apple published the revised European Union app terms on August 18, 2026, with changes taking effect October 1, 2026.",
+          "productStatus": "migration"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "raspberry-pi-cm5-programming-jig",
+      "title": "Raspberry Pi releases a $600 Compute Module 5 programming jig",
+      "summary": "The single-head fixture provisions one Compute Module 5 at a time without an IO board, including secure boot, full-disk encryption, and operating-system installation. It connects over Ethernet or Wi-Fi and adds a second Ethernet port for module transfers.",
+      "category": "Hardware & Devices",
+      "editorialTier": "notable",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:embedded-systems",
+        "topic:device-provisioning",
+        "format:release",
+        "entity:raspberry-pi"
+      ],
+      "publicationDate": "2026-08-19",
+      "entityKey": "raspberry-pi-cm5-programming-jig",
+      "eventKey": "raspberry-pi-cm5-programming-jig-release",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "Raspberry Pi",
+        "title": "Introducing the Raspberry Pi Compute Module 5 Programming Jig",
+        "url": "https://www.raspberrypi.com/news/introducing-the-raspberry-pi-compute-module-5-programming-jig/",
+        "evidence": {
+          "type": "release",
+          "freshnessClass": "standard",
+          "dateBasis": "Raspberry Pi released the Compute Module 5 Programming Jig on August 19, 2026 for $600.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    },
+    {
+      "id": "github-copilot-slack-agent-sessions",
+      "title": "GitHub adds shared Copilot agent sessions to Slack",
+      "summary": "Organizations on Copilot Business and Enterprise can use @GitHub to investigate failures, change code, and open pull requests. The public preview uses existing entitlements, and administrators can require extra approval for agent-authored pull requests.",
+      "category": "Software & Developer Tools",
+      "editorialTier": "notable",
+      "rankingRationale": "The dated primary source documents a current, substantive technology change or research finding with a direct practical consequence.",
+      "tags": [
+        "topic:coding-agents",
+        "topic:collaboration",
+        "format:release",
+        "entity:github"
+      ],
+      "publicationDate": "2026-08-21",
+      "entityKey": "github-copilot-slack",
+      "eventKey": "github-copilot-slack-agent-sessions-preview",
+      "signal": {
+        "whyNow": "The primary evidence is within the applicable seven- or fourteen-day freshness window and was verified on the edition date."
+      },
+      "source": {
+        "kind": "primary",
+        "publisher": "GitHub",
+        "title": "The new GitHub Copilot experience in Slack",
+        "url": "https://github.blog/changelog/2026-08-21-the-new-github-copilot-experience-in-slack",
+        "evidence": {
+          "type": "release",
+          "freshnessClass": "standard",
+          "dateBasis": "GitHub published the Copilot in Slack public preview on August 21, 2026.",
+          "productStatus": "active"
+        },
+        "verification": {
+          "status": "verified",
+          "method": "Fetched the dated primary source on the edition date and checked availability, stated facts, current status, and decision-relevant limits.",
+          "verifiedAt": "2026-08-22"
+        }
+      },
+      "curation": {
+        "preferenceSignal": 0,
+        "feedbackSignal": 0,
+        "eligiblePreferenceCount": 0,
+        "selectionMode": "editorial"
+      }
+    }
+  ]
+}
